@@ -19,7 +19,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
         }
 
         [Fact]
-        public void GivenMessageIsLoggedWithProperty_Have()
+        public void GivenMessageIsLoggedWithProperty_HavePropertySucceeds()
         {
             _logger.Information("Hello {name}", "World");
 
@@ -51,6 +51,43 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Should()
                 .Throw<XunitException>()
                 .WithMessage("Expected log message to have a property \"something else\" but it wasn't found");
+        }
+
+        [Fact]
+        public void GivenMessageIsLoggedWithPropertyAndAssertingValue_HavePropertySucceeds()
+        {
+            _logger.Information("Hello {name}", "World");
+
+            _sink
+                .Should()
+                .HaveMessage("Hello {name}")
+                .And
+                .AppearsOnce()
+                .Which
+                .Should()
+                .HaveProperty("name")
+                .WithValue("World");
+        }
+
+        [Fact]
+        public void GivenMessageIsLoggedWithPropertyAndAssertingDifferentValue_HavePropertyFails()
+        {
+            _logger.Information("Hello {name}", "World");
+
+            Action action = () => _sink
+                .Should()
+                .HaveMessage("Hello {name}")
+                .And
+                .AppearsOnce()
+                .Which
+                .Should()
+                .HaveProperty("name")
+                .WithValue("BLABLABLA");
+
+            action
+                .Should()
+                .Throw<XunitException>()
+                .WithMessage("Expected property \"name\" to have value \"BLABLABLA\" but found \"World\"");
         }
     }
 }

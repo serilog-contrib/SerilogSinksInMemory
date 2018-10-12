@@ -14,7 +14,7 @@ namespace Serilog.Sinks.InMemory.Assertions
 
         protected override string Identifier { get; }
 
-        public AndWhichConstraint<LogEventAssertions, LogEventPropertyValue> HaveProperty(
+        public LogEventPropertyValueAssertions HaveProperty(
             string propertyName, 
             string because = "",
             params object[] becauseArgs)
@@ -24,9 +24,7 @@ namespace Serilog.Sinks.InMemory.Assertions
                 .ForCondition(Subject.Properties.ContainsKey(propertyName))
                 .FailWith("Expected log message to have a property {0} but it wasn't found", propertyName);
 
-            return new AndWhichConstraint<LogEventAssertions, LogEventPropertyValue>(
-                this,
-                Subject.Properties[propertyName]);
+            return new LogEventPropertyValueAssertions(Subject.Properties[propertyName], propertyName);
         }
     }
 }
