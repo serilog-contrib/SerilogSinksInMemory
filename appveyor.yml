@@ -3,6 +3,7 @@ image: Visual Studio 2017
 branches:
   only:
   - master
+skip_tags: true
 init:
   # Good practise, because Windows line endings are different from Unix/Linux ones
   - cmd: git config --global core.autocrlf true
@@ -13,7 +14,7 @@ before_build:
   - cmd: dotnet restore --verbosity m
 build_script:
   - cmd: dotnet publish
-  - cmd: dotnet pack -o ./packages
+  - cmd: dotnet pack
 after_build:
   # For once the build has completed
 clone_depth: 1
@@ -23,3 +24,5 @@ test_script:
 on_finish :
   # any cleanup in here
 deploy: off
+artifacts:
+  - path: **/*.nupkg
