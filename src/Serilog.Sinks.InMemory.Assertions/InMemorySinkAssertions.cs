@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
@@ -15,7 +16,7 @@ namespace Serilog.Sinks.InMemory.Assertions
 
         protected override string Identifier { get; } = nameof(InMemorySink);
 
-        public AndWhichConstraint<InMemorySinkAssertions, LogEvent> HaveMessage(
+        public AndWhichConstraint<MessageAssertions, IEnumerable<LogEvent>> HaveMessage(
             string messageTemplate, 
             string because = "", 
             params object[] becauseArgs)
@@ -32,15 +33,8 @@ namespace Serilog.Sinks.InMemory.Assertions
                     "Expected a message to be logged with template {0} but didn't find any", 
                     messageTemplate);
 
-            Execute.Assertion
-                .BecauseOf(because, becauseArgs)
-                .ForCondition(matches.Count == 1)
-                .FailWith(
-                    "Expected a message to be logged with template {0} exactly once, but it was found {1} times", 
-                    messageTemplate,
-                    matches.Count);
-
-            return new AndWhichConstraint<InMemorySinkAssertions, LogEvent>(this, matches.Single());
+            return new AndWhichConstraint<MessageAssertions, IEnumerable<LogEvent>>(
+                new MessageAssertions(matches, messageTemplate), matches);
         }
     }
 }
