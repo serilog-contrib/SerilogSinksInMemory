@@ -1,0 +1,24 @@
+version: '1.0.{build}'
+image: Visual Studio 2017
+branches:
+  only:
+  - master
+init:
+  # Good practise, because Windows line endings are different from Unix/Linux ones
+  - cmd: git config --global core.autocrlf true
+install:
+  # Install repo specific stuff here
+before_build:
+  - cmd: dotnet --version
+  - cmd: dotnet restore --verbosity m
+build_script:
+  - cmd: dotnet publish
+after_build:
+  # For once the build has completed
+clone_depth: 1
+test_script:
+  - cmd: dotnet test ./test/Serilog.Sinks.InMemory.Tests.Unit/Serilog.Sinks.InMemory.Tests.Unit.csproj
+  - cmd: dotnet test ./test/Serilog.Sinks.InMemory.Assertions.Tests.Unit/Serilog.Sinks.InMemory.Assertions.Tests.Unit.csproj
+on_finish :
+  # any cleanup in here
+deploy: off
