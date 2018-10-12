@@ -25,4 +25,4 @@ on_finish :
   # any cleanup in here
 deploy: off
 artifacts:
-  - path: **/*.nupkg
+  - path: '**/*.nupkg'
