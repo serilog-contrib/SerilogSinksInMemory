@@ -15,19 +15,28 @@ namespace Serilog.Sinks.InMemory.Assertions
 
         protected override string Identifier { get; }
 
-        public void WithValue(string value, string because = "", params object[] becauseArgs)
+        public void WithValue(object value, string because = "", params object[] becauseArgs)
         {
-            var textWriter = new StringWriter();
-            Subject.Render(textWriter);
-            var actualValue = textWriter.GetStringBuilder().ToString().Replace("\"", "");
+            var actualValue = GetValueFromProperty(Subject);
 
             Execute.Assertion
                 .BecauseOf(because, becauseArgs)
-                .ForCondition(actualValue == value)
+                .ForCondition(object.Equals(actualValue, value))
                 .FailWith("Expected property {0} to have value {1} but found {2}",
                     Identifier,
                     value,
                     actualValue);
+        }
+
+        private object GetValueFromProperty(LogEventPropertyValue instance)
+        {
+            switch(instance)
+            {
+                case ScalarValue scalarValue:
+                    return scalarValue.Value;
+                default:
+                    return Subject.ToString();
+            }
         }
     }
 }

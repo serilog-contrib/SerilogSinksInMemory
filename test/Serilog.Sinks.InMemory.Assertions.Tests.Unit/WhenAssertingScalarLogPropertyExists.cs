@@ -5,12 +5,12 @@ using Xunit.Sdk;
 
 namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
 {
-    public class WhenAssertingLogPropertyExists
+    public class WhenAssertingScalarLogPropertyExists
     {
         private readonly InMemorySink _sink;
         private readonly ILogger _logger;
 
-        public WhenAssertingLogPropertyExists()
+        public WhenAssertingScalarLogPropertyExists()
         {
             _sink = new InMemorySink();
             _logger = new LoggerConfiguration()
@@ -88,6 +88,43 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Should()
                 .Throw<XunitException>()
                 .WithMessage("Expected property \"name\" to have value \"BLABLABLA\" but found \"World\"");
+        }
+
+        [Fact]
+        public void GivenMessageIsLoggedWithIntegerPropertyValue_HavePropertySucceeds()
+        {
+            _logger.Information("Message number {number}", 5);
+
+            _sink
+                .Should()
+                .HaveMessage("Message number {number}")
+                .And
+                .AppearsOnce()
+                .Which
+                .Should()
+                .HaveProperty("number")
+                .WithValue(5);
+        }
+
+        [Fact]
+        public void GivenMessageIsLoggedWithIntegerPropertyAndAssertingDifferentValue_HavePropertyFails()
+        {
+            _logger.Information("Message number {number}", 5);
+
+            Action action = () => _sink
+                .Should()
+                .HaveMessage("Message number {number}")
+                .And
+                .AppearsOnce()
+                .Which
+                .Should()
+                .HaveProperty("number")
+                .WithValue(2);
+
+            action
+                .Should()
+                .Throw<XunitException>()
+                .WithMessage("Expected property \"number\" to have value 2 but found 5");
         }
     }
 }
