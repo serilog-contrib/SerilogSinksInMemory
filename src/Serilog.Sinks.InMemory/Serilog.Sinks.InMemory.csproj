@@ -6,7 +6,7 @@
 
   <PropertyGroup>
     <IsPackable>true</IsPackable>
-    <PackageVersion>1.0.0</PackageVersion>
+    <Version>1.0.0</Version>
     <Title>Serilog in-memory sink</Title>
     <Description>A sink to be used for testing log messages using Serilog</Description>
     <Copyright>2018 Sander van Vliet</Copyright>
@@ -15,6 +15,10 @@
     <PackageLicenseUrl>https://github.com/sandermvanvliet/SerilogSinksInMemory/LICENSE</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/sandermvanvliet/SerilogSinksInMemory/</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageVersion>$(Version)$(VersionSuffix)</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
