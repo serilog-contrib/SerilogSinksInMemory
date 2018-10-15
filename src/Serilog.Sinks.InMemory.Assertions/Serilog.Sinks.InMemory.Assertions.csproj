@@ -19,7 +19,10 @@
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.4.2" />
-    <PackageReference Include="Serilog.Sinks.InMemory" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Serilog.Sinks.InMemory\Serilog.Sinks.InMemory.csproj" />
   </ItemGroup>
 
 </Project>
