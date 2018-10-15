@@ -12,7 +12,7 @@ before_build:
   - cmd: dotnet restore --verbosity m
 build_script:
   - cmd: dotnet publish
-  - cmd: dotnet pack --version-suffix -pre
+  - cmd: dotnet pack
 after_build:
   # For once the build has completed
 clone_depth: 1
