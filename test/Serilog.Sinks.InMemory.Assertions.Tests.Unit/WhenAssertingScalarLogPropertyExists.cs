@@ -8,15 +8,13 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
 {
     public class WhenAssertingScalarLogPropertyExists
     {
-        private readonly InMemorySink _sink;
         private readonly ILogger _logger;
 
         public WhenAssertingScalarLogPropertyExists()
         {
-            _sink = new InMemorySink();
             _logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
-                .WriteTo.Sink(_sink)
+                .WriteTo.InMemory()
                 .CreateLogger();
         }
 
@@ -25,7 +23,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
         {
             _logger.Information("Hello {name}", "World");
 
-            _sink
+            InMemorySink.Instance
                 .Should()
                 .HaveMessage("Hello {name}")
                 .Appearing().Once()
@@ -37,7 +35,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
         {
             _logger.Information("Hello {name}", "World");
 
-            Action action = () => _sink
+            Action action = () => InMemorySink.Instance
                 .Should()
                 .HaveMessage("Hello {name}")
                 .Appearing().Once()
@@ -54,7 +52,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
         {
             _logger.Information("Hello {name}", "World");
 
-            _sink
+            InMemorySink.Instance
                 .Should()
                 .HaveMessage("Hello {name}")
                 .Appearing().Once()
@@ -67,7 +65,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
         {
             _logger.Information("Hello {name}", "World");
 
-            Action action = () => _sink
+            Action action = () => InMemorySink.Instance
                 .Should()
                 .HaveMessage("Hello {name}")
                 .Appearing().Once()
@@ -85,7 +83,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
         {
             _logger.Information("Message number {number}", 5);
 
-            _sink
+            InMemorySink.Instance
                 .Should()
                 .HaveMessage("Message number {number}")
                 .Appearing().Once()
@@ -98,7 +96,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
         {
             _logger.Information("Message number {number}", 5);
 
-            Action action = () => _sink
+            Action action = () => InMemorySink.Instance
                 .Should()
                 .HaveMessage("Message number {number}")
                 .Appearing().Once()
@@ -119,7 +117,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 _logger.Information("Message number {number}", 5);
             }
 
-            _sink
+            InMemorySink.Instance
                 .Should()
                 .HaveMessage("Message number {number}")
                 .Appearing().Once()

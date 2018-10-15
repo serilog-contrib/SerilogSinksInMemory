@@ -7,21 +7,19 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
 {
     public class WhenAssertingLogEventsExist
     {
-        private readonly InMemorySink _sink;
         private readonly ILogger _logger;
 
         public WhenAssertingLogEventsExist()
         {
-            _sink = new InMemorySink();
             _logger = new LoggerConfiguration()
-                .WriteTo.Sink(_sink)
+                .WriteTo.InMemory()
                 .CreateLogger();
         }
 
         [Fact]
         public void GivenNoLogMessage_HaveMessageFails()
         {
-            Action action = () => _sink
+            Action action = () => InMemorySink.Instance
                 .Should()
                 .HaveMessage("Hello, World");
 
@@ -36,7 +34,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
         {
             _logger.Information("Hello, World");
 
-            _sink
+            InMemorySink.Instance
                 .Should()
                 .HaveMessage("Hello, World");
         }
@@ -49,7 +47,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
             _logger.Information("Hello, World");
             _logger.Information("Hello, World");
 
-            Action action = () => _sink
+            Action action = () => InMemorySink.Instance
                 .Should()
                 .HaveMessage("Hello, World")
                 .Appearing().Once();
@@ -68,7 +66,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
             _logger.Information("Hello, World");
             _logger.Information("Hello, World");
 
-            _sink
+            InMemorySink.Instance
                 .Should()
                 .HaveMessage("Hello, World")
                 .Appearing().Times(4);
@@ -82,7 +80,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
             _logger.Information("Hello, World");
             _logger.Information("Hello, World");
 
-            Action action = () => _sink
+            Action action = () => InMemorySink.Instance
                 .Should()
                 .HaveMessage("Hello, World")
                 .Appearing().Times(5);
