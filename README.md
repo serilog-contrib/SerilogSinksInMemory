@@ -4,6 +4,10 @@ In-memory sink for Serilog to use for testing with [FluentAssertions](https://fl
 ## Build status
 [![Build status](https://ci.appveyor.com/api/projects/status/aq0g2f247q5proix?svg=true)](https://ci.appveyor.com/project/sandermvanvliet/serilogsinksinmemory)
 
+[![NuGet Serilog.Sinks.InMemory](https://buildstats.info/nuget/Serilog.Sinks.InMemory)](https://www.nuget.org/packages/Serilog.Sinks.InMemory/)
+
+[![NuGet Serilog.Sinks.InMemory.Assertions](https://buildstats.info/nuget/Serilog.Sinks.InMemory.Assertions)](https://www.nuget.org/packages/Serilog.Sinks.InMemory.Assertions/)
+
 ## Usage
 
 To just use the sink, add the `Serilog.Sinks.InMemory` NuGet package:
