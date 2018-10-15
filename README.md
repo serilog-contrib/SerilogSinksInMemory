@@ -101,8 +101,7 @@ public void GivenInputOfFiveCharacters_MessageIsLoggedOnce()
     logger
         .Should()
         .HaveMessage("Input is {count} characters long")
-        .And
-        .AppearsOnce();
+        .Appearing().Once();
 }
 ```
 
@@ -118,11 +117,24 @@ public void GivenInputOfFiveCharacters_CountPropertyValueIsFive()
     logger
         .Should()
         .HaveMessage("Input is {count} characters long")
-        .And
-        .AppearsOnce()
-        .Which
-        .Should()
-        .HaveProperty("count")
+        .Appearing().Once();
+        .WithProperty("count")
         .WithValue(5);
+}
+```
+
+### Asserting a message appears more than once
+
+Let's say you have a log message in a loop and you want to verify that:
+
+```csharp
+public void GivenLoopWithFiveItems_MessageIsLoggedFiveTimes()
+{
+    /* omitted for brevity */
+
+    logger
+        .Should()
+        .HaveMessage("Input is {count} characters long")
+        .Appearing().Times(5);
 }
 ```
