@@ -6,7 +6,7 @@
 
   <PropertyGroup>
     <IsPackable>true</IsPackable>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <Title>Serilog in-memory sink</Title>
     <Description>A sink to be used for testing log messages using Serilog</Description>
     <Copyright>2018 Sander van Vliet</Copyright>
