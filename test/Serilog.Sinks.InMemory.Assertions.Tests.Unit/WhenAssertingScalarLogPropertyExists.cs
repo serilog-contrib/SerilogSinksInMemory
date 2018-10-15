@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentAssertions;
+using Serilog.Context;
 using Xunit;
 using Xunit.Sdk;
 
@@ -14,6 +15,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
         {
             _sink = new InMemorySink();
             _logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
                 .WriteTo.Sink(_sink)
                 .CreateLogger();
         }
@@ -26,11 +28,8 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
             _sink
                 .Should()
                 .HaveMessage("Hello {name}")
-                .And
-                .AppearsOnce()
-                .Which
-                .Should()
-                .HaveProperty("name");
+                .Appearing().Once()
+                .WithProperty("name");
         }
 
         [Fact]
@@ -41,16 +40,13 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
             Action action = () => _sink
                 .Should()
                 .HaveMessage("Hello {name}")
-                .And
-                .AppearsOnce()
-                .Which
-                .Should()
-                .HaveProperty("something else");
+                .Appearing().Once()
+                .WithProperty("something else");
 
             action
                 .Should()
                 .Throw<XunitException>()
-                .WithMessage("Expected log message to have a property \"something else\" but it wasn't found");
+                .WithMessage("Expected message \"Hello {name}\" to have a property \"something else\" but it wasn't found");
         }
 
         [Fact]
@@ -61,11 +57,8 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
             _sink
                 .Should()
                 .HaveMessage("Hello {name}")
-                .And
-                .AppearsOnce()
-                .Which
-                .Should()
-                .HaveProperty("name")
+                .Appearing().Once()
+                .WithProperty("name")
                 .WithValue("World");
         }
 
@@ -77,11 +70,8 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
             Action action = () => _sink
                 .Should()
                 .HaveMessage("Hello {name}")
-                .And
-                .AppearsOnce()
-                .Which
-                .Should()
-                .HaveProperty("name")
+                .Appearing().Once()
+                .WithProperty("name")
                 .WithValue("BLABLABLA");
 
             action
@@ -98,11 +88,8 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
             _sink
                 .Should()
                 .HaveMessage("Message number {number}")
-                .And
-                .AppearsOnce()
-                .Which
-                .Should()
-                .HaveProperty("number")
+                .Appearing().Once()
+                .WithProperty("number")
                 .WithValue(5);
         }
 
@@ -114,17 +101,30 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
             Action action = () => _sink
                 .Should()
                 .HaveMessage("Message number {number}")
-                .And
-                .AppearsOnce()
-                .Which
-                .Should()
-                .HaveProperty("number")
+                .Appearing().Once()
+                .WithProperty("number")
                 .WithValue(2);
 
             action
                 .Should()
                 .Throw<XunitException>()
                 .WithMessage("Expected property \"number\" to have value 2 but found 5");
+        }
+
+        [Fact]
+        public void GivenMessageIsLoggedWithPropertyFromContext_HavePropertySucceeds()
+        {
+            using (LogContext.PushProperty("some_property", "some_value"))
+            {
+                _logger.Information("Message number {number}", 5);
+            }
+
+            _sink
+                .Should()
+                .HaveMessage("Message number {number}")
+                .Appearing().Once()
+                .WithProperty("some_property")
+                .WithValue("some_value");
         }
     }
 }

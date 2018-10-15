@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
+﻿using System.Linq;
 using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
-using Serilog.Events;
 
 namespace Serilog.Sinks.InMemory.Assertions
 {
@@ -16,9 +13,9 @@ namespace Serilog.Sinks.InMemory.Assertions
 
         protected override string Identifier { get; } = nameof(InMemorySink);
 
-        public AndWhichConstraint<MessageAssertions, IEnumerable<LogEvent>> HaveMessage(
-            string messageTemplate, 
-            string because = "", 
+        public LogEventsAssertions HaveMessage(
+            string messageTemplate,
+            string because = "",
             params object[] becauseArgs)
         {
             var matches = Subject
@@ -30,11 +27,10 @@ namespace Serilog.Sinks.InMemory.Assertions
                 .BecauseOf(because, becauseArgs)
                 .ForCondition(matches.Any())
                 .FailWith(
-                    "Expected a message to be logged with template {0} but didn't find any", 
+                    "Expected message {0} to be logged",
                     messageTemplate);
 
-            return new AndWhichConstraint<MessageAssertions, IEnumerable<LogEvent>>(
-                new MessageAssertions(matches, messageTemplate), matches);
+            return new LogEventsAssertions(messageTemplate, matches);
         }
     }
 }

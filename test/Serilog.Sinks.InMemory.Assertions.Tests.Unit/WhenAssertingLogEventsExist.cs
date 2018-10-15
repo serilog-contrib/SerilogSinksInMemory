@@ -28,7 +28,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
             action
                 .Should()
                 .Throw<XunitException>()
-                .WithMessage("Expected a message to be logged with template \"Hello, World\" but didn't find any");
+                .WithMessage("Expected message \"Hello, World\" to be logged");
         }
 
         [Fact]
@@ -52,13 +52,12 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
             Action action = () => _sink
                 .Should()
                 .HaveMessage("Hello, World")
-                .And
-                .AppearsOnce();
+                .Appearing().Once();
 
             action
                 .Should()
                 .Throw<XunitException>()
-                .WithMessage("Expected a message to be logged with template \"Hello, World\" exactly once, but it was found 4 times");
+                .WithMessage("Expected message \"Hello, World\" to appear exactly once, but it was found 4 times");
         }
 
         [Fact]
@@ -72,8 +71,26 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
             _sink
                 .Should()
                 .HaveMessage("Hello, World")
-                .And
-                .AppearsTimes(4);
+                .Appearing().Times(4);
+        }
+
+        [Fact]
+        public void GivenTheSameLogMessageFourTimesAndAssertingFiveTimes_HaveMessageFails()
+        {
+            _logger.Information("Hello, World");
+            _logger.Information("Hello, World");
+            _logger.Information("Hello, World");
+            _logger.Information("Hello, World");
+
+            Action action = () => _sink
+                .Should()
+                .HaveMessage("Hello, World")
+                .Appearing().Times(5);
+
+            action
+                .Should()
+                .Throw<XunitException>()
+                .WithMessage("Expected message \"Hello, World\" to appear 5 times, but it was found 4 times");
         }
     }
 }

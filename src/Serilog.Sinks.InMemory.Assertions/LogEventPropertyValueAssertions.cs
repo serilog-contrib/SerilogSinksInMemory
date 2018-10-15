@@ -1,5 +1,4 @@
-﻿using System.IO;
-using FluentAssertions.Execution;
+﻿using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 using Serilog.Events;
 
@@ -21,7 +20,7 @@ namespace Serilog.Sinks.InMemory.Assertions
 
             Execute.Assertion
                 .BecauseOf(because, becauseArgs)
-                .ForCondition(object.Equals(actualValue, value))
+                .ForCondition(Equals(actualValue, value))
                 .FailWith("Expected property {0} to have value {1} but found {2}",
                     Identifier,
                     value,
