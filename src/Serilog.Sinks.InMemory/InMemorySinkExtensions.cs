@@ -7,7 +7,7 @@ namespace Serilog.Sinks.InMemory
         public static LoggerConfiguration InMemory(
             this LoggerSinkConfiguration loggerConfiguration)
         {
-            return loggerConfiguration.Sink(new InMemorySink());
+            return loggerConfiguration.Sink(InMemorySink.Instance);
         }
     }
 }
