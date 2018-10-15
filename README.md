@@ -61,17 +61,16 @@ public class WhenExecutingBusinessLogic
 {
     public void GivenInputOfFiveCharacters_MessageIsLogged()
     {
-        var inMemorySink = new Serilog.Sinks.InMemory.InMemorySink();
-
         var logger = new LoggerConfiguration()
-            .WriteTo.Sink(inMemorySink)
+            .WriteTo.InMemory()
             .CreateLogger();
 
         var logic = new ComplicatedBusinessLogic(logger);
 
         logic.FirstTenCharacters("12345");
 
-        logger
+        // Use the static Instance property to access the in-memory sink
+        InMemorySink.Instance
             .Should()
             .HaveMessage("Input is {count} characters long");
     }
@@ -100,7 +99,7 @@ public void GivenInputOfFiveCharacters_MessageIsLoggedOnce()
 {
     /* omitted for brevity */
 
-    logger
+    InMemorySink.Instance
         .Should()
         .HaveMessage("Input is {count} characters long")
         .Appearing().Once();
@@ -116,7 +115,7 @@ public void GivenInputOfFiveCharacters_CountPropertyValueIsFive()
 {
     /* omitted for brevity */
 
-    logger
+    InMemorySink.Instance
         .Should()
         .HaveMessage("Input is {count} characters long")
         .Appearing().Once();
@@ -134,7 +133,7 @@ public void GivenLoopWithFiveItems_MessageIsLoggedFiveTimes()
 {
     /* omitted for brevity */
 
-    logger
+    InMemorySink.Instance
         .Should()
         .HaveMessage("Input is {count} characters long")
         .Appearing().Times(5);
