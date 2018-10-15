@@ -11,7 +11,7 @@ namespace Serilog.Sinks.InMemory.Tests.Unit
         public void GivenConfigurationToWriteToInMemorySink_InMemorySinkIsAddedToLogger()
         {
             var logger = new LoggerConfiguration()
-                .WriteTo.InMemorySink()
+                .WriteTo.InMemory()
                 .CreateLogger();
 
             // Because there is no way to get access to the sinks configured for a logger
