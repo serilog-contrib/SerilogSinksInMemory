@@ -8,15 +8,13 @@ namespace Serilog.Sinks.InMemory.Tests.Unit
         [Fact]
         public void GivenInformationMessageIsWritten_LogEventIsStoredInSink()
         {
-            var sink = new InMemorySink();
-
             var logger = new LoggerConfiguration()
-                .WriteTo.Sink(sink)
+                .WriteTo.InMemory()
                 .CreateLogger();
 
             logger.Information("Test");
 
-            sink
+            InMemorySink.Instance
                 .LogEvents
                 .Should()
                 .HaveCount(1);
