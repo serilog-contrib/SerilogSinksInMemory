@@ -1,11 +1,36 @@
 # Serilog.Sinks.InMemory
-In-memory sink for Serilog to use for testing.
+In-memory sink for Serilog to use for testing with [FluentAssertions](https://fluentassertions.com/) support for easy to write assertions.
 
 ## Build status
 [![Build status](https://ci.appveyor.com/api/projects/status/aq0g2f247q5proix?svg=true)](https://ci.appveyor.com/project/sandermvanvliet/serilogsinksinmemory)
 
 ## Usage
 
+To just use the sink, add the `Serilog.Sinks.InMemory` NuGet package:
+
+`dotnet` CLI:
+```bash
+dotnet add package Serilog.Sinks.InMemory
+```
+
+PowerShell:
+```PowerShell
+Install-Package Serilog.Sinks.InMemory
+```
+
+But it's better with assertions so you'll also want to add the `Serilog.Sinks.InMemory.Assertions` NuGet package:
+
+`dotnet` CLI:
+```bash
+dotnet add package Serilog.Sinks.InMemory.Assertions
+```
+
+PowerShell:
+```PowerShell
+Install-Package -Name Serilog.Sinks.InMemory.Assertions
+```
+
+## Example
 Let's say you have a class with method implementing some complicated business logic:
 
 ```csharp
