@@ -1,4 +1,5 @@
-﻿using FluentAssertions.Execution;
+﻿using System;
+using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 using Serilog.Events;
 
@@ -28,6 +29,19 @@ namespace Serilog.Sinks.InMemory.Assertions
             return new LogEventPropertyValueAssertions(
                 Subject.Properties[name],
                 name);
+        }
+
+        public LogEventAssertion WithLevel(LogEventLevel level,  string because = "", params object[] becauseArgs)
+        {
+            Execute.Assertion
+                .BecauseOf(because, becauseArgs)
+                .ForCondition(Subject.Level == level)
+                .FailWith("Expected message {0} to have level {1}, but it is {2}",
+                    _messageTemplate,
+                    level,
+                    Subject.Level);
+
+            return this;
         }
     }
 }
