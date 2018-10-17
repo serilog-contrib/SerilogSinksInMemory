@@ -139,3 +139,39 @@ public void GivenLoopWithFiveItems_MessageIsLoggedFiveTimes()
         .Appearing().Times(5);
 }
 ```
+
+### Asserting a message has a certain level
+
+Apart from a message being logged, you'll also want to verify it is of the right level. You can do that using the `WithLevel()` assertion:
+
+```csharp
+public void GivenLoopWithFiveItems_MessageIsLoggedFiveTimes()
+{
+    /* omitted for brevity */
+
+    InMemorySink.Instance
+        .Should()
+        .HaveMessage("Input is {count} characters long")
+        .Appearing().Once()
+        .WithLevel(LogEventLevel.Information);
+}
+```
+
+This also works for multiple messages:
+
+```csharp
+public void GivenLoopWithFiveItems_MessageIsLoggedFiveTimes()
+{
+    logger.Warning("Test message");
+    logger.Warning("Test message");
+    logger.Warning("Test message");
+
+    InMemorySink.Instance
+        .Should()
+        .HaveMessage("Test message")
+        .Appearing().Times(3)
+        .WithLevel(LogEventLevel.Information);
+}
+```
+
+This will fail with a message: `Expected instances of log message \"Hello, world!\" to have level Information, but found 3 with level Warning`

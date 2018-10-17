@@ -47,5 +47,40 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Appearing().Once()
                 .WithLevel(LogEventLevel.Information);
         }
+
+        [Fact]
+        public void GivenMultipleInformationMessagesAndAssertingInformation_WithLevelSucceeds()
+        {
+            _logger.Information("Hello, world!");
+            _logger.Information("Hello, world!");
+            _logger.Information("Hello, world!");
+
+            InMemorySink
+                .Instance
+                .Should()
+                .HaveMessage("Hello, world!")
+                .Appearing().Times(3)
+                .WithLevel(LogEventLevel.Information);
+        }
+
+        [Fact]
+        public void GivenMultipleWarningMessagesAndAssertingInformation_WithLevelFails()
+        {
+            _logger.Warning("Hello, world!");
+            _logger.Warning("Hello, world!");
+            _logger.Warning("Hello, world!");
+
+            Action action = () => InMemorySink
+                .Instance
+                .Should()
+                .HaveMessage("Hello, world!")
+                .Appearing().Times(3)
+                .WithLevel(LogEventLevel.Information);
+
+            action
+                .Should()
+                .Throw<XunitException>()
+                .WithMessage("Expected instances of log message \"Hello, world!\" to have level Information, but found 3 with level Warning");
+        }
     }
 }

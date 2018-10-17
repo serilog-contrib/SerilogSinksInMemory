@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
@@ -46,6 +47,31 @@ namespace Serilog.Sinks.InMemory.Assertions
                     _messageTemplate,
                     number,
                     Subject.Count());
+
+            return this;
+        }
+
+        public LogEventsAssertions WithLevel(LogEventLevel level, string because = "", params object[] becauseArgs)
+        {
+            var notMatched = Subject.Where(logEvent => logEvent.Level != level);
+
+            var notMatchedText = "";
+
+            if(notMatched.Any())
+            {
+                notMatchedText = string.Join(" and ",
+                notMatched
+                .GroupBy(logEvent => logEvent.Level,
+                logEvent => logEvent,
+                (key, values) => $"{values.Count()} with level {key}"));
+            }
+
+            Execute.Assertion
+                .BecauseOf(because, becauseArgs)
+                .ForCondition(Subject.All(logEvent => logEvent.Level == level))
+                .FailWith($"Expected instances of log message {{0}} to have level {{1}}, but found {notMatchedText}",
+                    _messageTemplate,
+                    level);
 
             return this;
         }
