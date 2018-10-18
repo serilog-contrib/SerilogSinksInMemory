@@ -174,4 +174,4 @@ public void GivenLoopWithFiveItems_MessageIsLoggedFiveTimes()
 }
 ```
 
-This will fail with a message: `Expected instances of log message \"Hello, world!\" to have level Information, but found 3 with level Warning`
+This will fail with a message: `Expected instances of log message "Hello, world!" to have level Information, but found 3 with level Warning`
