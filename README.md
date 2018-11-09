@@ -29,7 +29,7 @@ dotnet add package Serilog.Sinks.InMemory.Assertions
 
 PowerShell:
 ```PowerShell
-Install-Package -Name Serilog.Sinks.InMemory.Assertions
+Install-Package Serilog.Sinks.InMemory.Assertions
 ```
 
 ## Example
