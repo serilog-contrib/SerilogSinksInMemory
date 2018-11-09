@@ -11,8 +11,10 @@ before_build:
   - cmd: dotnet --version
   - cmd: dotnet restore --verbosity m
 build_script:
-  - cmd: dotnet publish
-  - cmd: dotnet pack
+  - cmd: dotnet publish ./src/Serilog.Sinks.InMemory/Serilog.Sinks.InMemory.csproj
+  - cmd: dotnet publish ./src/Serilog.Sinks.InMemory.Assertions/Serilog.Sinks.InMemory.Assertions.csproj
+  - cmd: dotnet pack ./src/Serilog.Sinks.InMemory/Serilog.Sinks.InMemory.csproj
+  - cmd: dotnet pack ./src/Serilog.Sinks.InMemory.Assertions/Serilog.Sinks.InMemory.Assertions.csproj
 after_build:
   # For once the build has completed
 clone_depth: 1
