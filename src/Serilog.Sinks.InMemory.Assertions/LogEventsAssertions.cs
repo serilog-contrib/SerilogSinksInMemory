@@ -53,7 +53,7 @@ namespace Serilog.Sinks.InMemory.Assertions
 
         public LogEventsAssertions WithLevel(LogEventLevel level, string because = "", params object[] becauseArgs)
         {
-            var notMatched = Subject.Where(logEvent => logEvent.Level != level);
+            var notMatched = Subject.Where(logEvent => logEvent.Level != level).ToList();
 
             var notMatchedText = "";
 
