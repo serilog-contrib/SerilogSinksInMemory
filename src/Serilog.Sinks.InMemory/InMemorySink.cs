@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using Serilog.Core;
 using Serilog.Events;
 
 namespace Serilog.Sinks.InMemory
 {
-    public class InMemorySink : ILogEventSink
+    public class InMemorySink : ILogEventSink, IDisposable
     {
         private static readonly AsyncLocal<InMemorySink> LocalInstance = new AsyncLocal<InMemorySink>();
 
@@ -34,6 +35,11 @@ namespace Serilog.Sinks.InMemory
         public void Emit(LogEvent logEvent)
         {
             _logEvents.Add(logEvent);
+        }
+
+        public void Dispose()
+        {
+            _logEvents.Clear();
         }
     }
 }
