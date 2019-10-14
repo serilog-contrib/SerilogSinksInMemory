@@ -11,9 +11,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{056C07B9-C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.Tests.Unit", "test\Serilog.Sinks.InMemory.Tests.Unit\Serilog.Sinks.InMemory.Tests.Unit.csproj", "{32BA2907-C3CD-4957-88EE-C64FA6CFC7E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.Assertions", "src\Serilog.Sinks.InMemory.Assertions\Serilog.Sinks.InMemory.Assertions.csproj", "{57388B94-C61A-48CA-B7B7-9E82233DB7ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.Assertions", "src\Serilog.Sinks.InMemory.Assertions\Serilog.Sinks.InMemory.Assertions.csproj", "{57388B94-C61A-48CA-B7B7-9E82233DB7ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.Assertions.Tests.Unit", "test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\Serilog.Sinks.InMemory.Assertions.Tests.Unit.csproj", "{B2B802A5-04A4-4844-8A3E-CCEC78101C1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.Assertions.Tests.Unit", "test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\Serilog.Sinks.InMemory.Assertions.Tests.Unit.csproj", "{B2B802A5-04A4-4844-8A3E-CCEC78101C1C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{14ACDCFC-205B-4918-AABC-4E97E46D8BD5}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -175,3 +175,51 @@ public void GivenLoopWithFiveItems_MessageIsLoggedFiveTimes()
 ```
 
 This will fail with a message: `Expected instances of log message "Hello, world!" to have level Information, but found 3 with level Warning`
+
+## Clearing log events between tests
+
+Depending on your test framework and test setup you may want to ensure that the log events captured by the `InMemorySink` are cleared so tests 
+are not interfering with eachother. To enable this, the `InMemorySink` implements the [`IDisposable`](https://docs.microsoft.com/en-us/dotnet/api/system.idisposable?view=netstandard-2.0) interface. 
+When `Dispose()` is called the `LogEvents` collection is cleared. 
+
+It will depend on the test framework or your test if you need this feature. With xUnit this feature is not necessary as it isolates each test in its own instance of the test class which means that they all
+have their own instance of the `InMemorySink`. MSTest however has a different approach and there you may want to use this feature as follows:
+
+```csharp
+[TestClass]
+public class WhenDemonstratingDisposableFeature
+{
+    private Logger _logger;
+    
+    [TestInitialize]
+    public void Initialize()
+    {
+        _logger?.Dispose();
+
+        _logger = new LoggerConfiguration()
+            .WriteTo.InMemory()
+            .CreateLogger();
+    }
+
+    [TestMethod]
+    public void GivenAFoo_BarIsBlah()
+    {
+        _logger.Information("Foo");
+
+        InMemorySink.Instance
+            .Should()
+            .HaveMessage("Foo");
+    }
+
+    [TestMethod]
+    public void GivenABar_BazIsQuux()
+    {
+        _logger.Information("Bar");
+
+        InMemorySink.Instance
+            .Should()
+            .HaveMessage("Bar");
+    }
+}
+```
+this approach ensures that the `GivenABar_BazIsQuux` does not see any messages logged in a previous test.
