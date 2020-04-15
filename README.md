@@ -1,6 +1,8 @@
 # Serilog.Sinks.InMemory
 In-memory sink for Serilog to use for testing with [FluentAssertions](https://fluentassertions.com/) support for easy to write assertions.
 
+Currently the package targets `net45` and `netstandard1.3`. When using this package in projects targeting `net45`/`net451`/`net452` please see [Clearing log events between tests](#clearing-log-events-between-tests) as the .Net versions &lt; `net462` have issues with isolating the `InMemorySink` instance between tests.
+
 ## Build status
 [![Build status](https://ci.appveyor.com/api/projects/status/aq0g2f247q5proix?svg=true)](https://ci.appveyor.com/project/sandermvanvliet/serilogsinksinmemory)
 [![NuGet Serilog.Sinks.InMemory](https://buildstats.info/nuget/Serilog.Sinks.InMemory)](https://www.nuget.org/packages/Serilog.Sinks.InMemory/)
@@ -178,19 +180,16 @@ This will fail with a message: `Expected instances of log message "Hello, world!
 
 ## Clearing log events between tests
 
-Depending on your test framework and test setup you may want to ensure that the log events captured by the `InMemorySink` are cleared so tests 
-are not interfering with eachother. To enable this, the `InMemorySink` implements the [`IDisposable`](https://docs.microsoft.com/en-us/dotnet/api/system.idisposable?view=netstandard-2.0) interface. 
-When `Dispose()` is called the `LogEvents` collection is cleared. 
+Depending on your test framework and test setup you may want to ensure that the log events captured by the `InMemorySink` are cleared so tests are not interfering with eachother. To enable this, the `InMemorySink` implements the [`IDisposable`](https://docs.microsoft.com/en-us/dotnet/api/system.idisposable?view=netstandard-2.0) interface. When `Dispose()` is called the `LogEvents` collection is cleared.
 
-It will depend on the test framework or your test if you need this feature. With xUnit this feature is not necessary as it isolates each test in its own instance of the test class which means that they all
-have their own instance of the `InMemorySink`. MSTest however has a different approach and there you may want to use this feature as follows:
+It will depend on the test framework or your test if you need this feature. With xUnit this feature is not necessary as it isolates each test in its own instance of the test class which means that they all have their own instance of the `InMemorySink`. MSTest however has a different approach and there you may want to use this feature as follows:
 
 ```csharp
 [TestClass]
 public class WhenDemonstratingDisposableFeature
 {
     private Logger _logger;
-    
+
     [TestInitialize]
     public void Initialize()
     {
@@ -222,4 +221,7 @@ public class WhenDemonstratingDisposableFeature
     }
 }
 ```
+
 this approach ensures that the `GivenABar_BazIsQuux` does not see any messages logged in a previous test.
+
+For NUnit you can use the `[TesrDown]` attribute for a similar approach.
