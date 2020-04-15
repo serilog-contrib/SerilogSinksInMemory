@@ -1,14 +1,14 @@
 using System;
 using FluentAssertions;
+using NUnit.Framework;
+using Serilog.Core;
 using Serilog.Events;
-using Xunit;
-using Xunit.Sdk;
 
 namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
 {
     public class WhenAssertingLogEventHasLevel
     {
-        private readonly ILogger _logger;
+        private readonly Logger _logger;
 
         public WhenAssertingLogEventHasLevel()
         {
@@ -17,13 +17,20 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .CreateLogger();
         }
 
-        [Fact]
+        [TearDown]
+        public void TearDown()
+        {
+            // Instance isolation gets tricky with tests so we need to 
+            // ensure the sink is reset after each test.
+            _logger.Dispose();
+        }
+
+        [Test]
         public void GivenInformationMessageIsLoggedAndAssertingWarning_WithLevelFails()
         {
             _logger.Information("Hello, world!");
 
-            Action action = () => InMemorySink
-                .Instance
+            Action action = () => InMemorySink.Instance
                 .Should()
                 .HaveMessage("Hello, world!")
                 .Appearing().Once()
@@ -31,47 +38,44 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
 
             action
                 .Should()
-                .Throw<XunitException>()
+                .Throw<Exception>()
                 .WithMessage("Expected message \"Hello, world!\" to have level Warning, but it is Information");
         }
 
-        [Fact]
+        [Test]
         public void GivenInformationMessageIsLoggedAndAssertingInformation_WithLevelSucceeds()
         {
             _logger.Information("Hello, world!");
-
-            InMemorySink
-                .Instance
+            
+            InMemorySink.Instance
                 .Should()
                 .HaveMessage("Hello, world!")
                 .Appearing().Once()
                 .WithLevel(LogEventLevel.Information);
         }
 
-        [Fact]
+        [Test]
         public void GivenMultipleInformationMessagesAndAssertingInformation_WithLevelSucceeds()
         {
             _logger.Information("Hello, world!");
             _logger.Information("Hello, world!");
             _logger.Information("Hello, world!");
 
-            InMemorySink
-                .Instance
+            InMemorySink.Instance
                 .Should()
                 .HaveMessage("Hello, world!")
                 .Appearing().Times(3)
                 .WithLevel(LogEventLevel.Information);
         }
 
-        [Fact]
+        [Test]
         public void GivenMultipleWarningMessagesAndAssertingInformation_WithLevelFails()
         {
             _logger.Warning("Hello, world!");
             _logger.Warning("Hello, world!");
             _logger.Warning("Hello, world!");
 
-            Action action = () => InMemorySink
-                .Instance
+            Action action = () => InMemorySink.Instance
                 .Should()
                 .HaveMessage("Hello, world!")
                 .Appearing().Times(3)
@@ -79,7 +83,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
 
             action
                 .Should()
-                .Throw<XunitException>()
+                .Throw<Exception>()
                 .WithMessage("Expected instances of log message \"Hello, world!\" to have level Information, but found 3 with level Warning");
         }
     }

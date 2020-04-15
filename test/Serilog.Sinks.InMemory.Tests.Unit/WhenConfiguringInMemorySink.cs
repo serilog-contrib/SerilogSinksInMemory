@@ -1,13 +1,13 @@
 ﻿using System.Reflection;
 using FluentAssertions;
+using NUnit.Framework;
 using Serilog.Core;
-using Xunit;
 
 namespace Serilog.Sinks.InMemory.Tests.Unit
 {
     public class WhenConfiguringInMemorySink
     {
-        [Fact]
+        [Test]
         public void GivenConfigurationToWriteToInMemorySink_InMemorySinkIsAddedToLogger()
         {
             var logger = new LoggerConfiguration()

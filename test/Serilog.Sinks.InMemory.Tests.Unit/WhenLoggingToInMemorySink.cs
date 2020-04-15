@@ -1,11 +1,11 @@
 ﻿using FluentAssertions;
-using Xunit;
+using NUnit.Framework;
 
 namespace Serilog.Sinks.InMemory.Tests.Unit
 {
     public class WhenLoggingToInMemorySink
     {
-        [Fact]
+        [Test]
         public void GivenInformationMessageIsWritten_LogEventIsStoredInSink()
         {
             var logger = new LoggerConfiguration()
@@ -20,7 +20,7 @@ namespace Serilog.Sinks.InMemory.Tests.Unit
                 .HaveCount(1);
         }
 
-        [Fact]
+        [Test]
         public void GivenLoggerIsDisposed_LogEventsAreCleared()
         {
             var logger = new LoggerConfiguration()
@@ -37,7 +37,7 @@ namespace Serilog.Sinks.InMemory.Tests.Unit
                 .HaveCount(0);
         }
 
-        [Fact]
+        [Test]
         public void GivenLoggerIsDisposedAndNewMessageIsLogged_SinkOnlyContainsSecondMessage()
         {
             var logger = new LoggerConfiguration()

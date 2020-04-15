@@ -8,8 +8,13 @@ namespace Serilog.Sinks.InMemory
 {
     public class InMemorySink : ILogEventSink, IDisposable
     {
+#if NET45
+        // AsyncLocal<T> is introduced in net462 so we need to
+        // be satisfied with ThreadLocal<T> for net45*
+        private static readonly ThreadLocal<InMemorySink> LocalInstance = new ThreadLocal<InMemorySink>();
+#else
         private static readonly AsyncLocal<InMemorySink> LocalInstance = new AsyncLocal<InMemorySink>();
-
+#endif
         private readonly List<LogEvent> _logEvents;
 
         public InMemorySink()

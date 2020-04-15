@@ -1,13 +1,13 @@
 using System;
 using FluentAssertions;
-using Xunit;
-using Xunit.Sdk;
+using NUnit.Framework;
+using Serilog.Core;
 
 namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
 {
     public class WhenAssertingLogEventsExist
     {
-        private readonly ILogger _logger;
+        private readonly Logger _logger;
 
         public WhenAssertingLogEventsExist()
         {
@@ -16,7 +16,15 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .CreateLogger();
         }
 
-        [Fact]
+        [TearDown]
+        public void TearDown()
+        {
+            // Instance isolation gets tricky with tests so we need to 
+            // ensure the sink is reset after each test.
+            _logger.Dispose();
+        }
+
+        [Test]
         public void GivenNoLogMessage_HaveMessageFails()
         {
             Action action = () => InMemorySink.Instance
@@ -25,11 +33,11 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
 
             action
                 .Should()
-                .Throw<XunitException>()
+                .Throw<Exception>()
                 .WithMessage("Expected message \"Hello, World\" to be logged");
         }
 
-        [Fact]
+        [Test]
         public void GivenSingleLogMessage_HaveMessagePasses()
         {
             _logger.Information("Hello, World");
@@ -39,7 +47,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .HaveMessage("Hello, World");
         }
 
-        [Fact]
+        [Test]
         public void GivenTheSameLogMessageFourTimesAndAssertingOnlyOnce_HaveMessageFails()
         {
             _logger.Information("Hello, World");
@@ -54,11 +62,11 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
 
             action
                 .Should()
-                .Throw<XunitException>()
+                .Throw<Exception>()
                 .WithMessage("Expected message \"Hello, World\" to appear exactly once, but it was found 4 times");
         }
 
-        [Fact]
+        [Test]
         public void GivenTheSameLogMessageFourTimesAndAssertingFourTimes_HaveMessageSucceeds()
         {
             _logger.Information("Hello, World");
@@ -72,7 +80,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Appearing().Times(4);
         }
 
-        [Fact]
+        [Test]
         public void GivenTheSameLogMessageFourTimesAndAssertingFiveTimes_HaveMessageFails()
         {
             _logger.Information("Hello, World");
@@ -87,7 +95,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
 
             action
                 .Should()
-                .Throw<XunitException>()
+                .Throw<Exception>()
                 .WithMessage("Expected message \"Hello, World\" to appear 5 times, but it was found 4 times");
         }
     }
