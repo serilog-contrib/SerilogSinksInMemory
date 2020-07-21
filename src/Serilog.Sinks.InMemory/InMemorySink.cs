@@ -17,15 +17,12 @@ namespace Serilog.Sinks.InMemory
             _logEvents = new List<LogEvent>();
         }
 
-        public static InMemorySink Instance
-        {
-            get
-            {
+        public static InMemorySink Instance {
+            get {
                 if (LocalInstance.Value == null)
                 {
                     LocalInstance.Value = new InMemorySink();
                 }
-
                 return LocalInstance.Value;
             }
         }
