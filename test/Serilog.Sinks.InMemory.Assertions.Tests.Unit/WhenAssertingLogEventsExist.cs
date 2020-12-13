@@ -90,5 +90,37 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Throw<XunitException>()
                 .WithMessage("Expected message \"Hello, World\" to appear 5 times, but it was found 4 times");
         }
+
+        [Fact]
+        public void GivenMessageExistsAndTestingForAbsence_AssertionFails()
+        {
+            _logger.Information("Hello, World");
+
+            Action action = () => InMemorySink.Instance
+                .Should()
+                .NotHaveMessage("Hello, World");
+
+            action
+                .Should()
+                .Throw<XunitException>()
+                .WithMessage("Expected message \"Hello, World\" not to be logged, but it was found once");
+        }
+
+        [Fact]
+        public void GivenMessageExistsMultipleTImesAndTestingForAbsence_AssertionFailsWithAppearanceCountInFailure()
+        {
+            _logger.Information("Hello, World");
+            _logger.Information("Hello, World");
+            _logger.Information("Hello, World");
+
+            Action action = () => InMemorySink.Instance
+                .Should()
+                .NotHaveMessage("Hello, World");
+
+            action
+                .Should()
+                .Throw<XunitException>()
+                .WithMessage("Expected message \"Hello, World\" not to be logged, but it was found 3 times");
+        }
     }
 }

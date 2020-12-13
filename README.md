@@ -176,6 +176,51 @@ public void GivenLoopWithFiveItems_MessageIsLoggedFiveTimes()
 
 This will fail with a message: `Expected instances of log message "Hello, world!" to have level Information, but found 3 with level Warning`
 
+### Asserting messages with a pattern
+
+Instead of matching on the exact message you can also match on a certain pattern using the `Containing()` assertion:
+
+```csharp
+InMemorySink.Instance
+   .Should()
+   .HaveMessage()
+   .Containing("some pattern")
+   .Appearing().Once();
+```
+
+which matches on log messages:
+
+- `this is some pattern`
+- `some pattern in a message`
+- `this is some pattern in a message`
+
+### Asserting messages have been logged at all (or not!)
+
+When you want to assert that a message has been logged but don't care about what message you can do that with `HaveMessage` and `Appearing`:
+
+```csharp
+InMemorySink.Instance
+                .Should()
+                .HaveMessage()
+                .Appearing().Times(3); // Expect three messages to be logged
+```
+
+and of course the inverse is also possible when expecting no messages to be logged:
+
+```csharp
+InMemorySink.Instance
+                .Should()
+                .NotHaveMessage();
+```
+
+or that a specific message is not be logged
+
+```csharp
+InMemorySink.Instance
+                .Should()
+                .NotHaveMessage("a specific message");
+```
+
 ## Clearing log events between tests
 
 Depending on your test framework and test setup you may want to ensure that the log events captured by the `InMemorySink` are cleared so tests

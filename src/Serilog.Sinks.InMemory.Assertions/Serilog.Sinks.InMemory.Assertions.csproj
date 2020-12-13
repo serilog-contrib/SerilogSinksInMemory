@@ -6,10 +6,10 @@
 
   <PropertyGroup>
     <IsPackable>true</IsPackable>
-    <Version>0.4.1</Version>
+    <Version>0.6.0</Version>
     <Title>Serilog in-memory sink assertion extensions</Title>
     <Description>FluentAssertions extensions to use with the Serilog.Sinks.InMemory package</Description>
-    <Copyright>2019 Sander van Vliet</Copyright>
+    <Copyright>2020 Sander van Vliet</Copyright>
     <Authors>Sander van Vliet</Authors>
     <PackageProjectUrl>https://github.com/sandermvanvliet/SerilogSinksInMemory/</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/sandermvanvliet/SerilogSinksInMemory/LICENSE</PackageLicenseUrl>
@@ -23,10 +23,10 @@
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.*" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Serilog.Sinks.InMemory\Serilog.Sinks.InMemory.csproj" />
+    <PackageReference Include="Serilog.Sinks.InMemory" Version="0.*" />
+    <PackageReference Include="Serilog" Version="2.*">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
