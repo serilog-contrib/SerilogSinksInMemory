@@ -53,6 +53,23 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Appearing().Times(3);
         }
 
+        [Fact]
+        public void GivenThreeMessagesAndAssertingNoMessagesAreLogged_AssertionFails()
+        {
+            _logger.Information("foo");
+            _logger.Information("bar");
+            _logger.Information("baz");
+
+            Action action = () => InMemorySink.Instance
+                .Should()
+                .NotHaveMessage();
+
+            action
+                .Should()
+                .Throw<XunitException>()
+                .WithMessage("Expected no messages to be logged, but found 3 messages");
+        }
+
         private readonly ILogger _logger;
 
         public WhenAssertingMessageExistsThatContainsPattern()
