@@ -32,5 +32,25 @@ namespace Serilog.Sinks.InMemory.Assertions
 
             return new LogEventsAssertions(messageTemplate, matches);
         }
+
+        public PatternLogEventsAssertions HaveMessage()
+        {
+            return new PatternLogEventsAssertions(Subject.LogEvents);
+        }
+
+        public void NotHaveMessage(
+            string messageTemplate,
+            string because = "",
+            params object[] becauseArgs)
+        {
+            var count = Subject
+                .LogEvents
+                .Count(logEvent => logEvent.MessageTemplate.Text == messageTemplate);
+
+            Execute.Assertion
+                .BecauseOf(because, becauseArgs)
+                .ForCondition(count == 0)
+                .FailWith($"Expected message \"{messageTemplate}\" not to be logged, but it was found {(count > 1 ? $"{count} times" : "once")}");  
+        }
     }
 }
