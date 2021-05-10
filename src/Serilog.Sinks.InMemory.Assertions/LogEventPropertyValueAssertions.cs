@@ -1,4 +1,5 @@
-﻿using FluentAssertions.Execution;
+﻿using FluentAssertions;
+using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 using Serilog.Events;
 
@@ -6,15 +7,18 @@ namespace Serilog.Sinks.InMemory.Assertions
 {
     public class LogEventPropertyValueAssertions : ReferenceTypeAssertions<LogEventPropertyValue, LogEventPropertyValueAssertions>
     {
-        public LogEventPropertyValueAssertions(LogEventPropertyValue instance, string propertyName)
+        private readonly LogEventAssertion _logEventAssertion;
+
+        public LogEventPropertyValueAssertions(LogEventAssertion logEventAssertion, LogEventPropertyValue instance, string propertyName)
         {
+            _logEventAssertion = logEventAssertion;
             Subject = instance;
             Identifier = propertyName;
         }
 
         protected override string Identifier { get; }
 
-        public void WithValue(object value, string because = "", params object[] becauseArgs)
+        public AndConstraint<LogEventAssertion> WithValue(object value, string because = "", params object[] becauseArgs)
         {
             var actualValue = GetValueFromProperty(Subject);
 
@@ -25,6 +29,8 @@ namespace Serilog.Sinks.InMemory.Assertions
                     Identifier,
                     value,
                     actualValue);
+
+            return new AndConstraint<LogEventAssertion>(_logEventAssertion);
         }
 
         private object GetValueFromProperty(LogEventPropertyValue instance)

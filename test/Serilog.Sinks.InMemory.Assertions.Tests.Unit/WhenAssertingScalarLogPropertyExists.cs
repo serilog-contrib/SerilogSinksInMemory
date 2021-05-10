@@ -124,5 +124,21 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .WithProperty("some_property")
                 .WithValue("some_value");
         }
+
+        [Fact]
+        public void GivenLogMessageWithTwoProperties_BothPropertiesExistOnLogEntry()
+        {
+            _logger.Information("{PropertyOne} {PropertyTwo}", "one", "two");
+
+            InMemorySink.Instance
+                .Should()
+                .HaveMessage()
+                .Appearing().Once()
+                .WithProperty("PropertyOne")
+                .WithValue("one")
+                .And
+                .WithProperty("PropertyTwo")
+                .WithValue("two");
+        }
     }
 }
