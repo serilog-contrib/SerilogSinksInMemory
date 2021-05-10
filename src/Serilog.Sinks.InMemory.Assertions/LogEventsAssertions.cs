@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
@@ -74,6 +73,18 @@ namespace Serilog.Sinks.InMemory.Assertions
                     level);
 
             return this;
+        }
+
+        public LogEventsPropertyAssertion WithProperty(string propertyName, string because = "", params object[] becauseArgs)
+        {
+            Execute.Assertion
+                .BecauseOf(because, becauseArgs)
+                .ForCondition(Subject.All(logEvent => logEvent.Properties.ContainsKey(propertyName)))
+                .FailWith($"Expected all instances of log message {{0}} to have property {{1}}, but it was not found",
+                    _messageTemplate,
+                    propertyName);
+
+            return new LogEventsPropertyAssertion(this, propertyName);
         }
     }
 }

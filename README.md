@@ -221,6 +221,56 @@ InMemorySink.Instance
                 .NotHaveMessage("a specific message");
 ```
 
+### Asserting properties on messages
+
+When you want to assert that a message has a property you can do that using the `WithProperty` assertion:
+
+```csharp
+InMemorySink.Instance
+    .Should()
+    .HaveMessage("Message with {Property}")
+    .Appearing().Once()
+    .WithProperty("Property");
+```
+
+To then assert that it has a certain value you would use `WithValue`:
+
+```csharp
+InMemorySink.Instance
+    .Should()
+    .HaveMessage("Message with {Property}")
+    .Appearing().Once()
+    .WithProperty("Property")
+    .WithValue("property value");
+```
+
+Asserting that a message has multiple properties can be accomplished using the `And` constraint:
+
+```csharp
+InMemorySink.Instance
+    .Should()
+    .HaveMessage("Message with {Property1} and {Property2}")
+    .Appearing().Once()
+    .WithProperty("Property1")
+    .WithValue("value 1")
+    .And
+    .WithProperty("Property2")
+    .WithValue("value 2");
+```
+
+When you have a log message that appears a number of times and you want to assert that the value of the log property has the expected values you can do that using the `WithValues` assertion:
+
+```csharp
+InMemorySink.Instance
+    .Should()
+    .HaveMessage("Message with {Property1} and {Property2}")
+    .Appearing().Times(3)
+    .WithProperty("Property1")
+    .WithValue("value 1", "value 2", "value 3")
+```
+
+> **Note:** `WithValue` takes an array of values.
+
 ## Clearing log events between tests
 
 Depending on your test framework and test setup you may want to ensure that the log events captured by the `InMemorySink` are cleared so tests

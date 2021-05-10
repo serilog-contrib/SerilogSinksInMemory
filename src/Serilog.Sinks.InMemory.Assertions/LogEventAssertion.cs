@@ -1,5 +1,4 @@
-﻿using System;
-using FluentAssertions.Execution;
+﻿using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 using Serilog.Events;
 
@@ -15,7 +14,7 @@ namespace Serilog.Sinks.InMemory.Assertions
             Subject = subject;
         }
 
-        protected override string Identifier { get; } = "log event";
+        protected override string Identifier => "log event";
 
         public LogEventPropertyValueAssertions WithProperty(string name, string because = "", params object[] becauseArgs)
         {
@@ -27,6 +26,7 @@ namespace Serilog.Sinks.InMemory.Assertions
                     name);
 
             return new LogEventPropertyValueAssertions(
+                this,
                 Subject.Properties[name],
                 name);
         }
