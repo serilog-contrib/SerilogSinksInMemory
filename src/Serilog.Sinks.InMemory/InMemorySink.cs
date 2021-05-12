@@ -29,6 +29,8 @@ namespace Serilog.Sinks.InMemory
 
         public IEnumerable<LogEvent> LogEvents => _logEvents.AsReadOnly();
 
+        public void Clear() => _logEvents.Clear();
+
         public void Emit(LogEvent logEvent)
         {
             _logEvents.Add(logEvent);
