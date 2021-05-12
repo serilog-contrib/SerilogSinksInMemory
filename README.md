@@ -271,6 +271,24 @@ InMemorySink.Instance
 
 > **Note:** `WithValue` takes an array of values.
 
+Sometimes you might want to use assertions like `BeLessThanOrEqual()` or `HaveLength()` and in those cases `WithValue` is not very helpful.
+Instead you can use `WhichValue<T>()`  to access the value of the log property:
+
+```csharp
+InMemorySink.Instance
+    .Should()
+    .HaveMessage()
+    .Appearing().Once()
+    .WithProperty("PropertyOne")
+    .WhichValue<string>()
+    .Should()
+    .HaveLength(3);
+```
+
+If the type of the value of the log property does not match the generic type parameter the `WhichValue<T>` method will throw an exception.
+
+> **Note:** This only works for scalar values. When you pass an object as the property value when logging a message Serilog converts that into a string.
+
 ## Clearing log events between tests
 
 Depending on your test framework and test setup you may want to ensure that the log events captured by the `InMemorySink` are cleared so tests

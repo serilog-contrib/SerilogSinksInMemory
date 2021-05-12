@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 using Serilog.Events;
@@ -17,6 +18,22 @@ namespace Serilog.Sinks.InMemory.Assertions
         }
 
         protected override string Identifier { get; }
+
+        public TValue WhichValue<TValue>()
+        {
+            if (Subject is ScalarValue scalarValue)
+            {
+                Execute.Assertion
+                    .ForCondition(scalarValue.Value is TValue)
+                    .FailWith("Expected property value to be of type {0} but found {1}",
+                        typeof(TValue).Name,
+                        scalarValue.Value.GetType().Name);
+
+                return (TValue)scalarValue.Value;
+            }
+            
+            throw new Exception($"Expected property value to be of type {typeof(TValue).Name} but the property value is not a scalar and I don't know how to handle that");
+        }
 
         public AndConstraint<LogEventAssertion> WithValue(object value, string because = "", params object[] becauseArgs)
         {

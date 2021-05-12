@@ -140,5 +140,55 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .WithProperty("PropertyTwo")
                 .WithValue("two");
         }
+
+        [Fact]
+        public void GivenLogMessageWithIntegerProperty_CanAssertUsingFluentAssertions()
+        {
+            _logger.Information("{PropertyOne}", 5);
+
+            InMemorySink.Instance
+                .Should()
+                .HaveMessage()
+                .Appearing().Once()
+                .WithProperty("PropertyOne")
+                .WhichValue<int>()
+                .Should()
+                .BeLessOrEqualTo(10);
+        }
+
+        [Fact]
+        public void GivenLogMessageWithStringProperty_CanAssertUsingFluentAssertions()
+        {
+            _logger.Information("{PropertyOne}", "bar");
+
+            InMemorySink.Instance
+                .Should()
+                .HaveMessage()
+                .Appearing().Once()
+                .WithProperty("PropertyOne")
+                .WhichValue<string>()
+                .Should()
+                .HaveLength(3);
+        }
+
+        [Fact]
+        public void GivenLogMessageWithStringPropertyAndAssertingOnInt_AssertionFailsBecauseOfTypeMismatch()
+        {
+            _logger.Information("{PropertyOne}", "bar");
+
+            Action action = () => InMemorySink.Instance
+                .Should()
+                .HaveMessage()
+                .Appearing().Once()
+                .WithProperty("PropertyOne")
+                .WhichValue<int>()
+                .Should()
+                .BeLessThan(3);
+
+            action
+                .Should()
+                .Throw<Exception>()
+                .WithMessage($"Expected property value to be of type \"{nameof(Int32)}\" but found \"{nameof(String)}\"");
+        }
     }
 }
