@@ -118,7 +118,7 @@ public void GivenInputOfFiveCharacters_CountPropertyValueIsFive()
     InMemorySink.Instance
         .Should()
         .HaveMessage("Input is {count} characters long")
-        .Appearing().Once();
+        .Appearing().Once()
         .WithProperty("count")
         .WithValue(5);
 }
@@ -200,25 +200,25 @@ When you want to assert that a message has been logged but don't care about what
 
 ```csharp
 InMemorySink.Instance
-                .Should()
-                .HaveMessage()
-                .Appearing().Times(3); // Expect three messages to be logged
+    .Should()
+    .HaveMessage()
+    .Appearing().Times(3); // Expect three messages to be logged
 ```
 
 and of course the inverse is also possible when expecting no messages to be logged:
 
 ```csharp
 InMemorySink.Instance
-                .Should()
-                .NotHaveMessage();
+    .Should()
+    .NotHaveMessage();
 ```
 
 or that a specific message is not be logged
 
 ```csharp
 InMemorySink.Instance
-                .Should()
-                .NotHaveMessage("a specific message");
+    .Should()
+    .NotHaveMessage("a specific message");
 ```
 
 ### Asserting properties on messages
@@ -391,9 +391,9 @@ When configuring the logger, provide the switch using MinimumLevel.ControlledBy(
 
 ```csharp
 var log = new LoggerConfiguration()
-  .MinimumLevel.ControlledBy(levelSwitch)
-  .WriteTo.ColoredConsole()
-  .CreateLogger();
+    .MinimumLevel.ControlledBy(levelSwitch)
+    .WriteTo.ColoredConsole()
+    .CreateLogger();
 ```
 
 Now, events written to the logger will be filtered according to the switch’s MinimumLevel property.
