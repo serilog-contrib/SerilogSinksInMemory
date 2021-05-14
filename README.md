@@ -106,7 +106,7 @@ public void GivenInputOfFiveCharacters_MessageIsLoggedOnce()
 }
 ```
 
-To verify if a message is logged multiple times use `AppearsTimes(int numberOfTimes)`
+To verify if a message is logged multiple times use `Appearing().Times(int numberOfTimes)`
 
 So now you'll want to verify that the property `count` has the expected value. This builds upon the previous test:
 
