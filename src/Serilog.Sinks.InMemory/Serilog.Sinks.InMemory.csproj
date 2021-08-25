@@ -11,6 +11,8 @@
     <Description>A sink to be used for testing log messages using Serilog</Description>
     <Copyright>2020 Sander van Vliet</Copyright>
     <Authors>Sander van Vliet</Authors>
+    <PackageIcon>images\icon.png</PackageIcon>
+    <PackageIconUrl>https://serilog.net/images/serilog-sink-nuget.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/sandermvanvliet/SerilogSinksInMemory/</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/sandermvanvliet/SerilogSinksInMemory/LICENSE</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/sandermvanvliet/SerilogSinksInMemory/</RepositoryUrl>
@@ -23,6 +25,10 @@
 
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\asset\serilog-sink-nuget.png" Pack="true" Visible="false" PackagePath="images\icon.png" />
   </ItemGroup>
 
 </Project>
