@@ -37,8 +37,8 @@ namespace Serilog.Sinks.InMemory.Assertions
                 .ForCondition(Subject.Level == level)
                 .FailWith("Expected message {0} to have level {1}, but it is {2}",
                     _messageTemplate,
-                    level,
-                    Subject.Level);
+                    level.ToString(),
+                    Subject.Level.ToString());
 
             return this;
         }

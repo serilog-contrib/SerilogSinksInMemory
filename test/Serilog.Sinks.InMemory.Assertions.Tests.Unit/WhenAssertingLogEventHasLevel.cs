@@ -32,7 +32,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
             action
                 .Should()
                 .Throw<XunitException>()
-                .WithMessage("Expected message \"Hello, world!\" to have level Warning, but it is Information");
+                .WithMessage("Expected message \"Hello, world!\" to have level \"Warning\", but it is \"Information\"");
         }
 
         [Fact]
@@ -80,7 +80,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
             action
                 .Should()
                 .Throw<XunitException>()
-                .WithMessage("Expected instances of log message \"Hello, world!\" to have level Information, but found 3 with level Warning");
+                .WithMessage("Expected instances of log message \"Hello, world!\" to have level \"Information\", but found 3 with level \"Warning\"");
         }
     }
 }
