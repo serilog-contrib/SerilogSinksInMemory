@@ -12,7 +12,7 @@
     <Copyright>2021 Sander van Vliet</Copyright>
     <Authors>Sander van Vliet</Authors>
     <PackageProjectUrl>https://github.com/sandermvanvliet/SerilogSinksInMemory/</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/sandermvanvliet/SerilogSinksInMemory/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/sandermvanvliet/SerilogSinksInMemory/</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
