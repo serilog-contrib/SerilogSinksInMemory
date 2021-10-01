@@ -10,9 +10,8 @@ namespace Serilog.Sinks.InMemory.Assertions
 {
     public class InMemorySinkAssertions : ReferenceTypeAssertions<InMemorySink, InMemorySinkAssertions>
     {
-        public InMemorySinkAssertions(InMemorySink instance)
+        public InMemorySinkAssertions(InMemorySink instance) : base(SnapshotOf(instance))
         {
-            Subject = SnapshotOf(instance);
         }
         
         /*

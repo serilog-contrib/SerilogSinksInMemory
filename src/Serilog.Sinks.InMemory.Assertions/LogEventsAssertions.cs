@@ -10,10 +10,9 @@ namespace Serilog.Sinks.InMemory.Assertions
     {
         private readonly string _messageTemplate;
 
-        public LogEventsAssertions(string messageTemplate, IEnumerable<LogEvent> matches)
+        public LogEventsAssertions(string messageTemplate, IEnumerable<LogEvent> matches) : base(matches)
         {
             _messageTemplate = messageTemplate;
-            Subject = matches;
         }
 
         protected override string Identifier { get; } = "log events";

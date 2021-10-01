@@ -8,10 +8,9 @@ namespace Serilog.Sinks.InMemory.Assertions
     {
         private readonly string _messageTemplate;
 
-        public LogEventAssertion(string messageTemplate, LogEvent subject)
+        public LogEventAssertion(string messageTemplate, LogEvent subject) : base(subject)
         {
             _messageTemplate = messageTemplate;
-            Subject = subject;
         }
 
         protected override string Identifier => "log event";
