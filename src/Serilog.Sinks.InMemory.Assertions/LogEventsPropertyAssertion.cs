@@ -13,6 +13,7 @@ namespace Serilog.Sinks.InMemory.Assertions
         private readonly IEnumerable<LogEvent> _logEvents;
 
         public LogEventsPropertyAssertion(LogEventsAssertions logEventsAssertions, string propertyName)
+            : base(logEventsAssertions.Subject)
         {
             _logEventsAssertions = logEventsAssertions;
             _logEvents = logEventsAssertions.Subject;

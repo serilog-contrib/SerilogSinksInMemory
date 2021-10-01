@@ -10,10 +10,9 @@ namespace Serilog.Sinks.InMemory.Assertions
     {
         private readonly string _messageTemplate;
 
-        public LogEventsAssertions(string messageTemplate, IEnumerable<LogEvent> matches)
+        public LogEventsAssertions(string messageTemplate, IEnumerable<LogEvent> matches) : base(matches)
         {
             _messageTemplate = messageTemplate;
-            Subject = matches;
         }
 
         protected override string Identifier { get; } = "log events";
@@ -62,7 +61,7 @@ namespace Serilog.Sinks.InMemory.Assertions
                 notMatched
                 .GroupBy(logEvent => logEvent.Level,
                 logEvent => logEvent,
-                (key, values) => $"{values.Count()} with level {key}"));
+                (key, values) => $"{values.Count()} with level \"{key}\""));
             }
 
             Execute.Assertion
@@ -70,7 +69,7 @@ namespace Serilog.Sinks.InMemory.Assertions
                 .ForCondition(Subject.All(logEvent => logEvent.Level == level))
                 .FailWith($"Expected instances of log message {{0}} to have level {{1}}, but found {notMatchedText}",
                     _messageTemplate,
-                    level);
+                    level.ToString());
 
             return this;
         }

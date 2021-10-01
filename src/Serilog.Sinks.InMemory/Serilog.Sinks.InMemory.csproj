@@ -14,7 +14,7 @@
     <PackageIcon>images\icon.png</PackageIcon>
     <PackageIconUrl>https://serilog.net/images/serilog-sink-nuget.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/sandermvanvliet/SerilogSinksInMemory/</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/sandermvanvliet/SerilogSinksInMemory/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/sandermvanvliet/SerilogSinksInMemory/</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>

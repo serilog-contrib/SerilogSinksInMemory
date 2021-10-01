@@ -8,10 +8,9 @@ namespace Serilog.Sinks.InMemory.Assertions
     {
         private readonly string _messageTemplate;
 
-        public LogEventAssertion(string messageTemplate, LogEvent subject)
+        public LogEventAssertion(string messageTemplate, LogEvent subject) : base(subject)
         {
             _messageTemplate = messageTemplate;
-            Subject = subject;
         }
 
         protected override string Identifier => "log event";
@@ -38,8 +37,8 @@ namespace Serilog.Sinks.InMemory.Assertions
                 .ForCondition(Subject.Level == level)
                 .FailWith("Expected message {0} to have level {1}, but it is {2}",
                     _messageTemplate,
-                    level,
-                    Subject.Level);
+                    level.ToString(),
+                    Subject.Level.ToString());
 
             return this;
         }

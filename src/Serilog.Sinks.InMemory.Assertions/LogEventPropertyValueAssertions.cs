@@ -11,9 +11,9 @@ namespace Serilog.Sinks.InMemory.Assertions
         private readonly LogEventAssertion _logEventAssertion;
 
         public LogEventPropertyValueAssertions(LogEventAssertion logEventAssertion, LogEventPropertyValue instance, string propertyName)
+            : base(instance)
         {
             _logEventAssertion = logEventAssertion;
-            Subject = instance;
             Identifier = propertyName;
         }
 
