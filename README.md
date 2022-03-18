@@ -392,7 +392,7 @@ When configuring the logger, provide the switch using MinimumLevel.ControlledBy(
 ```csharp
 var log = new LoggerConfiguration()
     .MinimumLevel.ControlledBy(levelSwitch)
-    .WriteTo.ColoredConsole()
+    .WriteTo.InMemory()
     .CreateLogger();
 ```
 
