@@ -42,5 +42,27 @@ namespace Serilog.Sinks.InMemory.Assertions
 
             return this;
         }
+
+        public LogEventExceptionAssertion WithException<TException>(string because = "", params object[] becauseArgs)
+        {
+            Execute.Assertion
+                .BecauseOf(because, becauseArgs)
+                .ForCondition(Subject.Exception != null)
+                .FailWith("Expected message {0} to have an exception but it doesn't",
+                    _messageTemplate);
+
+            var exceptionType = typeof(TException);
+            var logEventExceptionType = Subject.Exception.GetType();
+
+            Execute.Assertion
+                .BecauseOf(because, becauseArgs)
+                .ForCondition(logEventExceptionType == exceptionType)
+                .FailWith("Expected message {0} to have an exception of type {1} but found {2}",
+                    _messageTemplate,
+                    exceptionType.Name,
+                    logEventExceptionType.Name);
+
+            return new LogEventExceptionAssertion(Subject.Exception, exceptionType, Subject);
+        }
     }
 }
