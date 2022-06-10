@@ -1,5 +1,14 @@
 # Changelog
 
+## Serilog.Sinks.InMemory 0.7.0
+
+- Introduce `InMemorySinkSnapshot` for testing (see below).
+- Change target frameworks for test projects to net462, netcoreapp3.1 and net6.0
+
+## Serilog.Sinks.InMemory.Assertions: 0.9.1
+
+- Use the new snapshot mechanism from `InMemorySink` instead of using reflection to achieve that.
+
 ## Serilog.Sinks.InMemory.Assertions: 0.9.0
 
 This release introduces support for FluentAssertions 6.x and maintains backwards compatibility with FluentAssertions 5.x releases.

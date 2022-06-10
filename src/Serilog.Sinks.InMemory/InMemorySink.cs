@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Serilog.Core;
 using Serilog.Events;
@@ -11,32 +12,53 @@ namespace Serilog.Sinks.InMemory
         private static readonly AsyncLocal<InMemorySink> LocalInstance = new AsyncLocal<InMemorySink>();
 
         private readonly List<LogEvent> _logEvents;
+        private readonly object _snapShotLock = new object();
 
-        public InMemorySink()
+        public InMemorySink() : this(new List<LogEvent>())
         {
-            _logEvents = new List<LogEvent>();
         }
 
-        public static InMemorySink Instance {
-            get {
+        protected InMemorySink(List<LogEvent> logEvents)
+        {
+            _logEvents = logEvents;
+        }
+
+        public static InMemorySink Instance
+        {
+            get
+            {
                 if (LocalInstance.Value == null)
                 {
                     LocalInstance.Value = new InMemorySink();
                 }
+
                 return LocalInstance.Value;
             }
         }
 
         public IEnumerable<LogEvent> LogEvents => _logEvents.AsReadOnly();
 
-        public void Emit(LogEvent logEvent)
-        {
-            _logEvents.Add(logEvent);
-        }
-
         public void Dispose()
         {
             _logEvents.Clear();
+        }
+
+        public virtual void Emit(LogEvent logEvent)
+        {
+            lock (_snapShotLock)
+            {
+                _logEvents.Add(logEvent);
+            }
+        }
+
+        public InMemorySink Snapshot()
+        {
+            lock (_snapShotLock)
+            {
+                var currentLogEvents = _logEvents.AsReadOnly().ToList();
+
+                return new InMemorySinkSnapshot(currentLogEvents);
+            }
         }
     }
 }

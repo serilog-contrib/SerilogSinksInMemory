@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Linq;
 using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
-using Serilog.Events;
 
 namespace Serilog.Sinks.InMemory.Assertions
 {
@@ -24,30 +20,11 @@ namespace Serilog.Sinks.InMemory.Assertions
          *
          * For now we copy the LogEvents from the current sink and use reflection to assign
          * it to a new instance of InMemorySink that will be used by the assertions,
-         * effectively snapshotting the InMemorySink that was used by the tests.
+         * effectively creating a snapshot of the InMemorySink that was used by the tests.
          */
         private static InMemorySink SnapshotOf(InMemorySink instance)
         {
-            // Capture the current log events
-            var logEvents = instance.LogEvents.ToList();
-
-            // Create a new sink instance
-            var snapshot = new InMemorySink();
-
-            // Get the field that holds the collection of log events
-            var field = snapshot.GetType().GetField("_logEvents", BindingFlags.NonPublic | BindingFlags.Instance);
-
-            if (field == null)
-            {
-                throw new InvalidOperationException(
-                    "Can't snapshot the InMemorySink instance because the private field that holds the messages could not be found.");
-            }
-
-            // Assign the snapshot of log events to the field
-            ((List<LogEvent>)field.GetValue(snapshot)).AddRange(logEvents);
-
-            // Return the new snapshotted InMemorySink instance
-            return snapshot;
+            return instance.Snapshot();
         }
 
         protected override string Identifier => nameof(InMemorySink);
