@@ -1,8 +1,12 @@
 # Serilog.Sinks.InMemory
+
 In-memory sink for Serilog to use for testing with [FluentAssertions](https://fluentassertions.com/) support for easy to write assertions.
 
 ## Build status
-[![Build status](https://ci.appveyor.com/api/projects/status/aq0g2f247q5proix?svg=true)](https://ci.appveyor.com/project/sandermvanvliet/serilogsinksinmemory)
+
+CI: [![build-and-test](https://github.com/serilog-contrib/SerilogSinksInMemory/actions/workflows/dotnet.yml/badge.svg)](https://github.com/serilog-contrib/SerilogSinksInMemory/actions/workflows/dotnet.yml)
+Release: [![release](https://github.com/serilog-contrib/SerilogSinksInMemory/actions/workflows/release.yml/badge.svg)](https://github.com/serilog-contrib/SerilogSinksInMemory/actions/workflows/release.yml)
+
 [![NuGet Serilog.Sinks.InMemory](https://buildstats.info/nuget/Serilog.Sinks.InMemory)](https://www.nuget.org/packages/Serilog.Sinks.InMemory/)
 [![NuGet Serilog.Sinks.InMemory.Assertions](https://buildstats.info/nuget/Serilog.Sinks.InMemory.Assertions)](https://www.nuget.org/packages/Serilog.Sinks.InMemory.Assertions/)
 
@@ -11,11 +15,13 @@ In-memory sink for Serilog to use for testing with [FluentAssertions](https://fl
 To just use the sink, add the `Serilog.Sinks.InMemory` NuGet package:
 
 `dotnet` CLI:
+
 ```bash
 dotnet add package Serilog.Sinks.InMemory
 ```
 
 PowerShell:
+
 ```PowerShell
 Install-Package Serilog.Sinks.InMemory
 ```
@@ -23,16 +29,19 @@ Install-Package Serilog.Sinks.InMemory
 But it's better with assertions so you'll also want to add the `Serilog.Sinks.InMemory.Assertions` NuGet package:
 
 `dotnet` CLI:
+
 ```bash
 dotnet add package Serilog.Sinks.InMemory.Assertions
 ```
 
 PowerShell:
+
 ```PowerShell
 Install-Package Serilog.Sinks.InMemory.Assertions
 ```
 
 ## Example
+
 Let's say you have a class with method implementing some complicated business logic:
 
 ```csharp
@@ -359,6 +368,7 @@ public class WhenDemonstratingDisposableFeature
     }
 }
 ```
+
 this approach ensures that the `GivenABar_BazIsQuux` does not see any messages logged in a previous test.
 
 ## Creating a logger
