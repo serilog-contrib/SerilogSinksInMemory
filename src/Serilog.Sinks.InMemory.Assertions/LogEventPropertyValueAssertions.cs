@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Xml.Linq;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
@@ -59,6 +61,46 @@ namespace Serilog.Sinks.InMemory.Assertions
                 default:
                     return Subject.ToString();
             }
+        }
+
+        public StructuredValueAssertions HavingADestructuredObject(string because = "", params object[] becauseArgs)
+        {
+            Execute.Assertion
+                .BecauseOf(because, becauseArgs)
+                .ForCondition(Subject is StructureValue)
+                .FailWith("Expected message \"{0}\" to have a property {1} that holds a destructured object but found a scalar value",
+                    _logEventAssertion.Subject.MessageTemplate,
+                    Identifier);
+            
+            return new StructuredValueAssertions(Subject as StructureValue, Identifier, _logEventAssertion);
+        }
+    }
+
+    public class StructuredValueAssertions : ReferenceTypeAssertions<StructureValue, StructuredValueAssertions>
+    {
+        private readonly LogEventAssertion _logEventAssertion;
+
+        public StructuredValueAssertions(StructureValue subject, string propertyName, LogEventAssertion logEventAssertion) : base(subject)
+        {
+            Identifier = propertyName;
+            _logEventAssertion = logEventAssertion;
+        }
+
+        protected override string Identifier { get; }
+
+        public LogEventPropertyValueAssertions WithProperty(string name, string because = "", params object[] becauseArgs)
+        {
+            Execute.Assertion
+                .BecauseOf(because, becauseArgs)
+                .ForCondition(Subject.Properties.Any(p => p.Name == name))
+                .FailWith("Expected destructured object property {0} to have a property {1} but it wasn't found",
+                    Identifier,
+                    name);
+
+            return new LogEventPropertyValueAssertions(
+                _logEventAssertion,
+                Subject.Properties.Single(p => p.Name == name).Value,
+                name);
         }
     }
 }

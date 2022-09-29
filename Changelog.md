@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 0.11.0.0
+
+- Add assertions for verifying properties on messages that have a property that contains a destructured object
+
 ## 0.10.0.0
 
 With this release the package versions are aligned and every next release will keep them in sync. That should make it easier to figure out which package versions go together, use the same version of both and you'll be fine 👍

@@ -17,6 +17,11 @@ namespace Serilog.Sinks.InMemory.Assertions
 
         public LogEventPropertyValueAssertions WithProperty(string name, string because = "", params object[] becauseArgs)
         {
+            if (name.StartsWith("@"))
+            {
+                name = name.Substring(1);
+            }
+
             Execute.Assertion
                 .BecauseOf(because, becauseArgs)
                 .ForCondition(Subject.Properties.ContainsKey(name))

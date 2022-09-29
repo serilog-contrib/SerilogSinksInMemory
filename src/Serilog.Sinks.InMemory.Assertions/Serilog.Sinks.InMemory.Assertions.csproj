@@ -18,6 +18,7 @@
 
 	<PropertyGroup>
 		<PackageVersion>$(Version)$(VersionSuffix)</PackageVersion>
+		<LangVersion>default</LangVersion>
 	</PropertyGroup>
 
 	<ItemGroup>

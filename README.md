@@ -289,6 +289,30 @@ If the type of the value of the log property does not match the generic type par
 
 > **Note:** This only works for scalar values. When you pass an object as the property value when logging a message Serilog converts that into a string.
 
+### Asserting a property with a destructured object
+
+If you use [object destructuring](https://github.com/serilog/serilog/wiki/Structured-Data#preserving-object-structure):
+
+```csharp
+var someObject = new { Foo = "bar", Baz = "quux" };
+logger.Information("Hello {@SomeObject}", someObject);
+```
+
+and want to assert on properties of the _destructured object_ you can use the `HavingADestructuredObject()` assertion like so:
+
+```csharp
+InMemorySink.Instance
+    .Should()
+    .HaveMessage("Hello {@SomeObject}")
+    .Appearing().Once()
+    .WithProperty("SomeObject")
+    .HavingADestructuredObject()
+    .WithProperty("Foo")
+    .WithValue("bar");
+```
+
+When the property `SomeObject` doesn't hold a destructured object the assertion will fail with the message: `"Expected message "Hello {NotDestructured}" to have a property "NotDestructured" that holds a destructured object but found a scalar value"`
+
 ## Clearing log events between tests
 
 Depending on your test framework and test setup you may want to ensure that the log events captured by the `InMemorySink` are cleared so tests
