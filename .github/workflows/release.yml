@@ -28,7 +28,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore -c Release .\Serilog.Sinks.InMemory.sln
+      run: dotnet build --no-restore -c Release .\SerilogSinksInMemory.sln
     - name: Test
       run: dotnet test --no-build --verbosity normal -c Release
     - name: Create NuGet package for Serilog.Sinks.InMemory
