@@ -1,6 +1,5 @@
 ﻿using System;
 using FluentAssertions;
-using Serilog.Context;
 using Xunit;
 using Xunit.Sdk;
 
@@ -18,7 +17,6 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
             _logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .WriteTo.Sink(_inMemorySink)
-                .WriteTo.Debug()
                 .CreateLogger();
 
             _logger.Information("Hello {@Placeholder}", new PlaceholderObject());
