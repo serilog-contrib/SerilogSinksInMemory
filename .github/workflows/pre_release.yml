@@ -15,6 +15,12 @@ jobs:
       with:
         xml-file: './Directory.Build.props'
         xpath: '//Version'
+    - name: Create short version
+      id: shortversion
+      run: |
+        $version = "${{ steps.get_version.outputs.info }}".Substring(0, "${{ steps.get_version.outputs.info }}".LastIndexOf("."))
+        Write-Host "::set-output name=shortversion::$version"
+      shell: pwsh
     - uses: actions/checkout@v2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
@@ -42,13 +48,23 @@ jobs:
         release_name: ${{ steps.get_version.outputs.info }}
         draft: false
         prerelease: true
-    - name: Upload NuGet package
-      id: upload-release-asset 
+    - name: Upload sink NuGet package
+      id: upload-nuget-sink
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./packaging/Serilog.Sinks.InMemory.${{ steps.get_version.outputs.info }}.nupkg
-        asset_name: Serilog.Sinks.InMemory.${{ steps.get_version.outputs.info }}.nupkg
+        asset_path: ./packaging/Serilog.Sinks.InMemory.${{ steps.shortversion.outputs.shortversion }}.nupkg
+        asset_name: Serilog.Sinks.InMemory.${{ steps.shortversion.outputs.shortversion }}.nupkg
+        asset_content_type: application/octet-stream
+    - name: Upload assertions NuGet package
+      id: upload-nuget-assertions
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        asset_path: ./packaging/Serilog.Sinks.InMemory.Assertions.${{ steps.shortversion.outputs.shortversion }}.nupkg
+        asset_name: Serilog.Sinks.InMemory.Assertions.${{ steps.shortversion.outputs.shortversion }}.nupkg
         asset_content_type: application/octet-stream
