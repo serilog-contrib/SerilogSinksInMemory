@@ -6,7 +6,6 @@
 
 	<PropertyGroup>
 		<IsPackable>true</IsPackable>
-		<Version>0.9.1</Version>
 		<Title>Serilog in-memory sink assertion extensions</Title>
 		<Description>FluentAssertions extensions to use with the Serilog.Sinks.InMemory package</Description>
 		<Copyright>2021 Sander van Vliet</Copyright>

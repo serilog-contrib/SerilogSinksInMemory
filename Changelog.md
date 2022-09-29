@@ -1,4 +1,8 @@
-# Changelog
+﻿# Changelog
+
+## 0.10.0.0
+
+With this release the package versions are aligned and every next release will keep them in sync. That should make it easier to figure out which package versions go together, use the same version of both and you'll be fine 👍
 
 ## Serilog.Sinks.InMemory 0.7.0
 
