@@ -34,7 +34,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Serilog.Sinks.InMemory\Serilog.Sinks.InMemory.csproj" Condition="'$(Configuration)'=='Debug'" />
+		<ProjectReference Include="..\Serilog.Sinks.InMemory\Serilog.Sinks.InMemory.csproj" />
 	</ItemGroup>
 
 </Project>
