@@ -50,7 +50,7 @@ jobs:
         tag_name: ${{ steps.get_version.outputs.info }}
         release_name: ${{ steps.get_version.outputs.info }}
         draft: false
-        prerelease: true
+        prerelease: false
     - name: Upload sink NuGet package
       id: upload-nuget-sink
       uses: actions/upload-release-asset@v1
