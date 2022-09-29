@@ -4,8 +4,8 @@ In-memory sink for Serilog to use for testing with [FluentAssertions](https://fl
 
 ## Build status
 
-CI: [![build-and-test](https://github.com/serilog-contrib/SerilogSinksInMemory/actions/workflows/dotnet.yml/badge.svg)](https://github.com/serilog-contrib/SerilogSinksInMemory/actions/workflows/dotnet.yml)
-Release: [![release](https://github.com/serilog-contrib/SerilogSinksInMemory/actions/workflows/release.yml/badge.svg)](https://github.com/serilog-contrib/SerilogSinksInMemory/actions/workflows/release.yml)
+[![build-and-test](https://github.com/serilog-contrib/SerilogSinksInMemory/actions/workflows/dotnet.yml/badge.svg)](https://github.com/serilog-contrib/SerilogSinksInMemory/actions/workflows/dotnet.yml)
+[![release](https://github.com/serilog-contrib/SerilogSinksInMemory/actions/workflows/release.yml/badge.svg)](https://github.com/serilog-contrib/SerilogSinksInMemory/actions/workflows/release.yml)
 
 [![NuGet Serilog.Sinks.InMemory](https://buildstats.info/nuget/Serilog.Sinks.InMemory)](https://www.nuget.org/packages/Serilog.Sinks.InMemory/)
 [![NuGet Serilog.Sinks.InMemory.Assertions](https://buildstats.info/nuget/Serilog.Sinks.InMemory.Assertions)](https://www.nuget.org/packages/Serilog.Sinks.InMemory.Assertions/)
