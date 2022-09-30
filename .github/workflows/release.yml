@@ -72,6 +72,6 @@ jobs:
         asset_name: Serilog.Sinks.InMemory.Assertions.${{ steps.shortversion.outputs.shortversion }}.nupkg
         asset_content_type: application/octet-stream
     - name: Publish sink package to public NuGet repository
-      run: dotnet nuget push -k ${{ secrets.NUGET_TOKEN }} ./packaging/SerilogSinks.InMemory.${{ steps.shortversion.outputs.shortversion}}.nupkg --skip-duplicate --no-symbols true
+      run: dotnet nuget push -k ${{ secrets.NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json ./packaging/SerilogSinks.InMemory.${{ steps.shortversion.outputs.shortversion}}.nupkg --skip-duplicate --no-symbols true
     - name: Publish assertions package to public NuGet repository
-      run: dotnet nuget push -k ${{ secrets.NUGET_TOKEN }} ./packaging/SerilogSinks.InMemory.Assertions.${{ steps.shortversion.outputs.shortversion }}.nupkg --skip-duplicate --no-symbols true
+      run: dotnet nuget push -k ${{ secrets.NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json ./packaging/SerilogSinks.InMemory.Assertions.${{ steps.shortversion.outputs.shortversion }}.nupkg --skip-duplicate --no-symbols true
