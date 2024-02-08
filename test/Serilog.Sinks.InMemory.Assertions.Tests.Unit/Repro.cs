@@ -1,9 +1,7 @@
-﻿using System;
 using Serilog.Events;
-using Xunit;
 
-namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
-{
+namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit;
+
 public class Repro
 {
     [Fact]
@@ -16,7 +14,7 @@ public class Repro
         logger.Error(
             new ArgumentException("Account name cannot be longer than 100 characters"),
             "An invalid argument was encountered while processing message with ID {MessageId}", "some-message-id");
-        
+
         InMemorySink.Instance.Should()
             .HaveErrorMessageWithException<ArgumentException>(
                 "An invalid argument was encountered while processing message with ID {MessageId}",
@@ -43,5 +41,4 @@ public static class Extension
                     o.Exception.Message.Contains(innerMessage)
             );
     }
-}
 }

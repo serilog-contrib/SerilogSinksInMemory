@@ -8,7 +8,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Get the version
       id: get_version
       uses: mavrosxristoforos/get-xml-info@1.0
@@ -21,7 +21,7 @@ jobs:
         $version = "${{ steps.get_version.outputs.info }}".Substring(0, "${{ steps.get_version.outputs.info }}".LastIndexOf("."))
         Write-Host "::set-output name=shortversion::$version"
       shell: pwsh
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
