@@ -1,64 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 using Serilog.Core;
 using Serilog.Events;
 
-namespace Serilog.Sinks.InMemory
+namespace Serilog.Sinks.InMemory;
+
+public class InMemorySink : ILogEventSink, IDisposable
 {
-    public class InMemorySink : ILogEventSink, IDisposable
+    private static readonly AsyncLocal<InMemorySink> _localInstance = new();
+
+    private readonly List<LogEvent> _logEvents;
+    private readonly object _snapShotLock = new();
+
+    public InMemorySink() : this([])
     {
-        private static readonly AsyncLocal<InMemorySink> LocalInstance = new AsyncLocal<InMemorySink>();
+    }
 
-        private readonly List<LogEvent> _logEvents;
-        private readonly object _snapShotLock = new object();
+    protected InMemorySink(List<LogEvent> logEvents)
+    {
+        _logEvents = logEvents;
+    }
 
-        public InMemorySink() : this(new List<LogEvent>())
+    public static InMemorySink Instance
+    {
+        get
         {
+            _localInstance.Value ??= new InMemorySink();
+
+            return _localInstance.Value;
         }
+    }
 
-        protected InMemorySink(List<LogEvent> logEvents)
+    public IEnumerable<LogEvent> LogEvents => _logEvents.AsReadOnly();
+
+    public void Dispose()
+    {
+        _logEvents.Clear();
+    }
+
+    public virtual void Emit(LogEvent logEvent)
+    {
+        lock (_snapShotLock)
         {
-            _logEvents = logEvents;
+            _logEvents.Add(logEvent);
         }
+    }
 
-        public static InMemorySink Instance
+    public InMemorySink Snapshot()
+    {
+        lock (_snapShotLock)
         {
-            get
-            {
-                if (LocalInstance.Value == null)
-                {
-                    LocalInstance.Value = new InMemorySink();
-                }
+            var currentLogEvents = _logEvents.AsReadOnly().ToList();
 
-                return LocalInstance.Value;
-            }
-        }
-
-        public IEnumerable<LogEvent> LogEvents => _logEvents.AsReadOnly();
-
-        public void Dispose()
-        {
-            _logEvents.Clear();
-        }
-
-        public virtual void Emit(LogEvent logEvent)
-        {
-            lock (_snapShotLock)
-            {
-                _logEvents.Add(logEvent);
-            }
-        }
-
-        public InMemorySink Snapshot()
-        {
-            lock (_snapShotLock)
-            {
-                var currentLogEvents = _logEvents.AsReadOnly().ToList();
-
-                return new InMemorySinkSnapshot(currentLogEvents);
-            }
+            return new InMemorySinkSnapshot(currentLogEvents);
         }
     }
 }

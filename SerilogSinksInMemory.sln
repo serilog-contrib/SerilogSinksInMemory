@@ -17,12 +17,27 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.Asse
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{14ACDCFC-205B-4918-AABC-4E97E46D8BD5}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
 		Changelog.md = Changelog.md
 		Directory.Build.props = Directory.Build.props
+		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions6", "test\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions6\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions6.csproj", "{F65ECEEE-4461-48EE-98BE-003BBC716FC5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{C4FC1D00-ACF8-420C-A407-47B099B7400A}"
+	ProjectSection(SolutionItems) = preProject
+		.github\FUNDING.yml = .github\FUNDING.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{22114512-ED45-4EE0-9470-542776307569}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+		.github\workflows\pre_release.yml = .github\workflows\pre_release.yml
+		.github\workflows\release.yml = .github\workflows\release.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -104,6 +119,7 @@ Global
 		{57388B94-C61A-48CA-B7B7-9E82233DB7ED} = {B73801C2-972F-48CD-A47A-87A4544953E2}
 		{B2B802A5-04A4-4844-8A3E-CCEC78101C1C} = {056C07B9-CAD5-4F92-8A24-FBDFDCBA0DDD}
 		{F65ECEEE-4461-48EE-98BE-003BBC716FC5} = {056C07B9-CAD5-4F92-8A24-FBDFDCBA0DDD}
+		{22114512-ED45-4EE0-9470-542776307569} = {C4FC1D00-ACF8-420C-A407-47B099B7400A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7573ED42-AA91-4C5A-8355-F60D23EC57B1}
