@@ -1,0 +1,17 @@
+namespace Serilog.Sinks.InMemory
+{
+    public class InMemorySink : Serilog.Core.ILogEventSink, System.IDisposable
+    {
+        public InMemorySink() { }
+        protected InMemorySink(System.Collections.Generic.List<Serilog.Events.LogEvent> logEvents) { }
+        public System.Collections.Generic.IEnumerable<Serilog.Events.LogEvent> LogEvents { get; }
+        public static Serilog.Sinks.InMemory.InMemorySink Instance { get; }
+        public void Dispose() { }
+        public virtual void Emit(Serilog.Events.LogEvent logEvent) { }
+        public Serilog.Sinks.InMemory.InMemorySink Snapshot() { }
+    }
+    public static class InMemorySinkExtensions
+    {
+        public static Serilog.LoggerConfiguration InMemory(this Serilog.Configuration.LoggerSinkConfiguration sinkConfiguration, Serilog.Events.LogEventLevel restrictedToMinimumLevel = 0, string outputTemplate = "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}", Serilog.Core.LoggingLevelSwitch levelSwitch = null) { }
+    }
+}
