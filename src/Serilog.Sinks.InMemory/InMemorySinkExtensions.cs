@@ -7,8 +7,6 @@ namespace Serilog.Sinks.InMemory
 {
     public static class InMemorySinkExtensions
     {
-        const string DefaultOutputTemplate = "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}";
-
         /// <summary>
         /// Writes log events to an in-memory log sink.
         /// </summary>
@@ -21,11 +19,9 @@ namespace Serilog.Sinks.InMemory
         public static LoggerConfiguration InMemory(
             this LoggerSinkConfiguration sinkConfiguration,
             LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum,
-            string outputTemplate = DefaultOutputTemplate,
             LoggingLevelSwitch levelSwitch = null)
         {
             if (sinkConfiguration == null) throw new ArgumentNullException(nameof(sinkConfiguration));
-            if (outputTemplate == null) throw new ArgumentNullException(nameof(outputTemplate));
 
             return sinkConfiguration.Sink(InMemorySink.Instance, restrictedToMinimumLevel, levelSwitch);
         }
