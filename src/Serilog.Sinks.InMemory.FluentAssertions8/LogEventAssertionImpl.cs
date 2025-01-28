@@ -1,4 +1,6 @@
-﻿using FluentAssertions.Execution;
+﻿using System;
+using FluentAssertions;
+using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 using Serilog.Events;
 using Serilog.Sinks.InMemory.Assertions;
@@ -47,6 +49,11 @@ namespace Serilog.Sinks.InMemory.FluentAssertions8
                     Subject.Level.ToString());
 
             return this;
+        }
+
+        public void Match(Func<LogEvent, bool> predicate)
+        {
+            Subject.Should().Match<LogEvent>(o => predicate(o));
         }
     }
 }
