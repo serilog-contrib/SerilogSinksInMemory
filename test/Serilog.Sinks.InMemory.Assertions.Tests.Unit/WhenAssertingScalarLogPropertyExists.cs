@@ -153,7 +153,12 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .WithProperty("PropertyOne")
                 .WhichValue<int>()
                 .Should()
+#if FLUENTASSERTIONS_8
+                .BeLessThanOrEqualTo(10);
+#else
                 .BeLessOrEqualTo(10);
+#endif
+
         }
 
         [Fact]

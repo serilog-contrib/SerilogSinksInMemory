@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using Serilog.Events;
 using Xunit;
 
