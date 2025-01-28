@@ -5,7 +5,6 @@ using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 using Serilog.Events;
 using Serilog.Sinks.InMemory.Assertions;
-using Serilog.Sinks.InMemory.Assertions.Abstractions;
 
 namespace Serilog.Sinks.InMemory.FluentAssertions6
 {

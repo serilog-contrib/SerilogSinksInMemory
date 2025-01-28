@@ -2,7 +2,7 @@
 using System.Linq;
 using FluentAssertions.Execution;
 using Serilog.Events;
-using Serilog.Sinks.InMemory.Assertions.Abstractions;
+using Serilog.Sinks.InMemory.Assertions;
 
 namespace Serilog.Sinks.InMemory.FluentAssertions5
 {

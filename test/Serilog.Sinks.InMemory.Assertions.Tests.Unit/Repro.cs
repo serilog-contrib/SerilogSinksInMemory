@@ -1,7 +1,8 @@
 ﻿using System;
+using FluentAssertions;
 using Serilog.Events;
-using Serilog.Sinks.InMemory.Assertions.Abstractions;
 using Xunit;
+using Serilog.Sinks.InMemory.Assertions;
 
 namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
 {

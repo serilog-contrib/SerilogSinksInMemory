@@ -8,6 +8,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory", "src\Serilog.Sinks.InMemory\Serilog.Sinks.InMemory.csproj", "{44E5F5AC-4A34-4FFF-842C-DE76717D0997}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{056C07B9-CAD5-4F92-8A24-FBDFDCBA0DDD}"
+	ProjectSection(SolutionItems) = preProject
+		test\Directory.Build.props = test\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.Tests.Unit", "test\Serilog.Sinks.InMemory.Tests.Unit\Serilog.Sinks.InMemory.Tests.Unit.csproj", "{32BA2907-C3CD-4957-88EE-C64FA6CFC7E3}"
 EndProject

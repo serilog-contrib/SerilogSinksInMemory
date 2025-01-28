@@ -3,6 +3,7 @@ using FluentAssertions;
 using Serilog.Events;
 using Xunit;
 using Xunit.Sdk;
+using Serilog.Sinks.InMemory.Assertions;
 
 namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
 {

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net462;netcoreapp3.1;net6.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
 
     <IsPackable>false</IsPackable>
     <DefineConstants>$(DefineConstants);FLUENTASSERTIONS_5</DefineConstants>
@@ -20,7 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Serilog.Sinks.InMemory.Assertions\Serilog.Sinks.InMemory.Assertions.csproj" />
+<!--    <ProjectReference Include="..\..\src\Serilog.Sinks.InMemory.Assertions\Serilog.Sinks.InMemory.Assertions.csproj" Condition="'$(UseProjectReference)'=='true'" />-->
+    <PackageReference Include="Serilog.Sinks.InMemory.Assertions" Version="0.11.5" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <ProjectReference Include="..\..\src\Serilog.Sinks.InMemory\Serilog.Sinks.InMemory.csproj" />
   </ItemGroup>
 

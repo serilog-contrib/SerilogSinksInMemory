@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 
-namespace Serilog.Sinks.InMemory.Assertions.Abstractions;
+namespace Serilog.Sinks.InMemory.Assertions;
 
 public interface LogEventPropertyValueAssertions
 {

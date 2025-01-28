@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using Serilog.Sinks.InMemory.Assertions.Abstractions;
 
 namespace Serilog.Sinks.InMemory.Assertions
 {
@@ -24,9 +23,17 @@ namespace Serilog.Sinks.InMemory.Assertions
 
             lock (SyncRoot)
             {
-                var assemblyLocation = Path.GetDirectoryName(typeof(InMemorySink).Assembly.Location);
+                var assemblyLocation = Path.GetDirectoryName(typeof(InMemorySinkAssertionExtensions).Assembly.Location);
                 var fluentAssertionsAssemblyPath = Path.Combine(assemblyLocation, "FluentAssertions.dll");
-                var fluentAssertionsAssembly = Assembly.LoadFile(fluentAssertionsAssemblyPath);
+                Assembly fluentAssertionsAssembly;
+                try
+                {
+                    fluentAssertionsAssembly = Assembly.LoadFile(fluentAssertionsAssemblyPath);
+                }
+                catch (FileNotFoundException e)
+                {
+                    throw new Exception($"Could not find assembly '{fluentAssertionsAssemblyPath}'", e);
+                }
                 var fluentAssertionsMajorVersion = fluentAssertionsAssembly.GetName().Version.Major;
 
                 var versionedLocation = Path.Combine(
