@@ -1,6 +1,5 @@
 ﻿<Project>
     <PropertyGroup>
-        <UseProjectReference Condition="'$(UseProjectReference)'==''">false</UseProjectReference>
-        <UsePackageReference>true</UsePackageReference>
+        <UseProjectReference Condition="'$(UseProjectReference)'==''">true</UseProjectReference>
     </PropertyGroup>
 </Project>
