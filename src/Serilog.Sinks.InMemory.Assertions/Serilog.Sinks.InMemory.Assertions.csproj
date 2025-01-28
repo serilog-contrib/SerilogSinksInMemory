@@ -38,6 +38,7 @@
 		<ProjectReference Include="..\Serilog.Sinks.InMemory\Serilog.Sinks.InMemory.csproj" />
 	</ItemGroup>
 
+	<!-- These exist to get the assmeblies copied to the output dir -->
 	<ItemGroup>
 		<None Include="..\Serilog.Sinks.InMemory.FluentAssertions5\bin\$(Configuration)\$(TargetFramework)\Serilog.Sinks.InMemory.FluentAssertions5.dll">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -48,5 +49,12 @@
 		<None Include="..\Serilog.Sinks.InMemory.FluentAssertions8\bin\$(Configuration)\$(TargetFramework)\Serilog.Sinks.InMemory.FluentAssertions8.dll">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+	</ItemGroup>
+	
+	<!-- These exist to get the assemblies copied into the nuget package -->
+	<ItemGroup>
+		<None Include="..\Serilog.Sinks.InMemory.FluentAssertions5\bin\$(Configuration)\$(TargetFramework)\Serilog.Sinks.InMemory.FluentAssertions5.dll" Pack="true" PackagePath="lib\netstandard2.0\" />
+		<None Include="..\Serilog.Sinks.InMemory.FluentAssertions6\bin\$(Configuration)\$(TargetFramework)\Serilog.Sinks.InMemory.FluentAssertions6.dll" Pack="true" PackagePath="lib\netstandard2.0\" />
+		<None Include="..\Serilog.Sinks.InMemory.FluentAssertions8\bin\$(Configuration)\$(TargetFramework)\Serilog.Sinks.InMemory.FluentAssertions8.dll" Pack="true" PackagePath="lib\netstandard2.0\" />
 	</ItemGroup>
 </Project>

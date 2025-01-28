@@ -34,6 +34,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.Asse
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.FluentAssertions5", "src\Serilog.Sinks.InMemory.FluentAssertions5\Serilog.Sinks.InMemory.FluentAssertions5.csproj", "{9E980ECF-E1CF-4121-83D2-800441F98EF7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Serilog.Sinks.InMemory.Assertions.Tests.Unit", "Serilog.Sinks.InMemory.Assertions.Tests.Unit", "{95F4D271-188F-48F9-BDB8-FD59BE4BFB30}"
+	ProjectSection(SolutionItems) = preProject
+		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\Repro.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\Repro.cs
+		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingAndSInkIsWrittenTo.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingAndSInkIsWrittenTo.cs
+		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingLogEventHasLevel.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingLogEventHasLevel.cs
+		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingLogEventsExist.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingLogEventsExist.cs
+		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingMessageExistsThatContainsPattern.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingMessageExistsThatContainsPattern.cs
+		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingPropertyValuesOnMultipleMessages.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingPropertyValuesOnMultipleMessages.cs
+		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingScalarLogPropertyExists.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingScalarLogPropertyExists.cs
+		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingStructuredLogPropertyExists.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingStructuredLogPropertyExists.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -179,6 +191,7 @@ Global
 		{610ADB4E-1975-44CF-A30B-53F96DF35704} = {B73801C2-972F-48CD-A47A-87A4544953E2}
 		{6718197F-6C67-4534-9296-36E0F120EB47} = {B73801C2-972F-48CD-A47A-87A4544953E2}
 		{9E980ECF-E1CF-4121-83D2-800441F98EF7} = {B73801C2-972F-48CD-A47A-87A4544953E2}
+		{95F4D271-188F-48F9-BDB8-FD59BE4BFB30} = {056C07B9-CAD5-4F92-8A24-FBDFDCBA0DDD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7573ED42-AA91-4C5A-8355-F60D23EC57B1}
