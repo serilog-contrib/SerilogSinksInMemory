@@ -4,6 +4,7 @@
     <TargetFrameworks>net462;netcoreapp3.1;net6.0</TargetFrameworks>
 
     <IsPackable>false</IsPackable>
+    <RootNamespace>Serilog.Sinks.InMemory.Assertions.Tests.Unit</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

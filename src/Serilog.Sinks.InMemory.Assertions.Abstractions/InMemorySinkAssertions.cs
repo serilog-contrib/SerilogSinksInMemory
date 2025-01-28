@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using FluentAssertions.Execution;
-using FluentAssertions.Primitives;
-
-namespace Serilog.Sinks.InMemory.Assertions
+﻿namespace Serilog.Sinks.InMemory.Assertions.Abstractions
 {
     public interface InMemorySinkAssertions
     {

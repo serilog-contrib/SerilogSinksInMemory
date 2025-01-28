@@ -24,8 +24,56 @@
   </ItemGroup>
   
   <ItemGroup>
+    <Content Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions5\Repro.cs">
+      <Link>Repro.cs</Link>
+    </Content>
+    <Content Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions5\WhenAssertingAndSInkIsWrittenTo.cs">
+      <Link>WhenAssertingAndSInkIsWrittenTo.cs</Link>
+    </Content>
+    <Content Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions5\WhenAssertingLogEventHasLevel.cs">
+      <Link>WhenAssertingLogEventHasLevel.cs</Link>
+    </Content>
+    <Content Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions5\WhenAssertingLogEventsExist.cs">
+      <Link>WhenAssertingLogEventsExist.cs</Link>
+    </Content>
+    <Content Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions5\WhenAssertingMessageExistsThatContainsPattern.cs">
+      <Link>WhenAssertingMessageExistsThatContainsPattern.cs</Link>
+    </Content>
+    <Content Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions5\WhenAssertingPropertyValuesOnMultipleMessages.cs">
+      <Link>WhenAssertingPropertyValuesOnMultipleMessages.cs</Link>
+    </Content>
+    <Content Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions5\WhenAssertingScalarLogPropertyExists.cs">
+      <Link>WhenAssertingScalarLogPropertyExists.cs</Link>
+    </Content>
+    <Content Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions5\WhenAssertingStructuredLogPropertyExists.cs">
+      <Link>WhenAssertingStructuredLogPropertyExists.cs</Link>
+    </Content>
     <Content Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\*.cs">
     </Content>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions5\Repro.cs">
+      <Link>Repro.cs</Link>
+    </Compile>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions5\WhenAssertingAndSInkIsWrittenTo.cs">
+      <Link>WhenAssertingAndSInkIsWrittenTo.cs</Link>
+    </Compile>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions5\WhenAssertingLogEventHasLevel.cs">
+      <Link>WhenAssertingLogEventHasLevel.cs</Link>
+    </Compile>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions5\WhenAssertingLogEventsExist.cs">
+      <Link>WhenAssertingLogEventsExist.cs</Link>
+    </Compile>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions5\WhenAssertingMessageExistsThatContainsPattern.cs">
+      <Link>WhenAssertingMessageExistsThatContainsPattern.cs</Link>
+    </Compile>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions5\WhenAssertingPropertyValuesOnMultipleMessages.cs">
+      <Link>WhenAssertingPropertyValuesOnMultipleMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions5\WhenAssertingScalarLogPropertyExists.cs">
+      <Link>WhenAssertingScalarLogPropertyExists.cs</Link>
+    </Compile>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions5\WhenAssertingStructuredLogPropertyExists.cs">
+      <Link>WhenAssertingStructuredLogPropertyExists.cs</Link>
+    </Compile>
     <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\*.cs" />
   </ItemGroup>
 

@@ -3,16 +3,15 @@ using System.Linq;
 using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 using Serilog.Events;
-using Serilog.Sinks.InMemory.Assertions;
 using Serilog.Sinks.InMemory.Assertions.Abstractions;
 
-namespace Serilog.Sinks.InMemory.FluentAssertions8
+namespace Serilog.Sinks.InMemory.FluentAssertions5
 {
     public class LogEventsAssertionsImpl : ReferenceTypeAssertions<IEnumerable<LogEvent>, LogEventsAssertionsImpl>, LogEventsAssertions
     {
         private readonly string _messageTemplate;
 
-        public LogEventsAssertionsImpl(string messageTemplate, IEnumerable<LogEvent> matches, AssertionChain assertionChain) : base(matches, assertionChain)
+        public LogEventsAssertionsImpl(string messageTemplate, IEnumerable<LogEvent> matches) : base(matches)
         {
             _messageTemplate = messageTemplate;
         }
@@ -26,7 +25,7 @@ namespace Serilog.Sinks.InMemory.FluentAssertions8
 
         public LogEventAssertion Once(string because = "", params object[] becauseArgs)
         {
-            CurrentAssertionChain
+            Execute.Assertion
                 .BecauseOf(because, becauseArgs)
                 .ForCondition(Subject.Count() == 1)
                 .FailWith(
@@ -34,12 +33,12 @@ namespace Serilog.Sinks.InMemory.FluentAssertions8
                     _messageTemplate,
                     Subject.Count());
 
-            return new LogEventAssertionImpl(_messageTemplate, Subject.Single(), CurrentAssertionChain);
+            return new LogEventAssertionImpl(_messageTemplate, Subject.Single());
         }
 
         public LogEventsAssertions Times(int number, string because = "", params object[] becauseArgs)
         {
-            CurrentAssertionChain
+            Execute.Assertion
                 .BecauseOf(because, becauseArgs)
                 .ForCondition(Subject.Count() == number)
                 .FailWith(
@@ -66,7 +65,7 @@ namespace Serilog.Sinks.InMemory.FluentAssertions8
                 (key, values) => $"{values.Count()} with level \"{key}\""));
             }
 
-            CurrentAssertionChain
+            Execute.Assertion
                 .BecauseOf(because, becauseArgs)
                 .ForCondition(Subject.All(logEvent => logEvent.Level == level))
                 .FailWith($"Expected instances of log message {{0}} to have level {{1}}, but found {notMatchedText}",
@@ -78,14 +77,14 @@ namespace Serilog.Sinks.InMemory.FluentAssertions8
 
         public LogEventsPropertyAssertion WithProperty(string propertyName, string because = "", params object[] becauseArgs)
         {
-            CurrentAssertionChain
+            Execute.Assertion
                 .BecauseOf(because, becauseArgs)
                 .ForCondition(Subject.All(logEvent => logEvent.Properties.ContainsKey(propertyName)))
                 .FailWith($"Expected all instances of log message {{0}} to have property {{1}}, but it was not found",
                     _messageTemplate,
                     propertyName);
 
-            return new LogEventsPropertyAssertionImpl(this, propertyName, CurrentAssertionChain);
+            return new LogEventsPropertyAssertionImpl(this, propertyName);
         }
     }
 }

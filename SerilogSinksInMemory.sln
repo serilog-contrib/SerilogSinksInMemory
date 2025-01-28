@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.Assertions", "src\Serilog.Sinks.InMemory.Assertions\Serilog.Sinks.InMemory.Assertions.csproj", "{57388B94-C61A-48CA-B7B7-9E82233DB7ED}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.Assertions.Tests.Unit", "test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\Serilog.Sinks.InMemory.Assertions.Tests.Unit.csproj", "{B2B802A5-04A4-4844-8A3E-CCEC78101C1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions5", "test\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions5\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions5.csproj", "{B2B802A5-04A4-4844-8A3E-CCEC78101C1C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{14ACDCFC-205B-4918-AABC-4E97E46D8BD5}"
 	ProjectSection(SolutionItems) = preProject
@@ -29,6 +29,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.FluentAssertions6", "src\Serilog.Sinks.InMemory.FluentAssertions6\Serilog.Sinks.InMemory.FluentAssertions6.csproj", "{0092D58A-402D-43F5-A20C-B5BADE049CE8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.FluentAssertions8", "src\Serilog.Sinks.InMemory.FluentAssertions8\Serilog.Sinks.InMemory.FluentAssertions8.csproj", "{610ADB4E-1975-44CF-A30B-53F96DF35704}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.Assertions.Abstractions", "src\Serilog.Sinks.InMemory.Assertions.Abstractions\Serilog.Sinks.InMemory.Assertions.Abstractions.csproj", "{6718197F-6C67-4534-9296-36E0F120EB47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.FluentAssertions5", "src\Serilog.Sinks.InMemory.FluentAssertions5\Serilog.Sinks.InMemory.FluentAssertions5.csproj", "{9E980ECF-E1CF-4121-83D2-800441F98EF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -136,6 +140,30 @@ Global
 		{610ADB4E-1975-44CF-A30B-53F96DF35704}.Release|x64.Build.0 = Release|Any CPU
 		{610ADB4E-1975-44CF-A30B-53F96DF35704}.Release|x86.ActiveCfg = Release|Any CPU
 		{610ADB4E-1975-44CF-A30B-53F96DF35704}.Release|x86.Build.0 = Release|Any CPU
+		{6718197F-6C67-4534-9296-36E0F120EB47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6718197F-6C67-4534-9296-36E0F120EB47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6718197F-6C67-4534-9296-36E0F120EB47}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6718197F-6C67-4534-9296-36E0F120EB47}.Debug|x64.Build.0 = Debug|Any CPU
+		{6718197F-6C67-4534-9296-36E0F120EB47}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6718197F-6C67-4534-9296-36E0F120EB47}.Debug|x86.Build.0 = Debug|Any CPU
+		{6718197F-6C67-4534-9296-36E0F120EB47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6718197F-6C67-4534-9296-36E0F120EB47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6718197F-6C67-4534-9296-36E0F120EB47}.Release|x64.ActiveCfg = Release|Any CPU
+		{6718197F-6C67-4534-9296-36E0F120EB47}.Release|x64.Build.0 = Release|Any CPU
+		{6718197F-6C67-4534-9296-36E0F120EB47}.Release|x86.ActiveCfg = Release|Any CPU
+		{6718197F-6C67-4534-9296-36E0F120EB47}.Release|x86.Build.0 = Release|Any CPU
+		{9E980ECF-E1CF-4121-83D2-800441F98EF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E980ECF-E1CF-4121-83D2-800441F98EF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E980ECF-E1CF-4121-83D2-800441F98EF7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9E980ECF-E1CF-4121-83D2-800441F98EF7}.Debug|x64.Build.0 = Debug|Any CPU
+		{9E980ECF-E1CF-4121-83D2-800441F98EF7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9E980ECF-E1CF-4121-83D2-800441F98EF7}.Debug|x86.Build.0 = Debug|Any CPU
+		{9E980ECF-E1CF-4121-83D2-800441F98EF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E980ECF-E1CF-4121-83D2-800441F98EF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E980ECF-E1CF-4121-83D2-800441F98EF7}.Release|x64.ActiveCfg = Release|Any CPU
+		{9E980ECF-E1CF-4121-83D2-800441F98EF7}.Release|x64.Build.0 = Release|Any CPU
+		{9E980ECF-E1CF-4121-83D2-800441F98EF7}.Release|x86.ActiveCfg = Release|Any CPU
+		{9E980ECF-E1CF-4121-83D2-800441F98EF7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -149,6 +177,8 @@ Global
 		{F759DDF5-0852-4D3E-965C-13F5DDD6DA0B} = {056C07B9-CAD5-4F92-8A24-FBDFDCBA0DDD}
 		{0092D58A-402D-43F5-A20C-B5BADE049CE8} = {B73801C2-972F-48CD-A47A-87A4544953E2}
 		{610ADB4E-1975-44CF-A30B-53F96DF35704} = {B73801C2-972F-48CD-A47A-87A4544953E2}
+		{6718197F-6C67-4534-9296-36E0F120EB47} = {B73801C2-972F-48CD-A47A-87A4544953E2}
+		{9E980ECF-E1CF-4121-83D2-800441F98EF7} = {B73801C2-972F-48CD-A47A-87A4544953E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7573ED42-AA91-4C5A-8355-F60D23EC57B1}

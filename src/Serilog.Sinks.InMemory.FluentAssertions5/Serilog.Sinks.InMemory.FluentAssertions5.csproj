@@ -38,15 +38,4 @@
 		<ProjectReference Include="..\Serilog.Sinks.InMemory\Serilog.Sinks.InMemory.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<None Include="..\Serilog.Sinks.InMemory.FluentAssertions5\bin\$(Configuration)\$(TargetFramework)\Serilog.Sinks.InMemory.FluentAssertions5.dll">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Include="..\Serilog.Sinks.InMemory.FluentAssertions6\bin\$(Configuration)\$(TargetFramework)\Serilog.Sinks.InMemory.FluentAssertions6.dll">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Include="..\Serilog.Sinks.InMemory.FluentAssertions8\bin\$(Configuration)\$(TargetFramework)\Serilog.Sinks.InMemory.FluentAssertions8.dll">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
 </Project>

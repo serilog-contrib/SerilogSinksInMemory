@@ -2,14 +2,13 @@
 using System.Linq;
 using FluentAssertions.Execution;
 using Serilog.Events;
-using Serilog.Sinks.InMemory.Assertions;
 using Serilog.Sinks.InMemory.Assertions.Abstractions;
 
-namespace Serilog.Sinks.InMemory.FluentAssertions8
+namespace Serilog.Sinks.InMemory.FluentAssertions5
 {
     public class PatternLogEventsAssertionsImpl : LogEventsAssertionsImpl, PatternLogEventsAssertions
     {
-        public PatternLogEventsAssertionsImpl(IEnumerable<LogEvent> subjectLogEvents, AssertionChain assertionChain) : base(null, subjectLogEvents, assertionChain)
+        public PatternLogEventsAssertionsImpl(IEnumerable<LogEvent> subjectLogEvents) : base(null, subjectLogEvents)
         {
         }
 
@@ -22,14 +21,14 @@ namespace Serilog.Sinks.InMemory.FluentAssertions8
                 .Where(logEvent => logEvent.MessageTemplate.Text.Contains(pattern))
                 .ToList();
 
-            CurrentAssertionChain
+            Execute.Assertion
                 .BecauseOf(because, becauseArgs)
                 .ForCondition(matches.Any())
                 .FailWith(
                     "Expected a message with pattern {0} to be logged",
                     pattern);
 
-            return new LogEventsAssertionsImpl(pattern, matches, CurrentAssertionChain);
+            return new LogEventsAssertionsImpl(pattern, matches);
         }
     }
 }

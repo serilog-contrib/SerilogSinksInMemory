@@ -1,7 +1,7 @@
 ﻿using System;
 using Serilog.Events;
 
-namespace Serilog.Sinks.InMemory.Assertions;
+namespace Serilog.Sinks.InMemory.Assertions.Abstractions;
 
 public interface LogEventAssertion
 {

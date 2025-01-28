@@ -4,5 +4,6 @@
 		<Authors>Sander van Vliet</Authors>
 		<Company>Codenizer BV</Company>
 		<Copyright>2022 Sander van Vliet</Copyright>
+		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 </Project>
