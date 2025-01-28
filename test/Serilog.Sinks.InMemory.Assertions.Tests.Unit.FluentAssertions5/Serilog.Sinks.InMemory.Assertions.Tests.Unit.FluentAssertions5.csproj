@@ -4,7 +4,7 @@
     <TargetFrameworks>net462;netcoreapp3.1;net6.0</TargetFrameworks>
 
     <IsPackable>false</IsPackable>
-    <RootNamespace>Serilog.Sinks.InMemory.Assertions.Tests.Unit</RootNamespace>
+    <DefineConstants>$(DefineConstants);FLUENTASSERTIONS_5</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,32 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\Repro.cs">
-      <Link>Repro.cs</Link>
-    </Content>
-    <Content Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingAndSInkIsWrittenTo.cs">
-      <Link>WhenAssertingAndSInkIsWrittenTo.cs</Link>
-    </Content>
-    <Content Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingLogEventHasLevel.cs">
-      <Link>WhenAssertingLogEventHasLevel.cs</Link>
-    </Content>
-    <Content Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingLogEventsExist.cs">
-      <Link>WhenAssertingLogEventsExist.cs</Link>
-    </Content>
-    <Content Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingMessageExistsThatContainsPattern.cs">
-      <Link>WhenAssertingMessageExistsThatContainsPattern.cs</Link>
-    </Content>
-    <Content Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingPropertyValuesOnMultipleMessages.cs">
-      <Link>WhenAssertingPropertyValuesOnMultipleMessages.cs</Link>
-    </Content>
-    <Content Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingScalarLogPropertyExists.cs">
-      <Link>WhenAssertingScalarLogPropertyExists.cs</Link>
-    </Content>
-    <Content Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingStructuredLogPropertyExists.cs">
-      <Link>WhenAssertingStructuredLogPropertyExists.cs</Link>
-    </Content>
-    <Content Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\*.cs">
-    </Content>
     <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\Repro.cs">
       <Link>Repro.cs</Link>
     </Compile>
@@ -75,6 +49,5 @@
     <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingStructuredLogPropertyExists.cs">
       <Link>WhenAssertingStructuredLogPropertyExists.cs</Link>
     </Compile>
-    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\*.cs" />
   </ItemGroup>
 </Project>
