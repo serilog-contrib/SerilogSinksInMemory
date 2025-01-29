@@ -4,7 +4,7 @@
     <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
 
     <IsPackable>false</IsPackable>
-    <DefineConstants>$(DefineConstants);FLUENTASSERTIONS_5</DefineConstants>
+    <DefineConstants>$(DefineConstants);FLUENTASSERTIONS_6</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
