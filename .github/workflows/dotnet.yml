@@ -20,7 +20,7 @@ jobs:
             6.x
             8.x
       - name: Unit tests
-        run: dotnet test --verbosity normal -c Release
+        run: dotnet test -c Release
         
       - name: Create local packages
         run: |
@@ -41,8 +41,20 @@ jobs:
           Write-Host "::set-output name=shortversion::$version"
         shell: pwsh
           
-      - name: Run integration tests
+      - name: Run integration tests for FluentAssertions 5
         working-directory: test/Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions5
         run: |
           dotnet restore -p:Version=${{ steps.shortversion.outputs.shortversion }}
-          dotnet test --no-restore -c Release --verbosity normal Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions5.csproj
+          dotnet test --no-restore -c Release Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions5.csproj
+
+      - name: Run integration tests for FluentAssertions 6
+        working-directory: test/Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions6
+        run: |
+          dotnet restore -p:Version=${{ steps.shortversion.outputs.shortversion }}
+          dotnet test --no-restore -c Release Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions6.csproj
+
+      - name: Run integration tests for FluentAssertions 8
+        working-directory: test/Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions8
+        run: |
+          dotnet restore -p:Version=${{ steps.shortversion.outputs.shortversion }}
+          dotnet test --no-restore -c Release Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions8.csproj
