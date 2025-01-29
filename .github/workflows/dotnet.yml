@@ -12,5 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Test
-      run: dotnet test --verbosity normal -c Release
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            6.x
+            8.x
+      - name: Test
+        run: dotnet test --verbosity normal -c Release
