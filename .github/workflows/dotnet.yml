@@ -19,5 +19,30 @@ jobs:
           dotnet-version: |
             6.x
             8.x
-      - name: Test
+      - name: Unit tests
         run: dotnet test --verbosity normal -c Release
+        
+      - name: Create local packages
+        run: |
+          dotnet pack -c Release -o packages src/Serilog.Sinks.InMemory/Serilog.Sinks.InMemory.csproj
+          dotnet pack -c Release -o packages src/Serilog.Sinks.InMemory.Assertions/Serilog.Sinks.InMemory.Assertions.csproj
+          
+      - name: Get the version
+        id: get_version
+        uses: mavrosxristoforos/get-xml-info@1.0
+        with:
+          xml-file: './Directory.Build.props'
+          xpath: '//Version'
+          
+      - name: Create short version
+        id: shortversion
+        run: |
+          $version = "${{ steps.get_version.outputs.info }}".Substring(0, "${{ steps.get_version.outputs.info }}".LastIndexOf("."))
+          Write-Host "::set-output name=shortversion::$version"
+        shell: pwsh
+          
+      - name: Run integration tests
+        working-directory: test/Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions5
+        run: |
+          dotnet restore -p:Version=${{ steps.shortversion.outputs.shortversion }}
+          dotnet test --no-restore -c Release --verbosity normal Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions5.csproj
