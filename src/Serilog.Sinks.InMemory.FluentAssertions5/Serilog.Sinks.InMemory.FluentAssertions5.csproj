@@ -25,9 +25,6 @@
 		<PackageReference Include="FluentAssertions" Version="5.*">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="Serilog.Sinks.InMemory" Version="0.*">
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
 		<PackageReference Include="Serilog" Version="2.*">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>

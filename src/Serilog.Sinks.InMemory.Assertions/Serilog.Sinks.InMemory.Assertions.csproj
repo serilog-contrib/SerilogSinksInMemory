@@ -18,7 +18,6 @@
 
 	<PropertyGroup>
 		<PackageVersion>$(Version)$(VersionSuffix)</PackageVersion>
-		<LangVersion>default</LangVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -34,28 +33,53 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Serilog.Sinks.InMemory.Assertions.Abstractions\Serilog.Sinks.InMemory.Assertions.Abstractions.csproj" Private="false">
-			<ExcludeAssets>all</ExcludeAssets>
-		</ProjectReference>
 		<ProjectReference Include="..\Serilog.Sinks.InMemory\Serilog.Sinks.InMemory.csproj" />
-	</ItemGroup>
-
-	<!-- These exist to get the assemblies copied into the nuget package -->
-	<ItemGroup>
-		<None Include="..\Serilog.Sinks.InMemory.Assertions.Abstractions\bin\$(Configuration)\netstandard2.0\Serilog.Sinks.InMemory.Assertions.Abstractions.dll" Pack="true" PackagePath="lib\netstandard2.0\">
+		
+		<!-- 
+		Some trickery involved with this ProjectReference because by default dotnet pack will
+		turn this into a transitive PackageReference but that won't work because the abstractions
+		aren't packaged as a NuGet package...
+		-->
+		<ProjectReference Include="..\Serilog.Sinks.InMemory.Assertions.Abstractions\Serilog.Sinks.InMemory.Assertions.Abstractions.csproj">
+			<ReferenceOutputAssembly>True</ReferenceOutputAssembly>
+			<Package>true</Package> <!-- This ensures it ends up in the NuGet package -->
+			<OutputItemType>Content</OutputItemType> <!-- Pretend this is a content item -->
+			<PackagePath>lib/netstandard2.0</PackagePath> <!-- This controls the location in the package, without it this file would end up in content/ -->
+			<ExcludeAssets>all</ExcludeAssets> <!-- This ensures that this reference isn't treated as a transitive dependency -->
+		</ProjectReference>
+		
+		<!-- 
+		Reference the projects but never their outputs so that we ensure they're compiled 
+		before this project and copied to the output directory but won't ever be "referenced" 
+		for compilation in the project itself.
+		-->
+		<ProjectReference Include="..\Serilog.Sinks.InMemory.FluentAssertions5\Serilog.Sinks.InMemory.FluentAssertions5.csproj">
+			<ReferenceOutputAssembly>False</ReferenceOutputAssembly> <!-- This prevents it being actually referenced -->
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory> <!-- This ensures the assembly is copied -->  
+			<Package>true</Package> <!-- This ensures it ends up in the NuGet package -->
+			<OutputItemType>Content</OutputItemType> <!-- Pretend this is a content item -->
+			<PackagePath>lib/netstandard2.0</PackagePath> <!-- This controls the location in the package, without it this file would end up in content/ -->
+		</ProjectReference>
+		<ProjectReference Include="..\Serilog.Sinks.InMemory.FluentAssertions6\Serilog.Sinks.InMemory.FluentAssertions6.csproj">
+			<ReferenceOutputAssembly>False</ReferenceOutputAssembly>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Include="..\Serilog.Sinks.InMemory.FluentAssertions5\bin\$(Configuration)\$(TargetFramework)\Serilog.Sinks.InMemory.FluentAssertions5.dll" Pack="true" PackagePath="lib\netstandard2.0\">
+			<Package>true</Package>
+			<OutputItemType>Content</OutputItemType>
+			<PackagePath>lib/netstandard2.0</PackagePath>
+		</ProjectReference>
+		<ProjectReference Include="..\Serilog.Sinks.InMemory.FluentAssertions7\Serilog.Sinks.InMemory.FluentAssertions7.csproj">
+			<ReferenceOutputAssembly>False</ReferenceOutputAssembly>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Include="..\Serilog.Sinks.InMemory.FluentAssertions6\bin\$(Configuration)\$(TargetFramework)\Serilog.Sinks.InMemory.FluentAssertions6.dll" Pack="true" PackagePath="lib\netstandard2.0\">
+			<Package>true</Package>
+			<OutputItemType>Content</OutputItemType>
+			<PackagePath>lib/netstandard2.0</PackagePath>
+		</ProjectReference>
+		<ProjectReference Include="..\Serilog.Sinks.InMemory.FluentAssertions8\Serilog.Sinks.InMemory.FluentAssertions8.csproj">
+			<ReferenceOutputAssembly>False</ReferenceOutputAssembly>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Include="..\Serilog.Sinks.InMemory.FluentAssertions7\bin\$(Configuration)\$(TargetFramework)\Serilog.Sinks.InMemory.FluentAssertions7.dll" Pack="true" PackagePath="lib\netstandard2.0\">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Include="..\Serilog.Sinks.InMemory.FluentAssertions8\bin\$(Configuration)\$(TargetFramework)\Serilog.Sinks.InMemory.FluentAssertions8.dll" Pack="true" PackagePath="lib\netstandard2.0\">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
+			<Package>true</Package>
+			<OutputItemType>Content</OutputItemType>
+			<PackagePath>lib/netstandard2.0</PackagePath>
+		</ProjectReference>
 	</ItemGroup>
 </Project>
