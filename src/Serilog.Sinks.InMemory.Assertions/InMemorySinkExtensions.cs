@@ -1,67 +1,80 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 
 namespace Serilog.Sinks.InMemory.Assertions
 {
     public static class InMemorySinkAssertionExtensions
     {
-        private static Type? AssertionsType = null;
+        private static Type? _assertionsType;
         private static readonly object SyncRoot = new();
 
         public static InMemorySinkAssertions Should(this InMemorySink instance)
         {
-            if (AssertionsType != null)
+            if (_assertionsType == null)
             {
-                var snapshotInstance = SnapshotOf(instance);
-                return (InMemorySinkAssertions)Activator.CreateInstance(AssertionsType,
-                    new object[] { snapshotInstance });
-            }
-
-            lock (SyncRoot)
-            {
-                var assemblyLocation = Path.GetDirectoryName(typeof(InMemorySinkAssertionExtensions).Assembly.Location);
-                var fluentAssertionsAssemblyPath = Path.Combine(assemblyLocation, "FluentAssertions.dll");
-                Assembly fluentAssertionsAssembly;
-                try
+                lock (SyncRoot)
                 {
-                    fluentAssertionsAssembly = Assembly.LoadFile(fluentAssertionsAssemblyPath);
-                }
-                catch (FileNotFoundException e)
-                {
-                    throw new Exception($"Could not find assembly '{fluentAssertionsAssemblyPath}'", e);
-                }
-                var fluentAssertionsMajorVersion = fluentAssertionsAssembly.GetName().Version.Major;
+                    var assemblyLocation =
+                        Path.GetDirectoryName(typeof(InMemorySinkAssertionExtensions).Assembly.Location);
 
-                var versionedLocation = Path.Combine(
-                    assemblyLocation,
+                    if (string.IsNullOrEmpty(assemblyLocation))
+                    {
+                        throw new Exception($"Unable to determine path to load assemblies from");
+                    }
+
+                    var fluentAssertionsAssembly = AppDomain
+                        .CurrentDomain
+                        .GetAssemblies()
+                        .FirstOrDefault(assembly => assembly.GetName().Name.Equals("FluentAssertions"));
+
+                    if (fluentAssertionsAssembly == null)
+                    {
+                        var fluentAssertionsAssemblyPath = Path.Combine(assemblyLocation, "FluentAssertions.dll");
+
+                        try
+                        {
+                            fluentAssertionsAssembly = Assembly.LoadFile(fluentAssertionsAssemblyPath);
+                        }
+                        catch (FileNotFoundException e)
+                        {
+                            throw new Exception($"Could not find assembly '{fluentAssertionsAssemblyPath}'", e);
+                        }
+                    }
+
+                    var fluentAssertionsMajorVersion = fluentAssertionsAssembly.GetName().Version.Major;
+
+                    var versionedLocation = Path.Combine(
+                        assemblyLocation,
                         $"Serilog.Sinks.InMemory.FluentAssertions{fluentAssertionsMajorVersion}.dll");
-                
-                var versionedAssembly = Assembly.LoadFile(versionedLocation);
 
-                try
-                {
-                    AssertionsType = versionedAssembly.GetTypes()
-                        .SingleOrDefault(t => t.Name == "InMemorySinkAssertionsImpl");
-                }
-                catch (ReflectionTypeLoadException e)
-                {
-                    Debugger.Break();
-                    throw;
-                }
+                    var versionedAssembly = Assembly.LoadFile(versionedLocation);
 
-                if (AssertionsType == null)
-                {
-                    throw new InvalidOperationException("Unable to load InMemorySinkAssertions");
+                    try
+                    {
+                        _assertionsType = versionedAssembly.GetTypes()
+                            .SingleOrDefault(t => t.Name == "InMemorySinkAssertionsImpl");
+                    }
+                    catch (ReflectionTypeLoadException e)
+                    {
+                        Debugger.Break();
+                        throw;
+                    }
                 }
-
-                var snapshotInstance = SnapshotOf(instance);
-                return (InMemorySinkAssertions)Activator.CreateInstance(AssertionsType,
-                    new object[] { snapshotInstance });
             }
+
+            if (_assertionsType == null)
+            {
+                throw new InvalidOperationException("Unable to load InMemorySinkAssertions");
+            }
+
+            var snapshotInstance = SnapshotOf(instance);
+            
+            return (InMemorySinkAssertions)Activator.CreateInstance(
+                _assertionsType, snapshotInstance);
         }
 
         /*
