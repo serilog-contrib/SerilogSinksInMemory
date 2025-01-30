@@ -53,6 +53,12 @@ jobs:
           dotnet restore -p:Version=${{ steps.shortversion.outputs.shortversion }}
           dotnet test --no-restore -c Release Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions6.csproj
 
+      - name: Run integration tests for FluentAssertions 7
+        working-directory: test/Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions7
+        run: |
+          dotnet restore -p:Version=${{ steps.shortversion.outputs.shortversion }}
+          dotnet test --no-restore -c Release Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions7.csproj
+
       - name: Run integration tests for FluentAssertions 8
         working-directory: test/Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions8
         run: |
