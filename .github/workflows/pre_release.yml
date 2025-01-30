@@ -35,9 +35,9 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal -c Release
     - name: Create NuGet package for Serilog.Sinks.InMemory
-      run: dotnet pack ./src/Serilog.Sinks.InMemory/Serilog.Sinks.InMemory.csproj -c Release --no-build --no-restore -o ./packaging -p:VersionSuffix=alpha
+      run: dotnet pack ./src/Serilog.Sinks.InMemory/Serilog.Sinks.InMemory.csproj -c Release --no-build --no-restore -o ./packaging -p:VersionSuffix=-alpha
     - name: Create NuGet package for Serilog.Sinks.InMemory.Assertions
-      run: dotnet pack ./src/Serilog.Sinks.InMemory.Assertions/Serilog.Sinks.InMemory.Assertions.csproj -c Release --no-build --no-restore -o ./packaging -p:VersionSuffix=alpha
+      run: dotnet pack ./src/Serilog.Sinks.InMemory.Assertions/Serilog.Sinks.InMemory.Assertions.csproj -c Release --no-build --no-restore -o ./packaging -p:VersionSuffix=-alpha
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
