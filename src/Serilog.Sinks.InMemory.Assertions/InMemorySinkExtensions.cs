@@ -53,16 +53,9 @@ namespace Serilog.Sinks.InMemory.Assertions
 
                     var versionedAssembly = Assembly.LoadFile(versionedLocation);
 
-                    try
-                    {
-                        _assertionsType = versionedAssembly.GetTypes()
-                            .SingleOrDefault(t => t.Name == "InMemorySinkAssertionsImpl");
-                    }
-                    catch (ReflectionTypeLoadException e)
-                    {
-                        Debugger.Break();
-                        throw;
-                    }
+                    _assertionsType = versionedAssembly
+                        .GetTypes()
+                        .SingleOrDefault(t => t.Name == "InMemorySinkAssertionsImpl");
                 }
             }
 
