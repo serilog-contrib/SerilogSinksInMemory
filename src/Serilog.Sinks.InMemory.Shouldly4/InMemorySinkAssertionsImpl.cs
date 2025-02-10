@@ -5,7 +5,7 @@ using Shouldly;
 namespace Serilog.Sinks.InMemory.Shouldly4
 {
     [ShouldlyMethods] 
-    public class InMemorySinkAssertionsImpl
+    public class InMemorySinkAssertionsImpl : InMemorySinkAssertions
     {
         private readonly InMemorySink _snapshotInstance;
 
