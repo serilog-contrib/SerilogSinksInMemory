@@ -1,5 +1,5 @@
 ﻿using System;
-using FluentAssertions;
+using Shouldly;
 using Serilog.Context;
 using Xunit;
 using Xunit.Sdk;
@@ -42,10 +42,9 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Appearing().Once()
                 .WithProperty("something else");
 
-            action
-                .Should()
-                .Throw<XunitException>()
-                .WithMessage("Expected message \"Hello {name}\" to have a property \"something else\" but it wasn't found");
+            Should.Throw<Exception>(() => action())
+                .Message
+                .ShouldBe("Expected message \"Hello {name}\" to have a property \"something else\" but it wasn't found");
         }
 
         [Fact]
@@ -73,10 +72,9 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .WithProperty("name")
                 .WithValue("BLABLABLA");
 
-            action
-                .Should()
-                .Throw<XunitException>()
-                .WithMessage("Expected property \"name\" to have value \"BLABLABLA\" but found \"World\"");
+            Should.Throw<Exception>(() => action())
+                .Message
+                .ShouldBe("Expected property \"name\" to have value \"BLABLABLA\" but found \"World\"");
         }
 
         [Fact]
@@ -104,10 +102,9 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .WithProperty("number")
                 .WithValue(2);
 
-            action
-                .Should()
-                .Throw<XunitException>()
-                .WithMessage("Expected property \"number\" to have value 2 but found 5");
+            Should.Throw<Exception>(() => action())
+                .Message
+                .ShouldBe("Expected property \"number\" to have value 2 but found 5");
         }
 
         [Fact]
@@ -152,15 +149,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Appearing().Once()
                 .WithProperty("PropertyOne")
                 .WhichValue<int>()
-                .Should()
-#if FLUENTASSERTIONS_8
-                .BeLessThanOrEqualTo(10);
-#elif AWESOMEASSERTIONS_8
-                .BeLessThanOrEqualTo(10);
-#else
-                .BeLessOrEqualTo(10);
-#endif
-
+                .ShouldBeLessThanOrEqualTo(10);
         }
 
         [Fact]
@@ -174,8 +163,8 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Appearing().Once()
                 .WithProperty("PropertyOne")
                 .WhichValue<string>()
-                .Should()
-                .HaveLength(3);
+                .Length
+                .ShouldBe(3);
         }
 
         [Fact]
@@ -189,13 +178,11 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Appearing().Once()
                 .WithProperty("PropertyOne")
                 .WhichValue<int>()
-                .Should()
-                .BeLessThan(3);
+                .ShouldBeLessThan(3);
 
-            action
-                .Should()
-                .Throw<Exception>()
-                .WithMessage($"Expected property value to be of type \"{nameof(Int32)}\" but found \"{nameof(String)}\"");
+            Should.Throw<Exception>(() => action())
+                .Message
+                .ShouldBe($"Expected property value to be of type \"{nameof(Int32)}\" but found \"{nameof(String)}\"");
         }
     }
 }

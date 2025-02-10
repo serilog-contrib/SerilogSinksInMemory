@@ -4,6 +4,7 @@
 
 - Support FluentAssertions version 5, 6, 7 and 8
 - Support AwesomeAssertions version 8
+- Support Shouldly 4.x
 
 ## 0.11.0.0
 

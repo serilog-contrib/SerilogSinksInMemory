@@ -2,13 +2,12 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
-		<RootNamespace>Serilog.Sinks.InMemory.AwesomeAssertions8</RootNamespace>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<IsPackable>false</IsPackable>
 		<Title>Serilog in-memory sink assertion extensions</Title>
-		<Description>AwesomeAssertions extensions to use with the Serilog.Sinks.InMemory package</Description>
+		<Description>Shouldly extensions to use with the Serilog.Sinks.InMemory package</Description>
 		<Copyright>2025 Sander van Vliet</Copyright>
 		<Authors>Sander van Vliet</Authors>
 		<PackageProjectUrl>https://github.com/sandermvanvliet/SerilogSinksInMemory/</PackageProjectUrl>
@@ -23,7 +22,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AwesomeAssertions" Version="8.*">
+		<PackageReference Include="Shouldly" Version="4.*">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
 		<PackageReference Include="Serilog" Version="2.*">

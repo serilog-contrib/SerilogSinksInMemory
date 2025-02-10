@@ -1,7 +1,8 @@
 ﻿using System;
-using FluentAssertions;
+using Shouldly;
 using Xunit;
 using Serilog.Sinks.InMemory.Assertions;
+using Xunit.Sdk;
 
 namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
 {
@@ -18,13 +19,9 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Appearing().Times(1)
                 .WithProperty("SomeProperty");
 
-            action
-                .Should()
-                .Throw<Exception>()
-                .Which
+            Should.Throw<Exception>(() => action())
                 .Message
-                .Should()
-                .Be("Expected all instances of log message \"Message without property\" to have property \"SomeProperty\", but it was not found");
+                .ShouldBe("Expected all instances of log message \"Message without property\" to have property \"SomeProperty\", but it was not found");
         }
 
         [Fact]
@@ -40,13 +37,9 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .WithProperty("Property")
                 .WithValues("val1", "val1");
 
-            action
-                .Should()
-                .Throw<Exception>()
-                .Which
+            Should.Throw<Exception>(() => action())
                 .Message
-                .Should()
-                .Be("Expected all instances of log message \"Message with {Property}\" to have property \"Property\", but it was not found");
+                .ShouldBe("Expected all instances of log message \"Message with {Property}\" to have property \"Property\", but it was not found");
         }
 
         [Fact]
@@ -76,13 +69,9 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .WithProperty("Property")
                 .WithValues("val1", "val2", "val3");
 
-            action
-                .Should()
-                .Throw<Exception>()
-                .Which
+            Should.Throw<Exception>(() => action())
                 .Message
-                .Should()
-                .Be("Can't assert property values because 3 values were provided while only 2 messages were expected");
+                .ShouldBe("Can't assert property values because 3 values were provided while only 2 messages were expected");
         }
 
         [Fact]
@@ -98,13 +87,9 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .WithProperty("Property")
                 .WithValues("val1", "other");
 
-            action
-                .Should()
-                .Throw<Exception>()
-                .Which
+            Should.Throw<Exception>(() => action())
                 .Message
-                .Should()
-                .Be("Expected property values {\"val1\", \"val1\"} to contain {\"val1\", \"other\"} but did not find {\"other\"}");
+                .ShouldBe("Expected property values {\"val1\", \"val1\"} to contain {\"val1\", \"other\"} but did not find {\"other\"}");
         }
 
         [Fact]
@@ -120,13 +105,9 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .WithProperty("Property")
                 .WithValues("other", "val1");
 
-            action
-                .Should()
-                .Throw<Exception>()
-                .Which
+            Should.Throw<Exception>(() => action())
                 .Message
-                .Should()
-                .Be("Expected property values {\"val1\", \"val1\"} to contain {\"other\", \"val1\"} but did not find {\"other\"}");
+                .ShouldBe("Expected property values {\"val1\", \"val1\"} to contain {\"other\", \"val1\"} but did not find {\"other\"}");
         }
 
         [Fact]
@@ -160,13 +141,9 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .WithProperty("Property2")
                 .WithValues("valA", "valB");
 
-            action
-                .Should()
-                .Throw<Exception>()
-                .Which
+            Should.Throw<Exception>(() => action())
                 .Message
-                .Should()
-                .Be("Expected property values {\"valA\", \"XXX\"} to contain {\"valA\", \"valB\"} but did not find {\"valB\"}");
+                .ShouldBe("Expected property values {\"valA\", \"XXX\"} to contain {\"valA\", \"valB\"} but did not find {\"valB\"}");
         }
 
         private readonly ILogger _logger;

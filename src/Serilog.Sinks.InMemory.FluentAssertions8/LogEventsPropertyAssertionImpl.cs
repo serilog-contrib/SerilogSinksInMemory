@@ -23,7 +23,7 @@ namespace Serilog.Sinks.InMemory.FluentAssertions8
 
         protected override string Identifier { get; }
 
-        public AndConstraint<LogEventsAssertions> WithValues(params object[] values)
+        public LogEventsAssertions WithValues(params object[] values)
         {
             CurrentAssertionChain
                 .ForCondition(_logEvents.Count() == values.Length)
@@ -45,7 +45,7 @@ namespace Serilog.Sinks.InMemory.FluentAssertions8
                     values,
                     notFound);
 
-            return new AndConstraint<LogEventsAssertions>(_logEventsAssertions);
+            return _logEventsAssertions;
         }
 
         private object GetValueFromProperty(LogEventPropertyValue instance)
