@@ -35,7 +35,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Containing("NOT MATCHING")
                 .Appearing().Times(3);
 
-            Should.Throw<XunitException>(() => action())
+            Should.Throw<Exception>(() => action())
                 .Message
                 .ShouldBe("Expected a message with pattern \"NOT MATCHING\" to be logged");
         }
@@ -64,7 +64,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Should()
                 .NotHaveMessage();
 
-            Should.Throw<XunitException>(() => action())
+            Should.Throw<Exception>(() => action())
                 .Message
                 .ShouldBe("Expected no messages to be logged, but found 3 messages");
         }

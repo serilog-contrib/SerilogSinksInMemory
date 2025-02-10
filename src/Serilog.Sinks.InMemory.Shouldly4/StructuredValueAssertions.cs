@@ -20,10 +20,11 @@ public class StructuredValueAssertionsImpl : StructuredValueAssertions
 
     public LogEventPropertyValueAssertions WithProperty(string name, string because = "", params object[] becauseArgs)
     {
-        _subject
-            .Properties
-            .ShouldContain(p => p.Name == _propertyName,
+        if (_subject.Properties.All(p => p.Name != name))
+        {
+            throw new ShouldAssertException(
                 $"Expected destructured object property '{_propertyName}' to have a property '{name}' but it wasn't found");
+        }
 
         return new LogEventPropertyValueAssertionsImpl(
             _logEventAssertion,

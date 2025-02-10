@@ -25,11 +25,11 @@ namespace Serilog.Sinks.InMemory.Shouldly4
             {
                 name = name.Substring(1);
             }
-            
-            Subject
-                .Properties
-                .ShouldContain(kv => kv.Key == name,
-                    $"Expected message {_messageTemplate} to have a property {name} but it wasn't found");
+
+            if (!Subject.Properties.ContainsKey(name))
+            {
+                throw new ShouldAssertException($"Expected message \"{_messageTemplate}\" to have a property \"{name}\" but it wasn't found");
+            }
 
             return new LogEventPropertyValueAssertionsImpl(
                 this,
@@ -39,11 +39,10 @@ namespace Serilog.Sinks.InMemory.Shouldly4
 
         public LogEventAssertion WithLevel(LogEventLevel level,  string because = "", params object[] becauseArgs)
         {
-            Subject
-                .Level
-                .ShouldBe(
-                    level,
-                    $"Expected message {_messageTemplate} to have level {level.ToString()}, but it is {Subject.Level.ToString()}");
+            if (Subject.Level != level)
+            {
+                throw new ShouldAssertException($"Expected message \"{_messageTemplate}\" to have level \"{level.ToString()}\", but it is \"{Subject.Level.ToString()}\"");
+            }
 
             return this;
         }

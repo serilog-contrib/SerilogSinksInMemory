@@ -23,10 +23,13 @@ namespace Serilog.Sinks.InMemory.Shouldly4
         {
             if (_subject is ScalarValue scalarValue)
             {
-                scalarValue.ShouldBeOfType<TValue>(
-                    $"Expected property value to be of type {typeof(TValue).Name} but found {scalarValue.Value.GetType().Name}");
+                if (scalarValue.Value is not TValue value)
+                {
+                    throw new ShouldAssertException(
+                        $"Expected property value to be of type \"{typeof(TValue).Name}\" but found \"{scalarValue.Value?.GetType().Name ?? "null"}\"");
+                }
 
-                return (TValue)scalarValue.Value;
+                return value;
             }
 
             throw new Exception(
@@ -38,10 +41,14 @@ namespace Serilog.Sinks.InMemory.Shouldly4
         {
             var actualValue = GetValueFromProperty(_subject);
 
-            actualValue
-                .ShouldBe(
-                    value,
-                    $"Expected property {_propertyName} to have value '{value}' but found '{actualValue}'");
+            if (!Equals(actualValue, value))
+            {
+                var formattedValue = value is string ? $"\"{value}\"" : value.ToString();
+                var formattedActualValue = actualValue is string ? $"\"{actualValue}\"" : actualValue.ToString();
+                
+                throw new ShouldAssertException(
+                    $"Expected property \"{_propertyName}\" to have value {formattedValue} but found {formattedActualValue}");
+            }
 
             return _logEventAssertion;
         }
@@ -59,11 +66,13 @@ namespace Serilog.Sinks.InMemory.Shouldly4
 
         public StructuredValueAssertions HavingADestructuredObject(string because = "", params object[] becauseArgs)
         {
-            _subject
-                .ShouldBeOfType<StructureValue>(
-                    $"Expected message '{_logEventAssertion.Subject.MessageTemplate}' to have a property '{_propertyName}' that holds a destructured object but found a scalar value");
+            if (_subject is not StructureValue structureValue)
+            {
+                throw new ShouldAssertException(
+                    $"Expected message \"{_logEventAssertion.Subject.MessageTemplate}\" to have a property \"{_propertyName}\" that holds a destructured object but found a scalar value");
+            }
 
-            return new StructuredValueAssertionsImpl(_subject as StructureValue, _propertyName, _logEventAssertion);
+            return new StructuredValueAssertionsImpl(structureValue, _propertyName, _logEventAssertion);
         }
     }
 }

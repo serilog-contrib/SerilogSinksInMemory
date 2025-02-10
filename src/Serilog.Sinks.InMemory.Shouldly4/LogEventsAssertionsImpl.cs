@@ -28,10 +28,12 @@ namespace Serilog.Sinks.InMemory.Shouldly4
         public LogEventAssertion Once(string because = "", params object[] becauseArgs)
         {
             var actualNumberOfMessages = Subject.Count();
-            
-            actualNumberOfMessages
-                .ShouldBe(1, 
-                    $"Expected message {_messageTemplate} to appear exactly once, but it was found {actualNumberOfMessages} times");
+
+            if (actualNumberOfMessages != 1)
+            {
+                throw new ShouldAssertException(
+                    $"Expected message \"{_messageTemplate}\" to appear exactly once, but it was found {actualNumberOfMessages} times");
+            }
 
             return new LogEventAssertionImpl(_messageTemplate, Subject.Single());
         }
@@ -40,9 +42,10 @@ namespace Serilog.Sinks.InMemory.Shouldly4
         {
             var actualNumberOfMessages = Subject.Count();
             
-            actualNumberOfMessages
-                .ShouldBe(1, 
-                    $"Expected message {_messageTemplate} to appear {number}, but it was found {actualNumberOfMessages} times");
+            if(actualNumberOfMessages != number)
+            {
+                throw new ShouldAssertException($"Expected message \"{_messageTemplate}\" to appear {number} times, but it was found {actualNumberOfMessages} times");
+            }
             
             return this;
         }
@@ -62,20 +65,22 @@ namespace Serilog.Sinks.InMemory.Shouldly4
                 (key, values) => $"{values.Count()} with level \"{key}\""));
             }
 
-            Subject
-                .ShouldAllBe(
-                    logEvent => logEvent.Level == level,
-                    $"Expected instances of log message {_messageTemplate} to have level {level.ToString()}, but found {notMatchedText}");
+            if (Subject.Any(logEvent => logEvent.Level != level))
+            {
+                throw new ShouldAssertException(
+                    $"Expected instances of log message \"{_messageTemplate}\" to have level \"{level.ToString()}\", but found {notMatchedText}");
+            }
 
             return this;
         }
 
         public LogEventsPropertyAssertion WithProperty(string propertyName, string because = "", params object[] becauseArgs)
         {
-            Subject
-                .ShouldAllBe(
-                    logEvent => logEvent.Properties.ContainsKey(propertyName),
-                    $"Expected all instances of log message {_messageTemplate} to have property {propertyName}, but it was not found");
+            if(!Subject.All(logEvent => logEvent.Properties.ContainsKey(propertyName)))
+            {
+                throw new ShouldAssertException(
+                    $"Expected all instances of log message \"{_messageTemplate}\" to have property \"{propertyName}\", but it was not found");
+            }
 
             return new LogEventsPropertyAssertionImpl(this, Subject, propertyName);
         }

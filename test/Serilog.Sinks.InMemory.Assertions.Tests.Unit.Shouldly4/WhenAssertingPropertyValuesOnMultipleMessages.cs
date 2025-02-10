@@ -19,7 +19,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Appearing().Times(1)
                 .WithProperty("SomeProperty");
 
-            Should.Throw<XunitException>(() => action())
+            Should.Throw<Exception>(() => action())
                 .Message
                 .ShouldBe("Expected all instances of log message \"Message without property\" to have property \"SomeProperty\", but it was not found");
         }
@@ -37,7 +37,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .WithProperty("Property")
                 .WithValues("val1", "val1");
 
-            Should.Throw<XunitException>(() => action())
+            Should.Throw<Exception>(() => action())
                 .Message
                 .ShouldBe("Expected all instances of log message \"Message with {Property}\" to have property \"Property\", but it was not found");
         }
@@ -69,7 +69,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .WithProperty("Property")
                 .WithValues("val1", "val2", "val3");
 
-            Should.Throw<XunitException>(() => action())
+            Should.Throw<Exception>(() => action())
                 .Message
                 .ShouldBe("Can't assert property values because 3 values were provided while only 2 messages were expected");
         }
@@ -87,7 +87,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .WithProperty("Property")
                 .WithValues("val1", "other");
 
-            Should.Throw<XunitException>(() => action())
+            Should.Throw<Exception>(() => action())
                 .Message
                 .ShouldBe("Expected property values {\"val1\", \"val1\"} to contain {\"val1\", \"other\"} but did not find {\"other\"}");
         }
@@ -105,7 +105,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .WithProperty("Property")
                 .WithValues("other", "val1");
 
-            Should.Throw<XunitException>(() => action())
+            Should.Throw<Exception>(() => action())
                 .Message
                 .ShouldBe("Expected property values {\"val1\", \"val1\"} to contain {\"other\", \"val1\"} but did not find {\"other\"}");
         }
@@ -141,7 +141,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .WithProperty("Property2")
                 .WithValues("valA", "valB");
 
-            Should.Throw<XunitException>(() => action())
+            Should.Throw<Exception>(() => action())
                 .Message
                 .ShouldBe("Expected property values {\"valA\", \"XXX\"} to contain {\"valA\", \"valB\"} but did not find {\"valB\"}");
         }

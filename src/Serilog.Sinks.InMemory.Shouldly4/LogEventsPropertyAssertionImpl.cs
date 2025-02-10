@@ -22,11 +22,11 @@ namespace Serilog.Sinks.InMemory.Shouldly4
 
         public LogEventsAssertions WithValues(params object[] values)
         {
-            _logEvents
-                .Count()
-                .ShouldBe(
-                values.Length,
-                $"Can't assert property values because {values.Length} values were provided while only {_logEvents.Count()} messages were expected");
+            if (_logEvents.Count() != values.Length)
+            {
+                throw new ShouldAssertException(
+                    $"Can't assert property values because {values.Length} values were provided while only {_logEvents.Count()} messages were expected");
+            }
 
             var propertyValues = _logEvents
                 .Select(logEvent => GetValueFromProperty(logEvent.Properties[_propertyName]))
@@ -36,8 +36,14 @@ namespace Serilog.Sinks.InMemory.Shouldly4
                 .Where(v => !propertyValues.Contains(v))
                 .ToArray();
 
-            notFound.ShouldBeEmpty(
-                $"Expected property values {propertyValues} to contain {values} but did not find {notFound}");
+            if (notFound.Any())
+            {
+                var formattedPropertyValues = "{" + string.Join(", ", propertyValues.Select(p => $"\"{p}\"")) + "}";
+                var formattedValues =  "{" + string.Join(", ", values.Select(p => $"\"{p}\"")) + "}";
+                var formattedNotFound =  "{" + string.Join(", ", notFound.Select(p => $"\"{p}\"")) + "}";
+                throw new ShouldAssertException(
+                    $"Expected property values {formattedPropertyValues} to contain {formattedValues} but did not find {formattedNotFound}");
+            }
 
             return _logEventsAssertions;
         }

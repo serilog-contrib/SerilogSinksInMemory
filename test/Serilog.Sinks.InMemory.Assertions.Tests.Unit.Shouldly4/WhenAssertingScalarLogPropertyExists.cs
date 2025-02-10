@@ -42,7 +42,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Appearing().Once()
                 .WithProperty("something else");
 
-            Should.Throw<XunitException>(() => action())
+            Should.Throw<Exception>(() => action())
                 .Message
                 .ShouldBe("Expected message \"Hello {name}\" to have a property \"something else\" but it wasn't found");
         }
@@ -72,7 +72,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .WithProperty("name")
                 .WithValue("BLABLABLA");
 
-            Should.Throw<XunitException>(() => action())
+            Should.Throw<Exception>(() => action())
                 .Message
                 .ShouldBe("Expected property \"name\" to have value \"BLABLABLA\" but found \"World\"");
         }
@@ -102,7 +102,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .WithProperty("number")
                 .WithValue(2);
 
-            Should.Throw<XunitException>(() => action())
+            Should.Throw<Exception>(() => action())
                 .Message
                 .ShouldBe("Expected property \"number\" to have value 2 but found 5");
         }
@@ -180,7 +180,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .WhichValue<int>()
                 .ShouldBeLessThan(3);
 
-            Should.Throw<XunitException>(() => action())
+            Should.Throw<Exception>(() => action())
                 .Message
                 .ShouldBe($"Expected property value to be of type \"{nameof(Int32)}\" but found \"{nameof(String)}\"");
         }

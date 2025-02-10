@@ -21,8 +21,10 @@ namespace Serilog.Sinks.InMemory.Shouldly4
                 .Where(logEvent => logEvent.MessageTemplate.Text.Contains(pattern))
                 .ToList();
 
-            matches
-                .ShouldNotBeEmpty($"Expected a message with pattern {pattern} to be logged");
+            if (matches.Count == 0)
+            {
+                throw new ShouldAssertException($"Expected a message with pattern \"{pattern}\" to be logged");
+            }
 
             return new LogEventsAssertionsImpl(pattern, matches);
         }

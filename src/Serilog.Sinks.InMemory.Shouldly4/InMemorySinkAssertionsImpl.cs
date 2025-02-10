@@ -41,7 +41,10 @@ namespace Serilog.Sinks.InMemory.Shouldly4
                 .Where(logEvent => logEvent.MessageTemplate.Text == messageTemplate)
                 .ToList();
 
-            matches.ShouldNotBeEmpty($"Expected message {messageTemplate} to be logged");
+            if (!matches.Any())
+            {
+                throw new ShouldAssertException($"Expected message \"{messageTemplate}\" to be logged");
+            }
 
             return new LogEventsAssertionsImpl(messageTemplate, matches);
         }
@@ -76,7 +79,10 @@ namespace Serilog.Sinks.InMemory.Shouldly4
                 failureMessage = $"Expected no messages to be logged, but found {(count > 1 ? $"{count} messages" : "message")}";
             }
 
-            count.ShouldBe(0, failureMessage);
+            if (count != 0)
+            {
+                throw new ShouldAssertException(failureMessage);
+            }
         }
     }
 }
