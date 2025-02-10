@@ -64,3 +64,15 @@ jobs:
         run: |
           dotnet restore -p:Version=${{ steps.shortversion.outputs.shortversion }}
           dotnet test --no-restore -c Release Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions8.csproj
+
+      - name: Run integration tests for AwesomeAssertions 8
+        working-directory: test/Serilog.Sinks.InMemory.Assertions.Tests.Integration.AwesomeAssertions8
+        run: |
+          dotnet restore -p:Version=${{ steps.shortversion.outputs.shortversion }}
+          dotnet test --no-restore -c Release Serilog.Sinks.InMemory.Assertions.Tests.Integration.AwesomeAssertions8.csproj
+
+      - name: Run integration tests for Shouldly 4.x
+        working-directory: test/Serilog.Sinks.InMemory.Assertions.Tests.Integration.Shouldly4
+        run: |
+          dotnet restore -p:Version=${{ steps.shortversion.outputs.shortversion }}
+          dotnet test --no-restore -c Release Serilog.Sinks.InMemory.Assertions.Tests.Integration.Shouldly4.csproj
