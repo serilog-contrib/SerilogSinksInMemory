@@ -156,6 +156,8 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Should()
 #if FLUENTASSERTIONS_8
                 .BeLessThanOrEqualTo(10);
+#elif AWESOMEASSERTIONS_8
+                .BeLessThanOrEqualTo(10);
 #else
                 .BeLessOrEqualTo(10);
 #endif

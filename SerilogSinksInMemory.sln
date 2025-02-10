@@ -29,15 +29,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions6", "test\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions6\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions6.csproj", "{F65ECEEE-4461-48EE-98BE-003BBC716FC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions8", "test\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions8\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions8.csproj", "{F759DDF5-0852-4D3E-965C-13F5DDD6DA0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions8", "test\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions8\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions8.csproj", "{F759DDF5-0852-4D3E-965C-13F5DDD6DA0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.FluentAssertions6", "src\Serilog.Sinks.InMemory.FluentAssertions6\Serilog.Sinks.InMemory.FluentAssertions6.csproj", "{0092D58A-402D-43F5-A20C-B5BADE049CE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.FluentAssertions6", "src\Serilog.Sinks.InMemory.FluentAssertions6\Serilog.Sinks.InMemory.FluentAssertions6.csproj", "{0092D58A-402D-43F5-A20C-B5BADE049CE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.FluentAssertions8", "src\Serilog.Sinks.InMemory.FluentAssertions8\Serilog.Sinks.InMemory.FluentAssertions8.csproj", "{610ADB4E-1975-44CF-A30B-53F96DF35704}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.FluentAssertions8", "src\Serilog.Sinks.InMemory.FluentAssertions8\Serilog.Sinks.InMemory.FluentAssertions8.csproj", "{610ADB4E-1975-44CF-A30B-53F96DF35704}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.Assertions.Abstractions", "src\Serilog.Sinks.InMemory.Assertions.Abstractions\Serilog.Sinks.InMemory.Assertions.Abstractions.csproj", "{6718197F-6C67-4534-9296-36E0F120EB47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.Assertions.Abstractions", "src\Serilog.Sinks.InMemory.Assertions.Abstractions\Serilog.Sinks.InMemory.Assertions.Abstractions.csproj", "{6718197F-6C67-4534-9296-36E0F120EB47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.FluentAssertions5", "src\Serilog.Sinks.InMemory.FluentAssertions5\Serilog.Sinks.InMemory.FluentAssertions5.csproj", "{9E980ECF-E1CF-4121-83D2-800441F98EF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.FluentAssertions5", "src\Serilog.Sinks.InMemory.FluentAssertions5\Serilog.Sinks.InMemory.FluentAssertions5.csproj", "{9E980ECF-E1CF-4121-83D2-800441F98EF7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Serilog.Sinks.InMemory.Assertions.Tests.Unit", "Serilog.Sinks.InMemory.Assertions.Tests.Unit", "{95F4D271-188F-48F9-BDB8-FD59BE4BFB30}"
 	ProjectSection(SolutionItems) = preProject
@@ -51,9 +51,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Serilog.Sinks.InMemory.Asse
 		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingStructuredLogPropertyExists.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingStructuredLogPropertyExists.cs
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.FluentAssertions7", "src\Serilog.Sinks.InMemory.FluentAssertions7\Serilog.Sinks.InMemory.FluentAssertions7.csproj", "{3EDF7A6B-C2D5-462C-898A-4293B3BE45D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.FluentAssertions7", "src\Serilog.Sinks.InMemory.FluentAssertions7\Serilog.Sinks.InMemory.FluentAssertions7.csproj", "{3EDF7A6B-C2D5-462C-898A-4293B3BE45D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions7", "test\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions7\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions7.csproj", "{63DF819E-0BF0-40EE-B94B-515BCF8041B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions7", "test\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions7\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions7.csproj", "{63DF819E-0BF0-40EE-B94B-515BCF8041B9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.AwesomeAssertions8", "src\Serilog.Sinks.InMemory.AwesomeAssertions8\Serilog.Sinks.InMemory.AwesomeAssertions8.csproj", "{5136DCA2-E485-4EB1-961C-AD3CC9593946}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.Assertions.Tests.Unit.AwesomeAssertions8", "test\Serilog.Sinks.InMemory.Assertions.Tests.Unit.AwesomeAssertions8\Serilog.Sinks.InMemory.Assertions.Tests.Unit.AwesomeAssertions8.csproj", "{251A7F28-0166-49BB-AC4C-F72004FE14CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -209,6 +213,30 @@ Global
 		{63DF819E-0BF0-40EE-B94B-515BCF8041B9}.Release|x64.Build.0 = Release|Any CPU
 		{63DF819E-0BF0-40EE-B94B-515BCF8041B9}.Release|x86.ActiveCfg = Release|Any CPU
 		{63DF819E-0BF0-40EE-B94B-515BCF8041B9}.Release|x86.Build.0 = Release|Any CPU
+		{5136DCA2-E485-4EB1-961C-AD3CC9593946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5136DCA2-E485-4EB1-961C-AD3CC9593946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5136DCA2-E485-4EB1-961C-AD3CC9593946}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5136DCA2-E485-4EB1-961C-AD3CC9593946}.Debug|x64.Build.0 = Debug|Any CPU
+		{5136DCA2-E485-4EB1-961C-AD3CC9593946}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5136DCA2-E485-4EB1-961C-AD3CC9593946}.Debug|x86.Build.0 = Debug|Any CPU
+		{5136DCA2-E485-4EB1-961C-AD3CC9593946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5136DCA2-E485-4EB1-961C-AD3CC9593946}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5136DCA2-E485-4EB1-961C-AD3CC9593946}.Release|x64.ActiveCfg = Release|Any CPU
+		{5136DCA2-E485-4EB1-961C-AD3CC9593946}.Release|x64.Build.0 = Release|Any CPU
+		{5136DCA2-E485-4EB1-961C-AD3CC9593946}.Release|x86.ActiveCfg = Release|Any CPU
+		{5136DCA2-E485-4EB1-961C-AD3CC9593946}.Release|x86.Build.0 = Release|Any CPU
+		{251A7F28-0166-49BB-AC4C-F72004FE14CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{251A7F28-0166-49BB-AC4C-F72004FE14CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{251A7F28-0166-49BB-AC4C-F72004FE14CC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{251A7F28-0166-49BB-AC4C-F72004FE14CC}.Debug|x64.Build.0 = Debug|Any CPU
+		{251A7F28-0166-49BB-AC4C-F72004FE14CC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{251A7F28-0166-49BB-AC4C-F72004FE14CC}.Debug|x86.Build.0 = Debug|Any CPU
+		{251A7F28-0166-49BB-AC4C-F72004FE14CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{251A7F28-0166-49BB-AC4C-F72004FE14CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{251A7F28-0166-49BB-AC4C-F72004FE14CC}.Release|x64.ActiveCfg = Release|Any CPU
+		{251A7F28-0166-49BB-AC4C-F72004FE14CC}.Release|x64.Build.0 = Release|Any CPU
+		{251A7F28-0166-49BB-AC4C-F72004FE14CC}.Release|x86.ActiveCfg = Release|Any CPU
+		{251A7F28-0166-49BB-AC4C-F72004FE14CC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -227,6 +255,8 @@ Global
 		{95F4D271-188F-48F9-BDB8-FD59BE4BFB30} = {056C07B9-CAD5-4F92-8A24-FBDFDCBA0DDD}
 		{3EDF7A6B-C2D5-462C-898A-4293B3BE45D3} = {B73801C2-972F-48CD-A47A-87A4544953E2}
 		{63DF819E-0BF0-40EE-B94B-515BCF8041B9} = {056C07B9-CAD5-4F92-8A24-FBDFDCBA0DDD}
+		{5136DCA2-E485-4EB1-961C-AD3CC9593946} = {B73801C2-972F-48CD-A47A-87A4544953E2}
+		{251A7F28-0166-49BB-AC4C-F72004FE14CC} = {056C07B9-CAD5-4F92-8A24-FBDFDCBA0DDD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7573ED42-AA91-4C5A-8355-F60D23EC57B1}

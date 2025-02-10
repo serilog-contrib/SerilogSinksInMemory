@@ -1,6 +1,5 @@
 ﻿#nullable enable
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -45,11 +44,15 @@ namespace Serilog.Sinks.InMemory.Assertions
                         }
                     }
 
+                    var assertionLibrary = IsAwesomeAssertions(fluentAssertionsAssembly)
+                        ? "AwesomeAssertions"
+                        : "FluentAssertions";
+
                     var fluentAssertionsMajorVersion = fluentAssertionsAssembly.GetName().Version.Major;
 
                     var versionedLocation = Path.Combine(
                         assemblyLocation,
-                        $"Serilog.Sinks.InMemory.FluentAssertions{fluentAssertionsMajorVersion}.dll");
+                        $"Serilog.Sinks.InMemory.{assertionLibrary}{fluentAssertionsMajorVersion}.dll");
 
                     var versionedAssembly = Assembly.LoadFile(versionedLocation);
 
@@ -68,6 +71,14 @@ namespace Serilog.Sinks.InMemory.Assertions
             
             return (InMemorySinkAssertions)Activator.CreateInstance(
                 _assertionsType, snapshotInstance);
+        }
+
+        private static bool IsAwesomeAssertions(Assembly fluentAssertionsAssembly)
+        {
+            var assemblyMetadata = fluentAssertionsAssembly.GetCustomAttributes<AssemblyMetadataAttribute>();
+
+            // Yuck yuck yuck
+            return assemblyMetadata.Any(metadata => metadata.Value.Contains("AwesomeAssertions"));
         }
 
         /*

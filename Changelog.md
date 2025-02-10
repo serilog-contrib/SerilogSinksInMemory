@@ -1,5 +1,10 @@
 ﻿# Changelog
 
+## 0.13.0.0
+
+- Support FluentAssertions version 5, 6, 7 and 8
+- Support AwesomeAssertions version 8
+
 ## 0.11.0.0
 
 - Add assertions for verifying properties on messages that have a property that contains a destructured object

@@ -8,7 +8,7 @@
 		<IsPackable>true</IsPackable>
 		<Title>Serilog in-memory sink assertion extensions</Title>
 		<Description>FluentAssertions extensions to use with the Serilog.Sinks.InMemory package</Description>
-		<Copyright>2021 Sander van Vliet</Copyright>
+		<Copyright>2025 Sander van Vliet</Copyright>
 		<Authors>Sander van Vliet</Authors>
 		<PackageProjectUrl>https://github.com/sandermvanvliet/SerilogSinksInMemory/</PackageProjectUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -75,6 +75,13 @@
 			<PackagePath>lib/netstandard2.0</PackagePath>
 		</ProjectReference>
 		<ProjectReference Include="..\Serilog.Sinks.InMemory.FluentAssertions8\Serilog.Sinks.InMemory.FluentAssertions8.csproj">
+			<ReferenceOutputAssembly>False</ReferenceOutputAssembly>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<Package>true</Package>
+			<OutputItemType>Content</OutputItemType>
+			<PackagePath>lib/netstandard2.0</PackagePath>
+		</ProjectReference>
+		<ProjectReference Include="..\Serilog.Sinks.InMemory.AwesomeAssertions8\Serilog.Sinks.InMemory.AwesomeAssertions8.csproj">
 			<ReferenceOutputAssembly>False</ReferenceOutputAssembly>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<Package>true</Package>
