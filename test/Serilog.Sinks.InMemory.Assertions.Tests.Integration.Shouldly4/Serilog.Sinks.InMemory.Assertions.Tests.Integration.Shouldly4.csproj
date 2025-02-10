@@ -23,4 +23,31 @@
     <PackageReference Include="Serilog.Sinks.InMemory" Version="$(Version)" />
     <PackageReference Include="Serilog.Sinks.InMemory.Assertions" Version="$(Version)" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.Shouldly4\Repro.cs">
+      <Link>Repro.cs</Link>
+    </Compile>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.Shouldly4\WhenAssertingAndSInkIsWrittenTo.cs">
+      <Link>WhenAssertingAndSInkIsWrittenTo.cs</Link>
+    </Compile>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.Shouldly4\WhenAssertingLogEventHasLevel.cs">
+      <Link>WhenAssertingLogEventHasLevel.cs</Link>
+    </Compile>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.Shouldly4\WhenAssertingLogEventsExist.cs">
+      <Link>WhenAssertingLogEventsExist.cs</Link>
+    </Compile>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.Shouldly4\WhenAssertingMessageExistsThatContainsPattern.cs">
+      <Link>WhenAssertingMessageExistsThatContainsPattern.cs</Link>
+    </Compile>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.Shouldly4\WhenAssertingPropertyValuesOnMultipleMessages.cs">
+      <Link>WhenAssertingPropertyValuesOnMultipleMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.Shouldly4\WhenAssertingScalarLogPropertyExists.cs">
+      <Link>WhenAssertingScalarLogPropertyExists.cs</Link>
+    </Compile>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit.Shouldly4\WhenAssertingStructuredLogPropertyExists.cs">
+      <Link>WhenAssertingStructuredLogPropertyExists.cs</Link>
+    </Compile>
+  </ItemGroup>
 </Project>
