@@ -27,111 +27,61 @@ namespace Serilog.Sinks.InMemory.Assertions
                         throw new Exception($"Unable to determine path to load assemblies from");
                     }
 
+                    string? adapterName = null;
+                    int? majorVersion = null;
                     Assembly? versionedAssembly = null;
 
+                    // Order is important here, first check the loaded assemblies before
+                    // looking on disk because otherwise we might load FluentAssertions from disk
+                    // while Shouldly is already loaded into the AppDomain and that's the one we
+                    // should be using.
+                    // That's also a guess but hey, if you mix and match assertion frameworks you
+                    // can deal with the fall out.
                     if (IsFluentAssertionsAlreadyLoadedIntoDomain(out var fluentAssertionsAssembly))
                     {
-                        var majorVersion = fluentAssertionsAssembly.GetName().Version.Major;
-
-                        var versionedLocation = Path.Combine(
-                            assemblyLocation,
-                            $"Serilog.Sinks.InMemory.FluentAssertions{majorVersion}.dll");
-
-                        if (File.Exists(versionedLocation))
-                        {
-                            versionedAssembly = Assembly.LoadFile(versionedLocation);
-                        }
-                        else
-                        {
-                            throw new InvalidOperationException($"Detected FluentAssertions version {majorVersion} but the assertions adapter wasn't found on disk");
-                        }
+                        adapterName = "FluentAssertions";
+                        majorVersion = fluentAssertionsAssembly.GetName().Version.Major;
                     }
                     else if (IsAwesomeAssertionsAlreadyLoadedIntoDomain(out var awesomeAssertionsAssembly))
                     {
-                        var majorVersion = awesomeAssertionsAssembly.GetName().Version.Major;
-
-                        var versionedLocation = Path.Combine(
-                            assemblyLocation,
-                            $"Serilog.Sinks.InMemory.AwesomeAssertions{majorVersion}.dll");
-
-                        if (File.Exists(versionedLocation))
-                        {
-                            versionedAssembly = Assembly.LoadFile(versionedLocation);
-                        }
-                        else
-                        {
-                            throw new InvalidOperationException($"Detected AwesomeAssertions version {majorVersion} but the assertions adapter wasn't found on disk");
-                        }
+                        adapterName = "AwesomeAssertions";
+                        majorVersion = awesomeAssertionsAssembly.GetName().Version.Major;
                     }
                     else if (IsShouldlyAlreadyLoadedIntoDomain(out var shouldlyAssembly))
                     {
-                        var majorVersion = shouldlyAssembly.GetName().Version.Major;
-
-                        var versionedLocation = Path.Combine(
-                            assemblyLocation,
-                            $"Serilog.Sinks.InMemory.Shouldly{majorVersion}.dll");
-
-                        if (File.Exists(versionedLocation))
-                        {
-                            versionedAssembly = Assembly.LoadFile(versionedLocation);
-                        }
-                        else
-                        {
-                            throw new InvalidOperationException($"Detected Shouldly version {majorVersion} but the assertions adapter wasn't found on disk");
-                        }
+                        adapterName = "Shouldly";
+                        majorVersion = shouldlyAssembly.GetName().Version.Major;
                     }
                     else if (IsFluentAssertionsAvailableOnDisk(assemblyLocation,
                                  out var fluentAssertionsOnDiskAssembly))
                     {
-                        var majorVersion = fluentAssertionsOnDiskAssembly.GetName().Version.Major;
-
-                        var versionedLocation = Path.Combine(
-                            assemblyLocation,
-                            $"Serilog.Sinks.InMemory.FluentAssertions{majorVersion}.dll");
-
-                        if (File.Exists(versionedLocation))
-                        {
-                            versionedAssembly = Assembly.LoadFile(versionedLocation);
-                        }
-                        else
-                        {
-                            throw new InvalidOperationException($"Detected FluentAssertions version {majorVersion} but the assertions adapter wasn't found on disk");
-                        }
+                        adapterName = "FluentAssertions";
+                        majorVersion = fluentAssertionsOnDiskAssembly.GetName().Version.Major;
                     }
                     else if (IsAwesomeAssertionsAvailableOnDisk(assemblyLocation,
                                  out var awesomeAssertionsOnDiskAssembly))
                     {
-                        var majorVersion = awesomeAssertionsOnDiskAssembly.GetName().Version.Major;
-
-                        var versionedLocation = Path.Combine(
-                            assemblyLocation,
-                            $"Serilog.Sinks.InMemory.AwesomeAssertions{majorVersion}.dll");
-
-                        if (File.Exists(versionedLocation))
-                        {
-                            versionedAssembly = Assembly.LoadFile(versionedLocation);
-                        }
-                        else
-                        {
-                            throw new InvalidOperationException($"Detected AweseomeAssertions version {majorVersion} but the assertions adapter wasn't found on disk");
-                        }
+                        adapterName = "AwesomeAssertions";
+                        majorVersion = awesomeAssertionsOnDiskAssembly.GetName().Version.Major;
                     }
                     else if (IsShouldlyAvailableOnDisk(assemblyLocation, out var shouldlyOnDiskAssembly))
                     {
-                        var majorVersion = shouldlyOnDiskAssembly.GetName().Version.Major;
+                        adapterName = "Shouldly";
+                        majorVersion = shouldlyOnDiskAssembly.GetName().Version.Major;
+                    }
 
+                    if (adapterName != null && majorVersion != null)
+                    {
                         var versionedLocation = Path.Combine(
                             assemblyLocation,
-                            $"Serilog.Sinks.InMemory.Shouldly{majorVersion}.dll");
+                            $"Serilog.Sinks.InMemory.{adapterName}{majorVersion}.dll");
 
-                        if (File.Exists(versionedLocation))
+                        if (!File.Exists(versionedLocation))
                         {
-                            versionedAssembly = Assembly.LoadFile(versionedLocation);
+                            throw new InvalidOperationException($"Detected {adapterName} version {majorVersion} but the assertions adapter wasn't found on disk");
                         }
-                        else
-                        {
-                            throw new InvalidOperationException($"Detected Shouldly version {majorVersion} but the assertions adapter wasn't found on disk");
-                        }
+                        
+                        versionedAssembly = Assembly.LoadFile(versionedLocation);
                     }
 
                     if (versionedAssembly != null)
@@ -139,10 +89,6 @@ namespace Serilog.Sinks.InMemory.Assertions
                         _assertionsType = versionedAssembly
                             .GetTypes()
                             .SingleOrDefault(t => t.Name == "InMemorySinkAssertionsImpl");
-                    }
-                    else
-                    {
-                        Debugger.Break();
                     }
                 }
             }
