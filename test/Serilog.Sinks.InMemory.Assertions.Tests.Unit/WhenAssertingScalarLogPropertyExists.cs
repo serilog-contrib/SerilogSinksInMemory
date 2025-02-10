@@ -137,7 +137,6 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Appearing().Once()
                 .WithProperty("PropertyOne")
                 .WithValue("one")
-                .And
                 .WithProperty("PropertyTwo")
                 .WithValue("two");
         }

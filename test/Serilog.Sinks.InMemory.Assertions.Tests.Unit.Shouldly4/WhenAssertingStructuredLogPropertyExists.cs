@@ -75,10 +75,9 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .WithProperty("Name")
                 .WithValue("Joe Blogs");
 
-            action
-                .Should()
-                .Throw<XunitException>()
-                .WithMessage("Expected message \"Hello {NotDestructured}\" to have a property \"NotDestructured\" that holds a destructured object but found a scalar value");
+            Should.Throw<XunitException>(() => action())
+                .Message
+                .ShouldBe("Expected message \"Hello {NotDestructured}\" to have a property \"NotDestructured\" that holds a destructured object but found a scalar value");
         }
     }
 }

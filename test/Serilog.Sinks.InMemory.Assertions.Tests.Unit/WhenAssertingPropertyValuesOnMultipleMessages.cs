@@ -141,7 +141,6 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Appearing().Times(2)
                 .WithProperty("Property1")
                 .WithValues("val1", "val2")
-                .And
                 .WithProperty("Property2")
                 .WithValues("valA", "valB");
         }
@@ -158,7 +157,6 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Appearing().Times(2)
                 .WithProperty("Property1")
                 .WithValues("val1", "val2")
-                .And
                 .WithProperty("Property2")
                 .WithValues("valA", "valB");
 

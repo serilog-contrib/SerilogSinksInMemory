@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using FluentAssertions;
 using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 using Serilog.Events;
@@ -23,7 +22,7 @@ namespace Serilog.Sinks.InMemory.FluentAssertions7
 
         protected override string Identifier { get; }
 
-        public AndConstraint<LogEventsAssertions> WithValues(params object[] values)
+        public LogEventsAssertions WithValues(params object[] values)
         {
             Execute.Assertion
                 .ForCondition(_logEvents.Count() == values.Length)
@@ -45,7 +44,7 @@ namespace Serilog.Sinks.InMemory.FluentAssertions7
                     values,
                     notFound);
 
-            return new AndConstraint<LogEventsAssertions>(_logEventsAssertions);
+            return _logEventsAssertions;
         }
 
         private object GetValueFromProperty(LogEventPropertyValue instance)

@@ -36,7 +36,7 @@ namespace Serilog.Sinks.InMemory.FluentAssertions7
             throw new Exception($"Expected property value to be of type {typeof(TValue).Name} but the property value is not a scalar and I don't know how to handle that");
         }
 
-        public AndConstraint<LogEventAssertion> WithValue(object value, string because = "", params object[] becauseArgs)
+        public LogEventAssertion WithValue(object value, string because = "", params object[] becauseArgs)
         {
             var actualValue = GetValueFromProperty(Subject);
 
@@ -48,7 +48,7 @@ namespace Serilog.Sinks.InMemory.FluentAssertions7
                     value,
                     actualValue);
 
-            return new AndConstraint<LogEventAssertion>(_logEventAssertion);
+            return _logEventAssertion;
         }
 
         private object GetValueFromProperty(LogEventPropertyValue instance)

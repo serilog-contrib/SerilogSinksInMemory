@@ -20,7 +20,7 @@ namespace Serilog.Sinks.InMemory.Shouldly4
             _propertyName = propertyName;
         }
 
-        public AndConstraint<LogEventsAssertions> WithValues(params object[] values)
+        public LogEventsAssertions WithValues(params object[] values)
         {
             _logEvents
                 .Count()
@@ -39,7 +39,7 @@ namespace Serilog.Sinks.InMemory.Shouldly4
             notFound.ShouldBeEmpty(
                 $"Expected property values {propertyValues} to contain {values} but did not find {notFound}");
 
-            return new AndConstraint<LogEventsAssertions>(_logEventsAssertions);
+            return _logEventsAssertions;
         }
 
         private object GetValueFromProperty(LogEventPropertyValue instance)

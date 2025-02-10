@@ -30,10 +30,9 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Appearing().Once()
                 .WithLevel(LogEventLevel.Warning);
 
-            action
-                .Should()
-                .Throw<XunitException>()
-                .WithMessage("Expected message \"Hello, world!\" to have level \"Warning\", but it is \"Information\"");
+            Should.Throw<XunitException>(() => action())
+                .Message
+                .ShouldBe("Expected message \"Hello, world!\" to have level \"Warning\", but it is \"Information\"");
         }
 
         [Fact]
@@ -78,10 +77,9 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Appearing().Times(3)
                 .WithLevel(LogEventLevel.Information);
 
-            action
-                .Should()
-                .Throw<XunitException>()
-                .WithMessage("Expected instances of log message \"Hello, world!\" to have level \"Information\", but found 3 with level \"Warning\"");
+            Should.Throw<XunitException>(() => action())
+                .Message
+                .ShouldBe("Expected instances of log message \"Hello, world!\" to have level \"Information\", but found 3 with level \"Warning\"");
         }
     }
 }

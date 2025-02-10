@@ -24,10 +24,9 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Should()
                 .HaveMessage("Hello, World");
 
-            action
-                .Should()
-                .Throw<XunitException>()
-                .WithMessage("Expected message \"Hello, World\" to be logged");
+            Should.Throw<XunitException>(() => action())
+                .Message
+                .ShouldBe("Expected message \"Hello, World\" to be logged");
         }
 
         [Fact]
@@ -53,10 +52,9 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .HaveMessage("Hello, World")
                 .Appearing().Once();
 
-            action
-                .Should()
-                .Throw<XunitException>()
-                .WithMessage("Expected message \"Hello, World\" to appear exactly once, but it was found 4 times");
+            Should.Throw<XunitException>(() => action())
+                .Message
+                .ShouldBe("Expected message \"Hello, World\" to appear exactly once, but it was found 4 times");
         }
 
         [Fact]
@@ -86,10 +84,9 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .HaveMessage("Hello, World")
                 .Appearing().Times(5);
 
-            action
-                .Should()
-                .Throw<XunitException>()
-                .WithMessage("Expected message \"Hello, World\" to appear 5 times, but it was found 4 times");
+            Should.Throw<XunitException>(() => action())
+                .Message
+                .ShouldBe("Expected message \"Hello, World\" to appear 5 times, but it was found 4 times");
         }
 
         [Fact]
@@ -101,10 +98,9 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Should()
                 .NotHaveMessage("Hello, World");
 
-            action
-                .Should()
-                .Throw<XunitException>()
-                .WithMessage("Expected message \"Hello, World\" not to be logged, but it was found once");
+            Should.Throw<XunitException>(() => action())
+                .Message
+                .ShouldBe("Expected message \"Hello, World\" not to be logged, but it was found once");
         }
 
         [Fact]
@@ -118,10 +114,9 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Should()
                 .NotHaveMessage("Hello, World");
 
-            action
-                .Should()
-                .Throw<XunitException>()
-                .WithMessage("Expected message \"Hello, World\" not to be logged, but it was found 3 times");
+            Should.Throw<XunitException>(() => action())
+                .Message
+                .ShouldBe("Expected message \"Hello, World\" not to be logged, but it was found 3 times");
         }
     }
 }
