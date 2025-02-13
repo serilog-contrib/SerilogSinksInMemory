@@ -35,16 +35,16 @@ jobs:
       run: dotnet restore
       
     - name: Build
-      run: dotnet build -c Release -p:VersionSuffix=alpha ./SerilogSinksInMemory.sln
+      run: dotnet build -c Release -p:Version=${{ steps.shortversion.outputs.shortversion }} ./SerilogSinksInMemory.sln
       
     - name: Test
       run: dotnet test --verbosity normal -c Release
       
     - name: Create NuGet package for Serilog.Sinks.InMemory
-      run: dotnet pack ./src/Serilog.Sinks.InMemory/Serilog.Sinks.InMemory.csproj -c Release -o ./packages -p:VersionSuffix=-alpha
+      run: dotnet pack ./src/Serilog.Sinks.InMemory/Serilog.Sinks.InMemory.csproj -c Release -o ./packages -p:Version=${{ steps.shortversion.outputs.shortversion }}
       
     - name: Create NuGet package for Serilog.Sinks.InMemory.Assertions
-      run: dotnet pack ./src/Serilog.Sinks.InMemory.Assertions/Serilog.Sinks.InMemory.Assertions.csproj -c Release -o ./packages -p:VersionSuffix=-alpha
+      run: dotnet pack ./src/Serilog.Sinks.InMemory.Assertions/Serilog.Sinks.InMemory.Assertions.csproj -c Release -o ./packages -p:Version=${{ steps.shortversion.outputs.shortversion }}
 
     - name: Run integration tests for FluentAssertions 5
       working-directory: test/Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions5
