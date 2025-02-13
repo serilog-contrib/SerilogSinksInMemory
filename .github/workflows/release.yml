@@ -103,7 +103,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./packaging/Serilog.Sinks.InMemory.${{ steps.shortversion.outputs.shortversion }}.nupkg
+          asset_path: ./packages/Serilog.Sinks.InMemory.${{ steps.shortversion.outputs.shortversion }}.nupkg
           asset_name: Serilog.Sinks.InMemory.${{ steps.shortversion.outputs.shortversion }}.nupkg
           asset_content_type: application/octet-stream
           
@@ -114,12 +114,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./packaging/Serilog.Sinks.InMemory.Assertions.${{ steps.shortversion.outputs.shortversion }}.nupkg
+          asset_path: ./packages/Serilog.Sinks.InMemory.Assertions.${{ steps.shortversion.outputs.shortversion }}.nupkg
           asset_name: Serilog.Sinks.InMemory.Assertions.${{ steps.shortversion.outputs.shortversion }}.nupkg
           asset_content_type: application/octet-stream
           
       - name: Publish sink package to public NuGet repository
-        run: dotnet nuget push -k ${{ secrets.NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json ./packaging/Serilog.Sinks.InMemory.${{ steps.shortversion.outputs.shortversion }}.nupkg --skip-duplicate --no-symbols
+        run: dotnet nuget push -k ${{ secrets.NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json ./packages/Serilog.Sinks.InMemory.${{ steps.shortversion.outputs.shortversion }}.nupkg --skip-duplicate --no-symbols
         
       - name: Publish assertions package to public NuGet repository
-        run: dotnet nuget push -k ${{ secrets.NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json ./packaging/Serilog.Sinks.InMemory.Assertions.${{ steps.shortversion.outputs.shortversion }}.nupkg --skip-duplicate --no-symbols
+        run: dotnet nuget push -k ${{ secrets.NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json ./packages/Serilog.Sinks.InMemory.Assertions.${{ steps.shortversion.outputs.shortversion }}.nupkg --skip-duplicate --no-symbols
