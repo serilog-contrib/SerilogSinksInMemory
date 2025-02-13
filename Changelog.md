@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 0.14.0.0
+
+Fix a packaging issue that caused the abstractions not to be part of the package.
+
 ## 0.13.0.0
 
 - Support FluentAssertions version 5, 6, 7 and 8

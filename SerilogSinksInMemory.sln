@@ -25,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Changelog.md = Changelog.md
 		Directory.Build.props = Directory.Build.props
 		README.md = README.md
+		LICENSE = LICENSE
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions6", "test\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions6\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions6.csproj", "{F65ECEEE-4461-48EE-98BE-003BBC716FC5}"

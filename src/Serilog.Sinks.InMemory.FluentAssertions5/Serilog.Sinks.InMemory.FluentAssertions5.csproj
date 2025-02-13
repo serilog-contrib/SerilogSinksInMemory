@@ -8,7 +8,7 @@
 		<IsPackable>false</IsPackable>
 		<Title>Serilog in-memory sink assertion extensions</Title>
 		<Description>FluentAssertions extensions to use with the Serilog.Sinks.InMemory package</Description>
-		<Copyright>2021 Sander van Vliet</Copyright>
+		<Copyright>2025 Sander van Vliet</Copyright>
 		<Authors>Sander van Vliet</Authors>
 		<PackageProjectUrl>https://github.com/sandermvanvliet/SerilogSinksInMemory/</PackageProjectUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
