@@ -38,7 +38,7 @@ jobs:
       run: dotnet build -c Release -p:Version=${{ steps.shortversion.outputs.shortversion }} ./SerilogSinksInMemory.sln
       
     - name: Test
-      run: dotnet test --verbosity normal -c Release
+      run: dotnet test -c Release
       
     - name: Create NuGet package for Serilog.Sinks.InMemory
       run: dotnet pack ./src/Serilog.Sinks.InMemory/Serilog.Sinks.InMemory.csproj -c Release -o ./packages -p:Version=${{ steps.shortversion.outputs.shortversion }}
