@@ -9,35 +9,79 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      
     - name: Setup dotnet
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: |
           6.x
           8.x
+          
     - name: Get the version
       id: get_version
       uses: mavrosxristoforos/get-xml-info@1.0
       with:
         xml-file: './Directory.Build.props'
         xpath: '//Version'
+        
     - name: Create short version
       id: shortversion
       run: |
         $version = "${{ steps.get_version.outputs.info }}".Substring(0, "${{ steps.get_version.outputs.info }}".LastIndexOf("."))
         Write-Host "::set-output name=shortversion::$version-alpha"
       shell: pwsh
-    - uses: actions/checkout@v2
+      
     - name: Restore dependencies
       run: dotnet restore
+      
     - name: Build
-      run: dotnet build --no-restore -c Release -p:VersionSuffix=alpha ./SerilogSinksInMemory.sln
+      run: dotnet build -c Release -p:VersionSuffix=alpha ./SerilogSinksInMemory.sln
+      
     - name: Test
-      run: dotnet test --no-build --verbosity normal -c Release
+      run: dotnet test --verbosity normal -c Release
+      
     - name: Create NuGet package for Serilog.Sinks.InMemory
-      run: dotnet pack ./src/Serilog.Sinks.InMemory/Serilog.Sinks.InMemory.csproj -c Release --no-build --no-restore -o ./packaging -p:VersionSuffix=-alpha
+      run: dotnet pack ./src/Serilog.Sinks.InMemory/Serilog.Sinks.InMemory.csproj -c Release -o ./packages -p:VersionSuffix=-alpha
+      
     - name: Create NuGet package for Serilog.Sinks.InMemory.Assertions
-      run: dotnet pack ./src/Serilog.Sinks.InMemory.Assertions/Serilog.Sinks.InMemory.Assertions.csproj -c Release --no-build --no-restore -o ./packaging -p:VersionSuffix=-alpha
+      run: dotnet pack ./src/Serilog.Sinks.InMemory.Assertions/Serilog.Sinks.InMemory.Assertions.csproj -c Release -o ./packages -p:VersionSuffix=-alpha
+
+    - name: Run integration tests for FluentAssertions 5
+      working-directory: test/Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions5
+      run: |
+        dotnet restore -p:Version=${{ steps.shortversion.outputs.shortversion }}
+        dotnet test --no-restore -c Release Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions5.csproj
+
+    - name: Run integration tests for FluentAssertions 6
+      working-directory: test/Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions6
+      run: |
+        dotnet restore -p:Version=${{ steps.shortversion.outputs.shortversion }}
+        dotnet test --no-restore -c Release Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions6.csproj
+
+    - name: Run integration tests for FluentAssertions 7
+      working-directory: test/Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions7
+      run: |
+        dotnet restore -p:Version=${{ steps.shortversion.outputs.shortversion }}
+        dotnet test --no-restore -c Release Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions7.csproj
+
+    - name: Run integration tests for FluentAssertions 8
+      working-directory: test/Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions8
+      run: |
+        dotnet restore -p:Version=${{ steps.shortversion.outputs.shortversion }}
+        dotnet test --no-restore -c Release Serilog.Sinks.InMemory.Assertions.Tests.Integration.FluentAssertions8.csproj
+
+    - name: Run integration tests for AwesomeAssertions 8
+      working-directory: test/Serilog.Sinks.InMemory.Assertions.Tests.Integration.AwesomeAssertions8
+      run: |
+        dotnet restore -p:Version=${{ steps.shortversion.outputs.shortversion }}
+        dotnet test --no-restore -c Release Serilog.Sinks.InMemory.Assertions.Tests.Integration.AwesomeAssertions8.csproj
+
+    - name: Run integration tests for Shouldly 4.x
+      working-directory: test/Serilog.Sinks.InMemory.Assertions.Tests.Integration.Shouldly4
+      run: |
+        dotnet restore -p:Version=${{ steps.shortversion.outputs.shortversion }}
+        dotnet test --no-restore -c Release Serilog.Sinks.InMemory.Assertions.Tests.Integration.Shouldly4.csproj
+      
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -48,6 +92,7 @@ jobs:
         release_name: ${{ steps.get_version.outputs.info }}-alpha
         draft: false
         prerelease: true
+        
     - name: Upload sink NuGet package
       id: upload-nuget-sink
       uses: actions/upload-release-asset@v1
@@ -55,9 +100,10 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./packaging/Serilog.Sinks.InMemory.${{ steps.shortversion.outputs.shortversion }}.nupkg
+        asset_path: ./packages/Serilog.Sinks.InMemory.${{ steps.shortversion.outputs.shortversion }}.nupkg
         asset_name: Serilog.Sinks.InMemory.${{ steps.shortversion.outputs.shortversion }}.nupkg
         asset_content_type: application/octet-stream
+        
     - name: Upload assertions NuGet package
       id: upload-nuget-assertions
       uses: actions/upload-release-asset@v1
@@ -65,6 +111,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./packaging/Serilog.Sinks.InMemory.Assertions.${{ steps.shortversion.outputs.shortversion }}.nupkg
+        asset_path: ./packages/Serilog.Sinks.InMemory.Assertions.${{ steps.shortversion.outputs.shortversion }}.nupkg
         asset_name: Serilog.Sinks.InMemory.Assertions.${{ steps.shortversion.outputs.shortversion }}.nupkg
         asset_content_type: application/octet-stream
