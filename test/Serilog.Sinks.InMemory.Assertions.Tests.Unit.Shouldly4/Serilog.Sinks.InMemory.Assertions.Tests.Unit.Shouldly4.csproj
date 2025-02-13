@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Serilog.Sinks.InMemory.Assertions.Abstractions\Serilog.Sinks.InMemory.Assertions.Abstractions.csproj" />
     <ProjectReference Include="..\..\src\Serilog.Sinks.InMemory.Assertions\Serilog.Sinks.InMemory.Assertions.csproj" />
     <ProjectReference Include="..\..\src\Serilog.Sinks.InMemory.Shouldly4\Serilog.Sinks.InMemory.Shouldly4.csproj" />
     <ProjectReference Include="..\..\src\Serilog.Sinks.InMemory\Serilog.Sinks.InMemory.csproj" />
