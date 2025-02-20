@@ -182,6 +182,13 @@ namespace Serilog.Sinks.InMemory.Assertions
             {
                 assembly = Assembly.LoadFile(assemblyPath);
 
+                if (assembly.GetCustomAttributes<AssemblyProductAttribute>()
+                    .Any(product =>
+                        product.Product.Equals("AwesomeAssertions", StringComparison.CurrentCultureIgnoreCase)))
+                {
+                    return true;
+                }
+
                 if (assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
                     .Any(metadata => metadata.Value.Contains("AwesomeAssertions", StringComparison.OrdinalIgnoreCase)))
                 {

@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 0.15.0.0
+
+Use `AssemblyProductAttribute` to detect AwesomeAssertions (as provided via [this PR](https://github.com/AwesomeAssertions/AwesomeAssertions/pull/30))
+
 ## 0.14.0.0
 
 Fix a packaging issue that caused the abstractions not to be part of the package.
