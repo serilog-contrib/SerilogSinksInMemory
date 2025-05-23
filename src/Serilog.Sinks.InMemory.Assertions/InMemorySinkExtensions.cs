@@ -133,7 +133,7 @@ namespace Serilog.Sinks.InMemory.Assertions
                 .CurrentDomain
                 .GetAssemblies()
                 .FirstOrDefault(assembly =>
-                    assembly.GetName().Name.Equals("FluentAssertions") &&
+                    (assembly.GetName().Name.Equals("FluentAssertions") || assembly.GetName().Name.Equals("AwesomeAssertions")) &&
                     assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
                         .Any(metadata => metadata.Value.Contains("AwesomeAssertions", StringComparison.OrdinalIgnoreCase)));
 

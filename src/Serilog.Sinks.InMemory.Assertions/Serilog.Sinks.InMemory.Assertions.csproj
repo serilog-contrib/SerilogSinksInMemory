@@ -86,6 +86,13 @@
 			<OutputItemType>Content</OutputItemType>
 			<PackagePath>lib/$(TargetFramework)</PackagePath>
 		</ProjectReference>
+		<ProjectReference Include="..\Serilog.Sinks.InMemory.AwesomeAssertions9\Serilog.Sinks.InMemory.AwesomeAssertions9.csproj">
+			<ReferenceOutputAssembly>False</ReferenceOutputAssembly>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<Package>true</Package>
+			<OutputItemType>Content</OutputItemType>
+			<PackagePath>lib/$(TargetFramework)</PackagePath>
+		</ProjectReference>
 		<ProjectReference Include="..\Serilog.Sinks.InMemory.Shouldly4\Serilog.Sinks.InMemory.Shouldly4.csproj">
 			<ReferenceOutputAssembly>False</ReferenceOutputAssembly>
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>

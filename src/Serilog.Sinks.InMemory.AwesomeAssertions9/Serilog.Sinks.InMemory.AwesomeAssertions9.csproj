@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<RootNamespace>Serilog.Sinks.InMemory.AwesomeAssertions9</RootNamespace>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<IsPackable>false</IsPackable>
+		<Title>Serilog in-memory sink assertion extensions</Title>
+		<Description>AwesomeAssertions extensions to use with the Serilog.Sinks.InMemory package</Description>
+		<Copyright>2025 Sander van Vliet</Copyright>
+		<Authors>Sander van Vliet</Authors>
+		<PackageProjectUrl>https://github.com/sandermvanvliet/SerilogSinksInMemory/</PackageProjectUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryUrl>https://github.com/sandermvanvliet/SerilogSinksInMemory/</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<PackageVersion>$(Version)$(VersionSuffix)</PackageVersion>
+		<LangVersion>default</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AwesomeAssertions" Version="9.*">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="Serilog" Version="2.*">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Serilog.Sinks.InMemory.Assertions.Abstractions\Serilog.Sinks.InMemory.Assertions.Abstractions.csproj" />
+		<ProjectReference Include="..\Serilog.Sinks.InMemory\Serilog.Sinks.InMemory.csproj" />
+	</ItemGroup>
+
+</Project>
