@@ -24,8 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		Changelog.md = Changelog.md
 		Directory.Build.props = Directory.Build.props
-		README.md = README.md
 		LICENSE = LICENSE
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions6", "test\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions6\Serilog.Sinks.InMemory.Assertions.Tests.Unit.FluentAssertions6.csproj", "{F65ECEEE-4461-48EE-98BE-003BBC716FC5}"
@@ -63,6 +63,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.Assertions.Tests.Unit.Shouldly4", "test\Serilog.Sinks.InMemory.Assertions.Tests.Unit.Shouldly4\Serilog.Sinks.InMemory.Assertions.Tests.Unit.Shouldly4.csproj", "{47696446-67B1-4011-AF4F-AC742A60C7F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.Shouldly4", "src\Serilog.Sinks.InMemory.Shouldly4\Serilog.Sinks.InMemory.Shouldly4.csproj", "{AD9FB993-5657-464E-A3B4-D8163F1AF7C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.AwesomeAssertions9", "src\Serilog.Sinks.InMemory.AwesomeAssertions9\Serilog.Sinks.InMemory.AwesomeAssertions9.csproj", "{545E23F2-220C-3065-196C-3956BD778A1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Sinks.InMemory.Assertions.Tests.Unit.AwesomeAssertions9", "test\Serilog.Sinks.InMemory.Assertions.Tests.Unit.AwesomeAssertions9\Serilog.Sinks.InMemory.Assertions.Tests.Unit.AwesomeAssertions9.csproj", "{2F1384C1-9596-FFB7-63CC-02D250E62355}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -266,6 +270,30 @@ Global
 		{AD9FB993-5657-464E-A3B4-D8163F1AF7C4}.Release|x64.Build.0 = Release|Any CPU
 		{AD9FB993-5657-464E-A3B4-D8163F1AF7C4}.Release|x86.ActiveCfg = Release|Any CPU
 		{AD9FB993-5657-464E-A3B4-D8163F1AF7C4}.Release|x86.Build.0 = Release|Any CPU
+		{545E23F2-220C-3065-196C-3956BD778A1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{545E23F2-220C-3065-196C-3956BD778A1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{545E23F2-220C-3065-196C-3956BD778A1C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{545E23F2-220C-3065-196C-3956BD778A1C}.Debug|x64.Build.0 = Debug|Any CPU
+		{545E23F2-220C-3065-196C-3956BD778A1C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{545E23F2-220C-3065-196C-3956BD778A1C}.Debug|x86.Build.0 = Debug|Any CPU
+		{545E23F2-220C-3065-196C-3956BD778A1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{545E23F2-220C-3065-196C-3956BD778A1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{545E23F2-220C-3065-196C-3956BD778A1C}.Release|x64.ActiveCfg = Release|Any CPU
+		{545E23F2-220C-3065-196C-3956BD778A1C}.Release|x64.Build.0 = Release|Any CPU
+		{545E23F2-220C-3065-196C-3956BD778A1C}.Release|x86.ActiveCfg = Release|Any CPU
+		{545E23F2-220C-3065-196C-3956BD778A1C}.Release|x86.Build.0 = Release|Any CPU
+		{2F1384C1-9596-FFB7-63CC-02D250E62355}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F1384C1-9596-FFB7-63CC-02D250E62355}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F1384C1-9596-FFB7-63CC-02D250E62355}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2F1384C1-9596-FFB7-63CC-02D250E62355}.Debug|x64.Build.0 = Debug|Any CPU
+		{2F1384C1-9596-FFB7-63CC-02D250E62355}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2F1384C1-9596-FFB7-63CC-02D250E62355}.Debug|x86.Build.0 = Debug|Any CPU
+		{2F1384C1-9596-FFB7-63CC-02D250E62355}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F1384C1-9596-FFB7-63CC-02D250E62355}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F1384C1-9596-FFB7-63CC-02D250E62355}.Release|x64.ActiveCfg = Release|Any CPU
+		{2F1384C1-9596-FFB7-63CC-02D250E62355}.Release|x64.Build.0 = Release|Any CPU
+		{2F1384C1-9596-FFB7-63CC-02D250E62355}.Release|x86.ActiveCfg = Release|Any CPU
+		{2F1384C1-9596-FFB7-63CC-02D250E62355}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -288,6 +316,8 @@ Global
 		{251A7F28-0166-49BB-AC4C-F72004FE14CC} = {056C07B9-CAD5-4F92-8A24-FBDFDCBA0DDD}
 		{47696446-67B1-4011-AF4F-AC742A60C7F6} = {056C07B9-CAD5-4F92-8A24-FBDFDCBA0DDD}
 		{AD9FB993-5657-464E-A3B4-D8163F1AF7C4} = {B73801C2-972F-48CD-A47A-87A4544953E2}
+		{545E23F2-220C-3065-196C-3956BD778A1C} = {B73801C2-972F-48CD-A47A-87A4544953E2}
+		{2F1384C1-9596-FFB7-63CC-02D250E62355} = {056C07B9-CAD5-4F92-8A24-FBDFDCBA0DDD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7573ED42-AA91-4C5A-8355-F60D23EC57B1}

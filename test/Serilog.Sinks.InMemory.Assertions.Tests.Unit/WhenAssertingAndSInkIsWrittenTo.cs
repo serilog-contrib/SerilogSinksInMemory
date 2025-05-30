@@ -1,5 +1,4 @@
 ﻿using Xunit;
-using Serilog.Sinks.InMemory.Assertions;
 
 namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
 {
