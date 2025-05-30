@@ -1,5 +1,9 @@
 ﻿using System;
+#if AWESOMEASSERTIONS_9
+using AwesomeAssertions;
+#else
 using FluentAssertions;
+#endif
 using Serilog.Context;
 using Xunit;
 using Xunit.Sdk;
@@ -155,7 +159,7 @@ namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
                 .Should()
 #if FLUENTASSERTIONS_8
                 .BeLessThanOrEqualTo(10);
-#elif AWESOMEASSERTIONS_8
+#elif AWESOMEASSERTIONS_8 || AWESOMEASSERTIONS_9
                 .BeLessThanOrEqualTo(10);
 #else
                 .BeLessOrEqualTo(10);

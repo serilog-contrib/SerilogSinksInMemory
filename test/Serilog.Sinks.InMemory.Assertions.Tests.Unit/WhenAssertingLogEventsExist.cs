@@ -1,5 +1,9 @@
 using System;
+#if AWESOMEASSERTIONS_9
+using AwesomeAssertions;
+#else
 using FluentAssertions;
+#endif
 using Xunit;
 using Xunit.Sdk;
 using Serilog.Sinks.InMemory.Assertions;

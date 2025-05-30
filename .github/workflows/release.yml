@@ -79,6 +79,12 @@ jobs:
           dotnet restore -p:Version=${{ steps.shortversion.outputs.shortversion }}
           dotnet test --no-restore -c Release Serilog.Sinks.InMemory.Assertions.Tests.Integration.AwesomeAssertions8.csproj
 
+      - name: Run integration tests for AwesomeAssertions 9
+        working-directory: test/Serilog.Sinks.InMemory.Assertions.Tests.Integration.AwesomeAssertions9
+        run: |
+          dotnet restore -p:Version=${{ steps.shortversion.outputs.shortversion }}
+          dotnet test --no-restore -c Release Serilog.Sinks.InMemory.Assertions.Tests.Integration.AwesomeAssertions9.csproj
+
       - name: Run integration tests for Shouldly 4.x
         working-directory: test/Serilog.Sinks.InMemory.Assertions.Tests.Integration.Shouldly4
         run: |
