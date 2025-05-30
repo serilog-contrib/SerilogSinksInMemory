@@ -1,5 +1,9 @@
 ﻿# Changelog
 
+## 0.16.0.0
+
+Add support for AwesomeAssertions 9. See [#42](https://github.com/serilog-contrib/SerilogSinksInMemory/pull/42)
+
 ## 0.15.0.0
 
 Use `AssemblyProductAttribute` to detect AwesomeAssertions (as provided via [this PR](https://github.com/AwesomeAssertions/AwesomeAssertions/pull/30))
