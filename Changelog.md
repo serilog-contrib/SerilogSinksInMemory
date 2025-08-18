@@ -1,5 +1,11 @@
 ﻿# Changelog
 
+## 1.0.0.0
+
+Finally pulling the trigger on releasing version 1.0 of the InMemory sink.
+
+This version bumps the minimum version of Serilog to 4.x to be more with the times.
+
 ## 0.16.0.0
 
 Add support for AwesomeAssertions 9. See [#42](https://github.com/serilog-contrib/SerilogSinksInMemory/pull/42)
