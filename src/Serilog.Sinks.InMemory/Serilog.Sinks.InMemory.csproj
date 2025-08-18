@@ -8,7 +8,7 @@
 		<IsPackable>true</IsPackable>
 		<Title>Serilog in-memory sink</Title>
 		<Description>A sink to be used for testing log messages using Serilog</Description>
-		<Copyright>2020 Sander van Vliet</Copyright>
+		<Copyright>2025 Sander van Vliet</Copyright>
 		<Authors>Sander van Vliet</Authors>
 		<PackageIcon>images\icon.png</PackageIcon>
 		<PackageIconUrl>https://serilog.net/images/serilog-sink-nuget.png</PackageIconUrl>
@@ -23,7 +23,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Serilog" Version="2.*" />
+		<PackageReference Include="Serilog" Version="4.*" />
 	</ItemGroup>
 
 	<ItemGroup>
