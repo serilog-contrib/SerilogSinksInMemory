@@ -1,6 +1,6 @@
 # Serilog.Sinks.InMemory
 
-In-memory sink for Serilog to use for testing with [FluentAssertions](https://fluentassertions.com/) support for easy to write assertions.
+In-memory sink for Serilog to use for testing with [FluentAssertions](https://fluentassertions.com/), [AwesomeAssertions](https://github.com/AwesomeAssertions/AwesomeAssertions) or [Shouldly](https://docs.shouldly.org/) support for easy-to-write assertions.
 
 ## Build status
 
