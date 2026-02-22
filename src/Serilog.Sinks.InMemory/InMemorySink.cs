@@ -1,5 +1,9 @@
-﻿using System;
+﻿#nullable enable
+
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using Serilog.Core;
@@ -7,14 +11,17 @@ using Serilog.Events;
 
 namespace Serilog.Sinks.InMemory
 {
+    [DebuggerTypeProxy(typeof(InMemorySinkAdvDebugProxy))]
     public class InMemorySink : ILogEventSink, IDisposable
     {
         private static readonly AsyncLocal<InMemorySink> LocalInstance = new AsyncLocal<InMemorySink>();
 
+        private ReadOnlyCollection<LogEvent>? _logEventsSnapshot;
         private readonly List<LogEvent> _logEvents;
         private readonly object _snapShotLock = new object();
 
-        public InMemorySink() : this(new List<LogEvent>())
+        public InMemorySink()
+            : this(new List<LogEvent>())
         {
         }
 
@@ -27,16 +34,12 @@ namespace Serilog.Sinks.InMemory
         {
             get
             {
-                if (LocalInstance.Value == null)
-                {
-                    LocalInstance.Value = new InMemorySink();
-                }
-
+                LocalInstance.Value ??= new InMemorySink();
                 return LocalInstance.Value;
             }
         }
 
-        public IEnumerable<LogEvent> LogEvents => _logEvents.AsReadOnly();
+        public IEnumerable<LogEvent> LogEvents => GetLogEvents();
 
         public void Dispose()
         {
@@ -48,17 +51,33 @@ namespace Serilog.Sinks.InMemory
             lock (_snapShotLock)
             {
                 _logEvents.Add(logEvent);
+                _logEventsSnapshot = null;
             }
+        }
+
+        private IEnumerable<LogEvent> GetLogEvents()
+        {
+            if (_logEventsSnapshot == null)
+            {
+                lock (_snapShotLock)
+                {
+                    _logEventsSnapshot ??= _logEvents.AsReadOnly();
+                }
+            }
+
+            return _logEventsSnapshot;
         }
 
         public InMemorySink Snapshot()
         {
-            lock (_snapShotLock)
-            {
-                var currentLogEvents = _logEvents.AsReadOnly().ToList();
+            var currentLogEvents = GetLogEvents().ToList();
+            return new InMemorySinkSnapshot(currentLogEvents);
+        }
 
-                return new InMemorySinkSnapshot(currentLogEvents);
-            }
+        public InMemorySink Snapshot(Func<LogEvent, bool> predicate)
+        {
+            var currentLogEvents = GetLogEvents().Where(predicate).ToList();
+            return new InMemorySinkSnapshot(currentLogEvents);
         }
     }
 }
