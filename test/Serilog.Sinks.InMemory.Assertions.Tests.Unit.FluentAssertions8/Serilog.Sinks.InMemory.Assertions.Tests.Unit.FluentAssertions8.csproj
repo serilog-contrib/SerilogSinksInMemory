@@ -5,6 +5,7 @@
 
     <IsPackable>false</IsPackable>
     <DefineConstants>$(DefineConstants);FLUENTASSERTIONS_8</DefineConstants>
+    <RootNamespace>Serilog.Sinks.InMemory.AssertionsTests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,29 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\Repro.cs">
-      <Link>Repro.cs</Link>
-    </Compile>
-    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingAndSInkIsWrittenTo.cs">
-      <Link>WhenAssertingAndSInkIsWrittenTo.cs</Link>
-    </Compile>
-    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingLogEventHasLevel.cs">
-      <Link>WhenAssertingLogEventHasLevel.cs</Link>
-    </Compile>
-    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingLogEventsExist.cs">
-      <Link>WhenAssertingLogEventsExist.cs</Link>
-    </Compile>
-    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingMessageExistsThatContainsPattern.cs">
-      <Link>WhenAssertingMessageExistsThatContainsPattern.cs</Link>
-    </Compile>
-    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingPropertyValuesOnMultipleMessages.cs">
-      <Link>WhenAssertingPropertyValuesOnMultipleMessages.cs</Link>
-    </Compile>
-    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingScalarLogPropertyExists.cs">
-      <Link>WhenAssertingScalarLogPropertyExists.cs</Link>
-    </Compile>
-    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingStructuredLogPropertyExists.cs">
-      <Link>WhenAssertingStructuredLogPropertyExists.cs</Link>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\**\*.cs">
+      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
     </Compile>
   </ItemGroup>
 

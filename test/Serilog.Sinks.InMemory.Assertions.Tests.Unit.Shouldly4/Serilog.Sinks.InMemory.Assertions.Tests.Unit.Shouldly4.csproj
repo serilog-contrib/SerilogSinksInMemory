@@ -5,6 +5,7 @@
 
     <IsPackable>false</IsPackable>
     <DefineConstants>$(DefineConstants);SHOULDLY_4</DefineConstants>
+    <RootNamespace>Serilog.Sinks.InMemory.AssertionsTests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,5 +24,14 @@
     <ProjectReference Include="..\..\src\Serilog.Sinks.InMemory.Assertions\Serilog.Sinks.InMemory.Assertions.csproj" />
     <ProjectReference Include="..\..\src\Serilog.Sinks.InMemory.Shouldly4\Serilog.Sinks.InMemory.Shouldly4.csproj" />
     <ProjectReference Include="..\..\src\Serilog.Sinks.InMemory\Serilog.Sinks.InMemory.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\GlobalUsings.cs">
+      <Link>GlobalUsings.cs</Link>
+    </Compile>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\TestInMemorySinkAssertionExtensions.cs">
+      <Link>TestInMemorySinkAssertionExtensions.cs</Link>
+    </Compile>
   </ItemGroup>
 </Project>

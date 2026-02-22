@@ -50,6 +50,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Serilog.Sinks.InMemory.Asse
 		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingPropertyValuesOnMultipleMessages.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingPropertyValuesOnMultipleMessages.cs
 		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingScalarLogPropertyExists.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingScalarLogPropertyExists.cs
 		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingStructuredLogPropertyExists.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingStructuredLogPropertyExists.cs
+		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\TestInMemorySinkAssertionExtensions.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\TestInMemorySinkAssertionExtensions.cs
+		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\GlobalUsings.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\GlobalUsings.cs
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serilog.Sinks.InMemory.FluentAssertions7", "src\Serilog.Sinks.InMemory.FluentAssertions7\Serilog.Sinks.InMemory.FluentAssertions7.csproj", "{3EDF7A6B-C2D5-462C-898A-4293B3BE45D3}"

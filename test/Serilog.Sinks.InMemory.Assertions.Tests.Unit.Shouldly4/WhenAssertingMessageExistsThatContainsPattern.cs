@@ -1,10 +1,4 @@
-﻿using System;
-using Shouldly;
-using Xunit;
-using Xunit.Sdk;
-using Serilog.Sinks.InMemory.Assertions;
-
-namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
+﻿namespace Serilog.Sinks.InMemory.AssertionsTests
 {
     public class WhenAssertingMessageExistsThatContainsPattern
     {

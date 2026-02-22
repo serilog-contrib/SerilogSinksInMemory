@@ -1,14 +1,5 @@
-﻿using System;
-#if AWESOMEASSERTIONS_9
-using AwesomeAssertions;
-#else
-using FluentAssertions;
-#endif
-using Serilog.Events;
-using Xunit;
+﻿namespace Serilog.Sinks.InMemory.AssertionsTests;
 
-namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
-{
 public class Repro
 {
     [Fact]
@@ -45,8 +36,7 @@ public static class Extension
             .WithLevel(LogEventLevel.Error)
             .Appearing().Once()
             .Match(o => o.Exception.GetType() == typeof(T) &&
-                    o.Exception.Message.Contains(innerMessage)
+                        o.Exception.Message.Contains(innerMessage)
             );
     }
-}
 }

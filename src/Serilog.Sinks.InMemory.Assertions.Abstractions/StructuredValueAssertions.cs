@@ -1,6 +1,8 @@
-﻿namespace Serilog.Sinks.InMemory.Assertions;
+﻿using Serilog.Events;
 
-public interface StructuredValueAssertions
+namespace Serilog.Sinks.InMemory.Assertions;
+
+public interface StructuredValueAssertions : ISubjectAssertions<StructureValue>
 {
     LogEventPropertyValueAssertions WithProperty(string name, string because = "", params object[] becauseArgs);
 }

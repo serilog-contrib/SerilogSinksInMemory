@@ -1,8 +1,9 @@
-﻿using Serilog.Events;
+﻿using System.Collections.Generic;
+using Serilog.Events;
 
 namespace Serilog.Sinks.InMemory.Assertions;
 
-public interface LogEventsAssertions
+public interface LogEventsAssertions : ISubjectAssertions<IReadOnlyCollection<LogEvent>>
 {
     LogEventsAssertions Appearing();
     LogEventsAssertions Times(int number, string because = "", params object[] becauseArgs);

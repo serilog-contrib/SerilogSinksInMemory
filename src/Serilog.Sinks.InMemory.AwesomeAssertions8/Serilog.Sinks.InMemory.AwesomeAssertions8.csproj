@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
-		<RootNamespace>Serilog.Sinks.InMemory.AwesomeAssertions8</RootNamespace>
+		<RootNamespace>Serilog.Sinks.InMemory.AssertionsFrameworkExtension</RootNamespace>
 	</PropertyGroup>
 
 	<PropertyGroup>

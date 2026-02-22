@@ -7,12 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FluentAssertions" Version="5.*">
-            <PrivateAssets>all</PrivateAssets>
-        </PackageReference>
-        <PackageReference Include="Serilog" Version="2.12.0">
-            <PrivateAssets>all</PrivateAssets>
-        </PackageReference>
+      <ProjectReference Include="..\Serilog.Sinks.InMemory\Serilog.Sinks.InMemory.csproj" />
     </ItemGroup>
 
 </Project>

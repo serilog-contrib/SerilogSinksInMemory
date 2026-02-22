@@ -9,10 +9,10 @@ namespace Serilog.Sinks.InMemory
 {
     public class InMemorySink : ILogEventSink, IDisposable
     {
-        private static readonly AsyncLocal<InMemorySink> LocalInstance = new AsyncLocal<InMemorySink>();
+        private static readonly AsyncLocal<InMemorySink> LocalInstance = new();
 
         private readonly List<LogEvent> _logEvents;
-        private readonly object _snapShotLock = new object();
+        private readonly object _snapShotLock = new();
 
         public InMemorySink() : this(new List<LogEvent>())
         {
@@ -36,7 +36,7 @@ namespace Serilog.Sinks.InMemory
             }
         }
 
-        public IEnumerable<LogEvent> LogEvents => _logEvents.AsReadOnly();
+        public IReadOnlyCollection<LogEvent> LogEvents => _logEvents.AsReadOnly();
 
         public void Dispose()
         {

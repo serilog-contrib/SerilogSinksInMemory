@@ -1,11 +1,6 @@
-﻿using System;
-using Shouldly;
-using Serilog.Context;
-using Xunit;
-using Xunit.Sdk;
-using Serilog.Sinks.InMemory.Assertions;
+﻿using Serilog.Context;
 
-namespace Serilog.Sinks.InMemory.Assertions.Tests.Unit
+namespace Serilog.Sinks.InMemory.AssertionsTests
 {
     public class WhenAssertingScalarLogPropertyExists
     {

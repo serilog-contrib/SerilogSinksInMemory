@@ -1,5 +1,7 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using FluentAssertions;
+using Serilog.Configuration;
 using Serilog.Core;
 using Xunit;
 
@@ -30,6 +32,17 @@ namespace Serilog.Sinks.InMemory.Tests.Unit
                 .GetValue(instance);
 
             sinks.Should().Contain(s => s.GetType() == typeof(InMemorySink));
+        }
+
+        [Fact]
+        public void GivenNullSinkConfiguration_InMemoryThrowsArgumentNullException()
+        {
+            LoggerSinkConfiguration sinkConfiguration = null;
+
+            Action act = () => sinkConfiguration.InMemory();
+
+            var exception = act.Should().Throw<ArgumentNullException>().Which;
+            exception.ParamName.Should().Be("sinkConfiguration");
         }
     }
 }
