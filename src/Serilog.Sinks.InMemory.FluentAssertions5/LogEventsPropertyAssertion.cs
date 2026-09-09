@@ -34,7 +34,7 @@ namespace Serilog.Sinks.InMemory.FluentAssertions5
                 .ToArray();
 
             var notFound = values
-                .Where(v => !propertyValues.Contains(v, PropertyValueEquality.Comparer))
+                .Where(v => !propertyValues.Any(pv => PropertyValueEquality.Equals(pv, v)))
                 .ToArray();
 
             Execute.Assertion

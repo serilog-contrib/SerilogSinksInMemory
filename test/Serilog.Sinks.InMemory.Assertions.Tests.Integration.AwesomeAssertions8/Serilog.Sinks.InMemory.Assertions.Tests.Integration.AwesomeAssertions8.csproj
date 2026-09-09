@@ -31,6 +31,9 @@
     <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingAndSInkIsWrittenTo.cs">
       <Link>WhenAssertingAndSInkIsWrittenTo.cs</Link>
     </Compile>
+    <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingArrayPropertyExists.cs">
+      <Link>WhenAssertingArrayPropertyExists.cs</Link>
+    </Compile>
     <Compile Include="..\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingLogEventHasLevel.cs">
       <Link>WhenAssertingLogEventHasLevel.cs</Link>
     </Compile>

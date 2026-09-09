@@ -44,6 +44,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Serilog.Sinks.InMemory.Asse
 	ProjectSection(SolutionItems) = preProject
 		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\Repro.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\Repro.cs
 		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingAndSInkIsWrittenTo.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingAndSInkIsWrittenTo.cs
+		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingArrayPropertyExists.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingArrayPropertyExists.cs
 		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingLogEventHasLevel.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingLogEventHasLevel.cs
 		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingLogEventsExist.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingLogEventsExist.cs
 		test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingMessageExistsThatContainsPattern.cs = test\Serilog.Sinks.InMemory.Assertions.Tests.Unit\WhenAssertingMessageExistsThatContainsPattern.cs
