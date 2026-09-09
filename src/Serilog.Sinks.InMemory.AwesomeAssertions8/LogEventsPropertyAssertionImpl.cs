@@ -34,7 +34,7 @@ namespace Serilog.Sinks.InMemory.AwesomeAssertions8
                 .ToArray();
 
             var notFound = values
-                .Where(v => !propertyValues.Contains(v))
+                .Where(v => !propertyValues.Any(pv => PropertyValueEquality.Equals(pv, v)))
                 .ToArray();
 
             CurrentAssertionChain
@@ -53,8 +53,10 @@ namespace Serilog.Sinks.InMemory.AwesomeAssertions8
             {
                 case ScalarValue scalarValue:
                     return scalarValue.Value;
+                case SequenceValue sequenceValue:
+                    return sequenceValue.Elements.Select(e => e is ScalarValue sv ? sv.Value : e).ToArray();
                 default:
-                    return Subject.ToString();
+                    return instance.ToString();
             }
         }
     }

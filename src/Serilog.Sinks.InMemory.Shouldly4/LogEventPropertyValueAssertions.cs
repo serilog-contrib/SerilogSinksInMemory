@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Serilog.Events;
 using Serilog.Sinks.InMemory.Assertions;
 using Shouldly;
@@ -41,7 +42,7 @@ namespace Serilog.Sinks.InMemory.Shouldly4
         {
             var actualValue = GetValueFromProperty(_subject);
 
-            if (!Equals(actualValue, value))
+            if (!PropertyValueEquality.Equals(actualValue, value))
             {
                 var formattedValue = value is string ? $"\"{value}\"" : value.ToString();
                 var formattedActualValue = actualValue is string ? $"\"{actualValue}\"" : actualValue.ToString();
@@ -59,8 +60,10 @@ namespace Serilog.Sinks.InMemory.Shouldly4
             {
                 case ScalarValue scalarValue:
                     return scalarValue.Value;
+                case SequenceValue sequenceValue:
+                    return sequenceValue.Elements.Select(e => e is ScalarValue sv ? sv.Value : e).ToArray();
                 default:
-                    return _subject.ToString();
+                    return instance.ToString();
             }
         }
 
