@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using AwesomeAssertions.Primitives;
 using Serilog.Events;
 using Serilog.Sinks.InMemory.Assertions;
@@ -40,7 +41,7 @@ namespace Serilog.Sinks.InMemory.AwesomeAssertions9
 
             CurrentAssertionChain
                 .BecauseOf(because, becauseArgs)
-                .ForCondition(Equals(actualValue, value))
+                .ForCondition(PropertyValueEquality.Equals(actualValue, value))
                 .FailWith("Expected property {0} to have value {1} but found {2}",
                     Identifier,
                     value,
@@ -55,8 +56,10 @@ namespace Serilog.Sinks.InMemory.AwesomeAssertions9
             {
                 case ScalarValue scalarValue:
                     return scalarValue.Value;
+                case SequenceValue sequenceValue:
+                    return sequenceValue.Elements.Select(e => e is ScalarValue sv ? sv.Value : e).ToArray();
                 default:
-                    return Subject.ToString();
+                    return instance.ToString();
             }
         }
 
